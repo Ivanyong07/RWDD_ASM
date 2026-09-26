@@ -5,8 +5,14 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    color: rgb(244, 240, 240);
+    font-family: Helvetica, Arial, sans-serif;
 
 }
+
+/* ============================
+HOME PAGE
+============================ */
 
 /* 0deg bottom to top
 90deg left to right
@@ -28,3 +34,56 @@ the more higher percentage the more lower effect from the black color*/
     background-size: cover;
     background-position: center;
 }
+
+#header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+}
+
+#header h3{
+    text-shadow: 0 2px 15px rgba(0, 0, 0, .8);
+}
+
+#navbar{
+    text-shadow: 0 2px 15px rgba(0, 0, 0, .8);
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 35px;
+}
+
+#navbar a{
+    text-decoration: none;
+    color: rgb(249, 249, 249);
+}
+
+#login{
+    border: none;
+    /* background: linear-gradient(rgb(155, 232, 182), rgb(4, 237, 136)); */
+    color: #151414;
+    padding: 5px 10px;
+    font-size: 15px;
+    width: 80px;
+    border-radius: 10px;
+    margin: 5px;
+    position: relative;
+    box-shadow: 5px 5px 5px #0c9260;
+    transition: all 0.3s ease;
+}
+
+#login:hover{
+    box-shadow: 0px 2px 20px #3f4040;
+    top: 3px;
+}
+
+#login:active{
+    box-shadow: none;
+    top: 5px;
+}
+
+#intro{
+    margin: 40px;
+}
+
