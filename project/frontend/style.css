@@ -1,15 +1,74 @@
-body{
+body.no-scroll{
     background: rgb(0, 0, 0);
-    min-height: 100vh;
     margin: 0;
+    color: rgb(244, 240, 240);
+    overflow: hidden;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+#first-page{
+    min-height: 100vh;
     display: flex;
+    font-size: 3rem;
     justify-content: center;
     align-items: center;
-    color: rgb(244, 240, 240);
-    font-family: Helvetica, Arial, sans-serif;
+}
+
+/* 
+===========================
+swap
+=========================== */
+
+#swap{
+    z-index: 1;
+    position: fixed;
+    inset: 0;
+}
+
+.band{
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 25%;
+    background: #191f1d;
+    transform: translateX(-100%);
+}
+
+.band.play{
+    animation: swapIn 0.5s ease forwards;
 
 }
 
+.band:nth-child(1){
+    top: 0%;
+    animation-delay: 0s;
+}
+
+.band:nth-child(2){
+    top: 25%;
+    animation-delay: 0.08s;
+}
+
+.band:nth-child(3){
+    top: 50%;
+    animation-delay: 0.16s;
+}
+
+.band:nth-child(4){
+    top: 75%;
+    animation-delay: 0.24s;
+}
+
+@keyframes swapIn {
+    from{
+        transform: translateX(-100%);
+    } to {
+        transform: translateX(0%);
+    }
+}
 /* ============================
 HOME PAGE
 ============================ */
@@ -23,9 +82,14 @@ HOME PAGE
 .15 means  15% opacity
 the more higher percentage the more lower effect from the black color*/
 
+#hero-wrapper{
+    position: relative;
+    min-height: 250vh;
+}
+
 #home-page{
     width: 99%;
-    height: calc(100vh - 20px);
+    height: 100vh;
     border-radius: 20px;
     overflow: hidden;
     background-image: linear-gradient(180deg,
@@ -33,13 +97,17 @@ the more higher percentage the more lower effect from the black color*/
     url("images/home.png"); /*180deg is top to bottom */
     background-size: cover;
     background-position: center;
+    top: 0;
+    position: sticky;
+    transition: transform 0.1s linear;
 }
 
 #header{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 10px;
+    margin: 15px;
+    padding: 1px 40px;
 }
 
 #header h3{
@@ -84,6 +152,47 @@ the more higher percentage the more lower effect from the black color*/
 }
 
 #intro{
-    margin: 40px;
+    position: absolute;
+    bottom: 100px;      /* distance from the bottom of the photo */
+    left: 40px;        /* distance from the left of the photo */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;   /* left-align the text instead of centering it */
+    text-align: left;
+    margin: 0;         /* remove the old margin-top:200px, position handles placement now */
 }
 
+#intro h2, #intro h4{
+    opacity: 0;
+    transform: translateY(20px); /* go up*/
+    transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+}
+
+#intro h1{
+    font-family: "Bricolage Grotesque", serif;
+    font-size: 5rem;
+}
+
+#intro h2{
+    font-family: "Figtree", sans-serif;
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+
+#intro h4{
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+/* ==========================
+nex-page
+========================== */
+
+#next-page{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(140, 226, 140);
+}
