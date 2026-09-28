@@ -1,21 +1,25 @@
-body.no-scroll{
+body{
     background: rgb(0, 0, 0);
     margin: 0;
     color: rgb(244, 240, 240);
+}
+
+body.no-scroll{
     overflow: hidden;
 }
+
 
 html{
     scroll-behavior: smooth;
 }
 
-#first-page{
+#start-page{
     min-height: 100vh;
-    display: flex;
     font-size: 3rem;
     justify-content: center;
     align-items: center;
 }
+
 
 /* 
 ===========================
@@ -42,6 +46,10 @@ swap
 
 }
 
+.band.play-back{
+    animation: swapOut 0.5s ease forwards;
+}
+
 .band:nth-child(1){
     top: 0%;
     animation-delay: 0s;
@@ -62,11 +70,25 @@ swap
     animation-delay: 0.24s;
 }
 
+.band h1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 @keyframes swapIn {
     from{
         transform: translateX(-100%);
     } to {
         transform: translateX(0%);
+    }
+}
+
+@keyframes swapOut{
+    from{
+        transform: translateX(0%);
+    } to {
+        transform:translateX(-100%) ;
     }
 }
 /* ============================
@@ -93,7 +115,7 @@ the more higher percentage the more lower effect from the black color*/
     border-radius: 20px;
     overflow: hidden;
     background-image: linear-gradient(180deg,
-    rgba(4,20,13,.72) 0%, rgba(4,20,13,.1) 24%, rgba(4,20,13,.1) 45%, rgba(4,20,13,.65) 72%, rgba(4,20,13,.92) 100%),
+    rgba(4,20,13,.72) 10%, rgba(4,20,13,.1) 24%, rgba(4,20,13,.1) 45%, rgba(4,20,13,.65) 72%, rgba(4,20,13,.92) 100%),
     url("images/home.png"); /*180deg is top to bottom */
     background-size: cover;
     background-position: center;

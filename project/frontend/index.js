@@ -33,11 +33,29 @@ function first_page(){
     document.body.classList.add('no-scroll');
 
     setTimeout(() => {
-        document.getElementById('start-page').style.display = 'none';
-        document.body.classList.remove('no-scroll');
-
+        console.log("Hello Start page after 1s")
         document.querySelectorAll('.band').forEach(b => b.classList.add('play'));
-    }, 1000);
+        document.body.classList.add('no-scroll');
+    }, 2000);
+
+
+    setTimeout(() => {
+        document.querySelectorAll('.band').forEach(b => {
+            console.log("Hello World");
+
+            b.classList.remove('play');
+            document.getElementById('start-page').style.display = 'none';
+            b.classList.add('play-back');
+        });
+    }, 3500);
+
+    setTimeout(() => {
+      document.getElementById('swap').style.display = 'none';
+      document.body.classList.remove('no-scroll');
+    }, 4000);
+    
+
+    
 }
 
 first_page()
