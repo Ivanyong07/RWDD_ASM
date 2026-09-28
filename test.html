@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carousel</title>
+
+    <style>
+      body {
+        overflow-x: hidden;
+      }
+
+      .carousel {
+        margin: 100px auto;
+        width: 50%;
+        border: 5px solid red;
+        overflow: hidden;
+      }
+
+      .track {
+        display: flex;
+        width: max-content;
+        animation: spin 15s linear infinite;
+      }
+
+      .group {
+        display: flex;
+        align-items: center;
+        gap: 2em;
+        padding-right: 2em;
+        flex-shrink: 0;
+      }
+
+      .card {
+        flex: 0 0 5em;
+        height: 5em;
+        padding: 1em;
+        background: blue;
+        font-size: 3rem;
+        border-radius: 0.2em;
+        text-align: center;
+      }
+
+      @keyframes spin {
+        from {
+          transform: translateX(0);
+        }
+
+        to {
+          transform: translateX(-50%);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="carousel">
+      <div class="track">
+        <div class="group">
+          <div class="card">1</div>
+          <div class="card">2</div>
+          <div class="card">3</div>
+          <div class="card">4</div>
+          <div class="card">5</div>
+          <div class="card">6</div>
+        </div>
+
+        <div class="group" aria-hidden="true">
+          <div class="card">1</div>
+          <div class="card">2</div>
+          <div class="card">3</div>
+          <div class="card">4</div>
+          <div class="card">5</div>
+          <div class="card">6</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,3 +1,6 @@
+history.scrollRestoration = 'manual';
+window.scrollTo({top: 0, left: 0, behavior: 'instant'});
+
 window.addEventListener('scroll', () => {
   const wrapper = document.querySelector('#hero-wrapper');
 
@@ -52,7 +55,7 @@ function first_page(){
     setTimeout(() => {
       document.getElementById('swap').style.display = 'none';
       document.body.classList.remove('no-scroll');
-    }, 4000);
+    }, 4300);
     
 
     

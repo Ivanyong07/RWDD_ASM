@@ -16,10 +16,10 @@ html{
 #start-page{
     min-height: 100vh;
     font-size: 3rem;
+    display: flex;
     justify-content: center;
     align-items: center;
 }
-
 
 /* 
 ===========================
@@ -47,7 +47,7 @@ swap
 }
 
 .band.play-back{
-    animation: swapOut 0.5s ease forwards;
+    animation: swapOut 0.5s ease both;
 }
 
 .band:nth-child(1){
@@ -63,6 +63,9 @@ swap
 .band:nth-child(3){
     top: 50%;
     animation-delay: 0.16s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .band:nth-child(4){
@@ -70,11 +73,6 @@ swap
     animation-delay: 0.24s;
 }
 
-.band h1{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
 @keyframes swapIn {
     from{
@@ -208,13 +206,72 @@ the more higher percentage the more lower effect from the black color*/
 }
 
 /* ==========================
-nex-page
+about
 ========================== */
 
-#next-page{
+#about{
     min-height: 100vh;
+}
+
+#div-about{
+
+}
+
+
+/* ==========================
+badge-collection
+========================== */
+
+#badge-collection{
+    min-height: 50vh;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: rgb(140, 226, 140);
+    flex-direction: column;
+}
+
+body {
+    overflow-x: hidden;
+    }
+
+.carousel {
+    margin: 100px auto;
+    width: 90%;
+    border: 5px solid red;
+    overflow: hidden;
+    }
+
+.track {
+    display: flex;
+    width: max-content;
+    animation: spin 15s linear infinite;
+    }
+
+.group {
+    display: flex;
+    align-items: center;
+    gap: 2em;
+    padding-right: 2em;
+    flex-shrink: 0;
+    }
+
+.card {
+    flex: 0 0 5em;
+    height: 5em;
+    padding: 1em;
+    background: blue;
+    font-size: 3rem;
+    border-radius: 0.2em;
+    text-align: center;
+    }
+
+@keyframes spin {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
 }
