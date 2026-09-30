@@ -1,79 +1,105 @@
 <!doctype html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Carousel</title>
+    <title>Scroll Curve</title>
 
     <style>
+      * {
+        box-sizing: border-box;
+      }
+
       body {
-        overflow-x: hidden;
+        margin: 0;
+        background: #111;
+        color: white;
       }
 
-      .carousel {
-        margin: 100px auto;
-        width: 50%;
-        border: 5px solid red;
-        overflow: hidden;
-      }
+      section {
+        height: 100vh;
 
-      .track {
         display: flex;
-        width: max-content;
-        animation: spin 15s linear infinite;
-      }
-
-      .group {
-        display: flex;
+        justify-content: center;
         align-items: center;
-        gap: 2em;
-        padding-right: 2em;
-        flex-shrink: 0;
       }
 
-      .card {
-        flex: 0 0 5em;
-        height: 5em;
-        padding: 1em;
-        background: blue;
-        font-size: 3rem;
-        border-radius: 0.2em;
-        text-align: center;
+      .scroll-line {
+        position: fixed;
+
+        left: 50%;
+        top: 0;
+
+        width: 500px;
+        height: 100vh;
+
+        transform: translateX(-50%);
+
+        overflow: visible;
+
+        pointer-events: none;
       }
 
-      @keyframes spin {
-        from {
-          transform: translateX(0);
-        }
-
-        to {
-          transform: translateX(-50%);
-        }
+      #line {
+        fill: none;
+        stroke: #4ade80;
+        stroke-width: 8;
+        stroke-linecap: round;
       }
     </style>
   </head>
 
   <body>
-    <div class="carousel">
-      <div class="track">
-        <div class="group">
-          <div class="card">1</div>
-          <div class="card">2</div>
-          <div class="card">3</div>
-          <div class="card">4</div>
-          <div class="card">5</div>
-          <div class="card">6</div>
-        </div>
+    <svg class="scroll-line" viewBox="0 0 500 2000" preserveAspectRatio="none">
+      <path
+        id="line"
+        d="
+          M0 250
+          C50 300, 450 500, 250 800
+          C50 1100, 450 1300, 250 1600
+          C150 1750, 350 1900, 250 2000
+        "
+      />
+    </svg>
 
-        <div class="group" aria-hidden="true">
-          <div class="card">1</div>
-          <div class="card">2</div>
-          <div class="card">3</div>
-          <div class="card">4</div>
-          <div class="card">5</div>
-          <div class="card">6</div>
-        </div>
-      </div>
-    </div>
+    <section>
+      <h1>Section 1</h1>
+    </section>
+
+    <section>
+      <h1>Section 2</h1>
+    </section>
+
+    <section>
+      <h1>Section 3</h1>
+    </section>
+
+    <section>
+      <h1>Section 4</h1>
+    </section>
+
+    <script>
+      const line = document.querySelector("#line");
+
+      const lineLength = line.getTotalLength();
+
+      line.style.strokeDasharray = lineLength;
+      line.style.strokeDashoffset = lineLength;
+
+      window.addEventListener("scroll", () => {
+        // How far the user has scrolled
+        const scrollTop = window.scrollY;
+
+        // Total scrollable distance
+        const documentHeight =
+          document.documentElement.scrollHeight - window.innerHeight;
+
+        // Scroll percentage
+        const scrollProgress = scrollTop / documentHeight;
+
+        // Draw the line according to scroll
+        const drawLength = lineLength * scrollProgress;
+
+        line.style.strokeDashoffset = lineLength - drawLength;
+      });
+    </script>
   </body>
 </html>

@@ -1,0 +1,69 @@
+body{
+    background: rgb(0, 0, 0);
+    margin: 0;
+    color: rgb(244, 240, 240);
+}
+
+#swap{
+    z-index: 1;
+    position: fixed;
+    inset: 0;
+}
+
+.band{
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 25%;
+    background: #191f1d;
+    transform: translateX(-100%);
+}
+
+.band.play{
+    animation: swapIn 0.5s ease forwards;
+
+}
+
+.band.play-back{
+    animation: swapOut 0.5s ease both;
+}
+
+.band:nth-child(1){
+    top: 0%;
+    animation-delay: 0s;
+}
+
+.band:nth-child(2){
+    top: 25%;
+    animation-delay: 0.08s;
+}
+
+.band:nth-child(3){
+    top: 50%;
+    animation-delay: 0.16s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.band:nth-child(4){
+    top: 75%;
+    animation-delay: 0.24s;
+}
+
+
+@keyframes swapIn {
+    from{
+        transform: translateX(-100%);
+    } to {
+        transform: translateX(0%);
+    }
+}
+
+@keyframes swapOut{
+    from{
+        transform: translateX(0%);
+    } to {
+        transform:translateX(-100%) ;
+    }
+}

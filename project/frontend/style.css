@@ -1,5 +1,27 @@
+/*
+=================================
+* Filename : style.css
+* Date : 30/9/2026
+* Author : Ivan Yong
+* Description : A file that contain css code
+=================================
+*/
+
+
+
 body{
-    background: rgb(0, 0, 0);
+    background:
+    radial-gradient(
+        circle at 20% 20%,
+        #1a2028,
+        transparent 45%
+    ),
+    radial-gradient(
+        circle at 80% 80%,
+        #0d1117,
+        transparent 50%
+    ),
+    #050505;
     margin: 0;
     color: rgb(244, 240, 240);
 }
@@ -19,6 +41,18 @@ html{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    animation: fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn {
+    from{
+        opacity: 0;
+        transform: translateY(-10%);
+    } to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* 
@@ -205,18 +239,95 @@ the more higher percentage the more lower effect from the black color*/
     font-weight: 400;
 }
 
+/* =============================
+LEAVE
+============================= */
+
+#corner-leave{
+    position:absolute;
+    inset: 0; /* fill into homepage */
+    pointer-events: none; /* not blocking the  */
+}
+#leave-left, #leave-right{
+    width: 400px;      /* pick a size that looks right */
+    height: auto;
+}
+#leave-left{
+    position: absolute;
+    bottom: 0;
+    left: -2;
+}
+
+#leave-left.play-animate{
+    animation:
+        fadeInLeft 1s ease forwards,
+        floatLeft 4s ease-in-out infinite 1s;
+}
+
+#leave-right{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+#leave-right.play-animate{
+    animation: 
+        fadeInRight 1s ease forwards,
+        floatRight 4s ease-in-out infinite 1s;
+}
+
+
+@keyframes floatLeft {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    } 50% {
+        transform: translateY(-5px) rotate(-2deg);
+    }
+}
+
+@keyframes floatRight {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    } 50% {
+        transform: translateY(-5px) rotate(-2deg);
+    }
+}
+
+@keyframes fadeInLeft{
+    from {
+        opacity: 0;
+        transform: translateX(-60px) translateY(40px);
+    } to {
+        opacity: 0.5;
+        transform: translateX(0) translateY(0);
+    }
+}
+
+@keyframes fadeInRight{
+    from {
+        opacity: 0;
+        transform: translateX(60px) translateY(-40px);
+    } to {
+        opacity: 0.5;
+        transform: translateX(0) translateY(0);
+    }
+}
 /* ==========================
-about
+ABOUT-US
 ========================== */
 
-#about{
+#about-us{
     min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
-#div-about{
-
+.section-title{
+    font-style: italic;
+    transition: transform 1.3s ease-out;
 }
-
 
 /* ==========================
 badge-collection
@@ -227,18 +338,12 @@ badge-collection
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgb(140, 226, 140);
     flex-direction: column;
 }
-
-body {
-    overflow-x: hidden;
-    }
 
 .carousel {
     margin: 100px auto;
     width: 90%;
-    border: 5px solid red;
     overflow: hidden;
     }
 
@@ -258,7 +363,7 @@ body {
 
 .card {
     flex: 0 0 5em;
-    height: 5em;
+    height: 1em;
     padding: 1em;
     background: blue;
     font-size: 3rem;
@@ -275,3 +380,103 @@ body {
         transform: translateX(-50%);
     }
 }
+
+
+
+/* ==========================
+green center
+========================== */
+
+#place{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/* ==========================
+rank
+========================== */
+
+#rank{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/* ==========================
+team
+========================== */
+
+#team{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+#team > #title {
+    margin-top: 100px;
+}
+
+#member-profile{
+    width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#member-profile img{
+    width: 300px;
+    height: 400px;
+    gap: 50px;
+    cursor: pointer;
+}
+
+#member1{
+    border: 1px solid rgb(151, 151, 206);
+}
+
+#member2{
+    border: 1px solid rgb(151, 151, 206);
+}
+
+#member3{
+    border: 1px solid rgb(151, 151, 206);
+}
+
+#member4{
+    border: 1px solid rgb(151, 151, 206);
+}
+
+
+/* ==========================
+message
+========================== */
+
+#message{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#message h1{
+    font-size: 3em;
+}
+
+    
+/* ==========================
+footer
+========================== */
+
+#footer{
+    min-height: 100vh;
+}
+
+
+
