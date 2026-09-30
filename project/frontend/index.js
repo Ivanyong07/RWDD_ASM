@@ -65,19 +65,21 @@ function setupScrollAnimation(){
         // Title Rotataion
         // =========================
 
-        const aboutSection = document.querySelector('#about-us');
-        const aboutRect = aboutSection.getBoundingClientRect();
-        const aboutProgress = (window.innerHeight - aboutRect.top) / window.innerHeight;
-
         const title = document.querySelectorAll('.section-title');
-        let moveX = aboutProgress * 300;
+        
+        title.forEach(title => {
 
-        if (moveX >= 170){
-            moveX = 170;
-        }
+            const section = title.parentElement;
+            const rect = section.getBoundingClientRect();
 
-        console.log(moveX);
-        title.style.transform = `translateX(${moveX}px)`;
+            const progress = (window.innerHeight - rect.top) / window.innerHeight;
+            let moveX = aboutProgress * 300;
+
+            if (moveX >= 170){
+                moveX = 170;
+            }
+            title.style.transform = `translateX(${moveX}px)`;
+        });
         
     });
 
