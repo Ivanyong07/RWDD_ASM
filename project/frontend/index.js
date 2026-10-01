@@ -23,64 +23,46 @@ function loading(){
 // =========================
 function setupScrollAnimation(){
 
-    const wrapper = document.querySelector('#hero-wrapper');
+    const hero_wrapper = document.querySelector('#hero-wrapper');
+    const about = document.querySelector('#about-us');
+    let lastScrollY = window.scrollY;
 
     window.addEventListener('scroll', () => {
         
+        // ========================
+        // Intro Text
+        // =======================
 
-        const rect = wrapper.getBoundingClientRect(); 
-        // how far is hero wrapper from the top of my screen. 
+        const rect = hero_wrapper.getBoundingClientRect(); 
+        // how far is wrapper from the top of my screen. 
         //if not scroll yet is 0 scroll abit 300 is -300
 
         // wrapper.offsetHeight = how tall #hero-wrapper is (250vh is 2250px)
         // window.innerHeight = how tall your screen is (900px), the actuall scroll size
-        const total = wrapper.offsetHeight - window.innerHeight;
+        const total = hero_wrapper.offsetHeight - window.innerHeight;
         // total = 2250 - 900 = 1350
 
         const progress = Math.min(Math.max(-rect.top / total, 0), 1);
         // this function is to measure how may size that you already scroll
         // 0 is havnet scroll, 0.5 scroll half, 1 is scroll finish
 
-        // ========================
-        // Intro Text
-        // =======================
+        
 
         document.querySelector('#intro h2').style.opacity = progress > 0.3 ? 1 : 0;
         document.querySelector('#intro h4').style.opacity = progress > 0.5 ? 1 : 0;
-
-
+        
         // ========================
-        // Home Page Scale
-        // ========================
-        let shrinkProgress = 0;
+        // About us
+        // =======================
 
-        if (progress >= 0.9){
-            shrinkProgress = (progress - 0.5) / (1 - 0.5);
+        if (window.scrollY > lastScrollY){
+            document.querySelector('.about-label').classList.add('show');
+        } else {
+            document.querySelector('.about-label').classList.remove('show');
         }
 
-        const scale = 1 - shrinkProgress * 0.30;
-        document.querySelector('#home-page').style.transform = `scale(${scale})`;
+        lastScrollY = window.scrollY;
 
-        // ==========================
-        // Title Rotataion
-        // =========================
-
-        const title = document.querySelectorAll('.section-title');
-        
-        title.forEach(title => {
-
-            const section = title.parentElement;
-            const rect = section.getBoundingClientRect();
-
-            const progress = (window.innerHeight - rect.top) / window.innerHeight;
-            let moveX = aboutProgress * 300;
-
-            if (moveX >= 170){
-                moveX = 170;
-            }
-            title.style.transform = `translateX(${moveX}px)`;
-        });
-        
     });
 
         

@@ -9,10 +9,11 @@
 
 
 
-body{
+html, body{
     background: #f5f5f5;
     margin: 0;
     color: rgb(0, 0, 0);
+    width: 100%;
 }
 
 body.no-scroll{
@@ -126,12 +127,14 @@ HOME PAGE
 the more higher percentage the more lower effect from the black color*/
 
 #hero-wrapper{
-    position: relative;
+    position: relative; /* reference box */
     min-height: 250vh;
+    isolation: isolate;
 }
 
 #home-page{
     width: 99%;
+    margin: 0 auto;
     height: 100vh;
     border-radius: 20px;
     overflow: hidden;
@@ -142,8 +145,8 @@ the more higher percentage the more lower effect from the black color*/
     background-position: center;
     top: 0;
     position: sticky;
-    transition: transform 0.1s linear;
     color: white;
+    z-index: 1;
 }
 
 #header{
@@ -241,11 +244,12 @@ LEAVE
 #leave-left, #leave-right{
     width: 400px;      /* pick a size that looks right */
     height: auto;
+    z-index: -1;
 }
 #leave-left{
     position: absolute;
     bottom: 0;
-    left: -2;
+    left: -2px;
 }
 
 #leave-left.play-animate{
@@ -302,17 +306,171 @@ LEAVE
         transform: translateX(0) translateY(0);
     }
 }
+
+/* =============================
+Letter behind the home page
+============================= */
+
+#letter-behind {
+    position: absolute;
+    top: 200px;
+    left: 50%;
+    z-index: -1;
+    transform: translate(-50%, -50%);
+
+    white-space: nowrap;
+    pointer-events: none;
+    font-size: 10rem;
+}
+
+#letter-behind h1 {
+    color: #767676;
+    margin: 0;
+}
+
 /* ==========================
 ABOUT-US
 ========================== */
 
-#about-us{
-    background: #f5f5f5;
+#about-us {
     min-height: 100vh;
     display: flex;
-    justify-content: center;
     align-items: center;
-    flex-direction: column;
+    justify-content: space-between;
+    gap: 80px;
+
+    padding: 100px 8%;
+    box-sizing: border-box;
+
+    overflow: hidden;
+}
+
+.about-content {
+    max-width: 600px;
+}
+
+.about-label {
+    opacity: 1;
+    transform: translateY(30px);
+    letter-spacing: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+}
+
+.about-label.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+.about-content h2 {
+    opacity: 0;
+    transform: translateY(35px);
+
+    animation: aboutFadeUp 1s cubic-bezier(.2,.8,.2,1) forwards;
+    animation-delay: 0.4s;
+
+    font-size: clamp(3rem, 6vw, 6rem);
+    line-height: 0.95;
+    margin: 20px 0;
+}
+
+
+.about-content h2 span {
+    display: block;
+}
+
+
+.about-description {
+    opacity: 0;
+
+    animation: aboutFadeUp 0.9s ease forwards;
+    animation-delay: 0.7s;
+
+    max-width: 500px;
+    line-height: 1.7;
+    font-size: 17px;
+}
+
+.about-button {
+    display: inline-block;
+
+    opacity: 0;
+    transform: translateY(20px);
+
+    animation: aboutFadeUp 0.8s ease forwards;
+    animation-delay: 0.9s;
+
+    margin-top: 30px;
+    padding: 14px 24px;
+
+    border: 1px solid rgba(20, 20, 20, 0.3);
+    border-radius: 30px;
+
+    color: rgb(15, 15, 15);
+    text-decoration: none;
+}
+
+.about-button:hover{
+    background-color: #a3a3d1;
+}
+
+.about-image {
+    width: 45%;
+    height: 600px;
+
+    overflow: hidden;
+    border-radius: 24px;
+
+    clip-path: inset(100% 0 0 0);
+
+    animation: imageReveal 1.3s cubic-bezier(.77,0,.18,1) forwards;
+    animation-delay: 0.5s;
+}
+
+
+.about-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transform: scale(1.08);
+
+    animation: imageZoom 1.6s cubic-bezier(.2,.8,.2,1) forwards;
+    animation-delay: 0.5s;
+}
+
+@keyframes aboutFadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+@keyframes imageReveal {
+    to {
+        clip-path: inset(0 0 0 0);
+    }
+}
+
+
+@keyframes imageZoom {
+    to {
+        transform: scale(1);
+    }
+}
+
+@keyframes aboutClip{
+    to {
+        opacity: 1;
+        clip-path: inset(0 0 0 0);
+        transform: translateY(0px);
+    }
 }
 
 .section-title{
@@ -337,6 +495,8 @@ badge-collection
     margin: 100px auto;
     width: 90%;
     overflow: hidden;
+    position: relative;
+    contain: paint;
     }
 
 .track {
@@ -348,20 +508,20 @@ badge-collection
 .group {
     display: flex;
     align-items: center;
-    gap: 2em;
-    padding-right: 2em;
+    gap: 1em;
+    padding-right: 1em;
     flex-shrink: 0;
     }
 
 .card {
-    flex: 0 0 5em;
+    flex: 0 0 4em;
     height: 1em;
-    padding: 1em;
+    padding: 0.7em;
     background: blue;
-    font-size: 3rem;
+    font-size: 2rem;
     border-radius: 0.2em;
     text-align: center;
-    }
+}
 
 @keyframes spin {
     from {
@@ -419,16 +579,18 @@ team
 }
 
 #member-profile{
-    width: 300px;
+    width: 90%;
+    max-width: 1350px;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
     gap: 50px;
 }
 
 #member-profile img{
     width: 300px;
-    height: 400px;
+   max-width: 100%;
     cursor: pointer;
 }
 

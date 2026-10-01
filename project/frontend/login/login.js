@@ -12,7 +12,7 @@ function swap(){
         document.querySelectorAll('.band').forEach(b => {
             b.classList.remove('play');
 
-            document.getElementById('start-page').style.display = 'none';
+            document.getElementById('swap').style.display = 'none';
             b.classList.add('play-back');
         })
     }, 3500)

@@ -1,4 +1,4 @@
-<!doctype html>
+<!-- <!doctype html>
 <html>
   <head>
     <title>Scroll Curve</title>
@@ -101,5 +101,53 @@
         line.style.strokeDashoffset = lineLength - drawLength;
       });
     </script>
+  </body>
+</html> -->
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    body {
+      margin: 0;
+    }
+
+    .one {
+      opacity: 0;
+      clip-path: inset(100% 0 0 0);
+      transform: translateY(30px);
+      animation: appear 1s ease forwards 0s;
+    }
+
+    .two {
+      opacity: 0;
+      clip-path: inset(100% 0 0 0);
+      transform: translateY(30px);
+      animation: appear 1s ease forwards 0.2s;
+    }
+
+    .three {
+      opacity: 0;
+      clip-path: inset(100% 0 0 0);
+      transform: translateY(30px);
+      animation: appear 1s ease forwards 0.4s;
+    }
+
+    @keyframes appear {
+      to {
+        opacity: 1;
+        clip-path: inset(0 0 0 0);
+        transform: translateY(0px);
+      }
+    }
+  </style>
+  <body>
+    <p class="one">About us</p>
+    <p class="two">Building a grener APU</p>
+    <p class="three">A description here...</p>
   </body>
 </html>
