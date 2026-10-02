@@ -114,40 +114,41 @@
   <style>
     body {
       margin: 0;
+      min-height: 100vh;
+      overflow: hidden;
     }
 
-    .one {
-      opacity: 0;
-      clip-path: inset(100% 0 0 0);
-      transform: translateY(30px);
-      animation: appear 1s ease forwards 0s;
+    .orbit {
+      position: absolute;
+      inset: 0;
+      font-size: 4rem; /* sets the 1em used below */
+      transform-origin: 50% calc(100% - 0.5em); /* pivot = bottom center, level with the letter's middle */
+      animation: swing 3s ease-in-out forwards;
     }
 
-    .two {
-      opacity: 0;
-      clip-path: inset(100% 0 0 0);
-      transform: translateY(30px);
-      animation: appear 1s ease forwards 0.2s;
+    .letter {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      margin: 0;
+      line-height: 1; /* so the letter is exactly 1em tall */
+      animation: upright 3s ease-in-out forwards;
     }
 
-    .three {
-      opacity: 0;
-      clip-path: inset(100% 0 0 0);
-      transform: translateY(30px);
-      animation: appear 1s ease forwards 0.4s;
-    }
-
-    @keyframes appear {
+    @keyframes swing {
       to {
-        opacity: 1;
-        clip-path: inset(0 0 0 0);
-        transform: translateY(0px);
+        transform: rotate(-180deg);
       }
-    }
+    } /* counter-clockwise, arcs upward */
+    @keyframes upright {
+      to {
+        transform: rotate(-180deg);
+      }
+    } /* exact opposite, text stays level */
   </style>
   <body>
-    <p class="one">About us</p>
-    <p class="two">Building a grener APU</p>
-    <p class="three">A description here...</p>
+    <div class="orbit">
+      <p class="letter">Collectors</p>
+    </div>
   </body>
 </html>

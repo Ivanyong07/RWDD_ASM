@@ -13,7 +13,6 @@ html, body{
     background: #f5f5f5;
     margin: 0;
     color: rgb(0, 0, 0);
-    width: 100%;
 }
 
 body.no-scroll{
@@ -128,7 +127,7 @@ the more higher percentage the more lower effect from the black color*/
 
 #hero-wrapper{
     position: relative; /* reference box */
-    min-height: 250vh;
+    min-height: 400vh;
     isolation: isolate;
 }
 
@@ -147,6 +146,7 @@ the more higher percentage the more lower effect from the black color*/
     position: sticky;
     color: white;
     z-index: 1;
+    box-shadow: 10px 10px 5px #aaaaaa;
 }
 
 #header{
@@ -311,22 +311,62 @@ LEAVE
 Letter behind the home page
 ============================= */
 
-#letter-behind {
+#letter-top,
+#letter-bottom {
     position: absolute;
-    top: 200px;
-    left: 50%;
-    z-index: -1;
-    transform: translate(-50%, -50%);
-
-    white-space: nowrap;
-    pointer-events: none;
-    font-size: 10rem;
-}
-
-#letter-behind h1 {
-    color: #767676;
+    font-size: 20vh;
+    z-index: 0;
     margin: 0;
 }
+
+#letter-top p,
+#letter-bottom p {
+    margin: 0;
+    line-height: 1;
+}
+
+#letter-top {
+    top: 2vh;
+    left: 10vh;
+}
+
+#letter-bottom {
+    bottom: 0;
+    right: 5vw;
+}
+
+/* ==========================
+Title vertical
+========================== */
+
+#title-layer{
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: -100vh;
+}
+
+#left-title-vertical{
+    writing-mode: vertical-rl;
+    line-height: 1;
+    white-space: nowrap;
+    z-index: 0;
+    margin: 0;
+}
+
+#right-title-vertical{
+    writing-mode: vertical-rl;
+    line-height: 1;
+    white-space: nowrap;
+    z-index: 0;
+    margin: 0;
+}
+
 
 /* ==========================
 ABOUT-US
@@ -350,19 +390,16 @@ ABOUT-US
 }
 
 .about-label {
-    opacity: 1;
-    transform: translateY(30px);
+    opacity: 0;
     letter-spacing: 4px;
     font-size: 13px;
     font-weight: 600;
-    transition:
-        opacity 0.8s ease,
-        transform 0.8s ease;
+    clip-path: inset(100% 0 0 0);
+    transform: translateY(30px);
 }
 
 .about-label.show {
-    opacity: 1;
-    transform: translateY(0);
+    animation: clip 1s ease forwards 0s;
 }
 
 
@@ -370,12 +407,13 @@ ABOUT-US
     opacity: 0;
     transform: translateY(35px);
 
-    animation: aboutFadeUp 1s cubic-bezier(.2,.8,.2,1) forwards;
-    animation-delay: 0.4s;
-
     font-size: clamp(3rem, 6vw, 6rem);
     line-height: 0.95;
     margin: 20px 0;
+}
+
+.about-content.show h2 {
+    animation: fadeUp 1s cubic-bezier(.2,.8,.2,1) forwards 0.4s;
 }
 
 
@@ -386,13 +424,13 @@ ABOUT-US
 
 .about-description {
     opacity: 0;
-
-    animation: aboutFadeUp 0.9s ease forwards;
-    animation-delay: 0.7s;
-
     max-width: 500px;
     line-height: 1.7;
     font-size: 17px;
+}
+
+.about-description.show{
+    animation: fadeUp 0.9s ease forwards 0.7s;
 }
 
 .about-button {
@@ -444,7 +482,7 @@ ABOUT-US
     animation-delay: 0.5s;
 }
 
-@keyframes aboutFadeUp {
+@keyframes fadeUp {
     to {
         opacity: 1;
         transform: translateY(0);
@@ -465,7 +503,7 @@ ABOUT-US
     }
 }
 
-@keyframes aboutClip{
+@keyframes clip{
     to {
         opacity: 1;
         clip-path: inset(0 0 0 0);
@@ -543,9 +581,51 @@ green center
     min-height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    background: #f5f5f5;
+    justify-content: space-between;
+    gap: 80px;
+    padding: 100px 8%;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.place-label{
+    opacity: 0;
+    letter-spacing: 4px;
+    font-weight: 600;
+    clip-path: inset(100% 0 0 0);
+    transform: translateY(30px);
+    font: 13px;
+}
+
+.place-label.show{
+    animation: clip 1s ease forwards 0s;
+}
+
+.place-content{
+    max-width: 600px;
+}
+
+.place-content h2{
+    opacity: 0;
+    transform: translateY(35px);
+    font-size: clamp(3rem, 6vw, 6rem);
+    line-height: 0.95;
+    margin: 20px 0;
+}
+
+.place-content h2.show {
+    animation: fadeUp 1s cubic-bezier(.2,.8,.2,1) forwards 0.6s;
+}
+
+.place-description{
+    opacity: 0;
+    max-width: 500px;
+    line-height: 1.7;
+    font-size: 17px;
+}
+
+.place-description.show{
+    animation: fadeUp 0.9s ease forwards 0.7s;
 }
 
 /* ==========================
