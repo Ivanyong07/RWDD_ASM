@@ -132,10 +132,10 @@ the more higher percentage the more lower effect from the black color*/
 }
 
 #home-page{
-    width: 99%;
+    width: 100%;
     margin: 0 auto;
     height: 100vh;
-    border-radius: 20px;
+    border-radius: 0px;
     overflow: hidden;
     background-image: linear-gradient(180deg,
     rgba(4,20,13,.72) 10%, rgba(4,20,13,.1) 24%, rgba(4,20,13,.1) 45%, rgba(4,20,13,.65) 72%, rgba(4,20,13,.92) 100%),
@@ -326,8 +326,10 @@ Letter behind the home page
 }
 
 #letter-top {
-    top: 2vh;
+    position: absolute;
+    bottom: 78vh;
     left: 10vh;
+    z-index: 0;
 }
 
 #letter-bottom {
@@ -517,6 +519,46 @@ ABOUT-US
 }
 
 /* ==========================
+stats
+========================== */
+
+#stat{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    box-sizing: border-box;
+    padding: 10vh 8%;
+    gap: 100px;
+}
+
+.student-joined, .challenge, .item{
+    border: 0px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 150px;
+    font-size: 1.5rem;
+    border-radius: 20px;
+    background: linear-gradient(rgb(224, 237, 224), white);
+    box-shadow: 5px 5px #d1e2d9;
+    cursor: pointer;
+    transform: translateY(0);
+}
+
+.item:hover{
+    animation: goUp 1s ease forwards;
+}
+
+@keyframes goUp {
+    to {
+        transform: translateY(4px) scale(1.4);
+    }
+}
+
+/* ==========================
 badge-collection
 ========================== */
 
@@ -527,6 +569,19 @@ badge-collection
     align-items: center;
     justify-content: center;
     flex-direction: column;
+}
+
+.badge-label{
+    opacity: 0;
+    letter-spacing: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    clip-path: inset(100% 0 0 0);
+    transform: translateY(30px);
+}
+
+.badge-label.show{
+    animation: clip 1s ease forwards 0s;
 }
 
 .carousel {
@@ -632,13 +687,41 @@ green center
 rank
 ========================== */
 
-#rank{
+#step{
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-    background: #ffffff;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 24px;
+    box-sizing: border-box;
+}
+
+#step-label{
+    opacity: 1;
+    letter-spacing: 4px;
+    font-weight: 600;
+    clip-path: inset(100% 0 0 0);
+    transform: translateY(30px);
+    font: 13px;
+    flex-basis: 100%;           /* label takes its own line on top */
+    text-align: center;
+}
+
+#step-label.show{
+    animation: clip 1s ease forwards 0s;
+}
+
+#step > div{
+    flex: 0 0 calc((100% - 48px) / 3);
+    max-width: none;
+    text-align: center;
+}
+
+#step img{
+    width: 400px;
+    height: 200px
 }
 
 /* ==========================
@@ -715,13 +798,49 @@ footer
     min-height: 50vh;
     background: linear-gradient(
         180deg,
-        #d6d2d2 0%,
-        #6d6ddd 25%,
-        #212180 50%,
-        #080852 75%,
-        #030000 100%
+        #f5f5f5 0%,
+        #d1e2d9 30%,
+        #595959 60%,
+        #292a2a 85%,
+        #04140d 100%
     );
 }
 
+/* ===== Tablet ===== */
+@media (max-width: 1024px){
+    #intro h1{ font-size: 3.5rem; }
+    #intro h2{ font-size: 1.1rem; }
+    #leave-left, #leave-right{ width: 260px; }
+    #navbar{ gap: 20px; }
+    #about-us, #place{ gap: 40px; padding: 80px 6%; }
+    .about-image{ height: 450px; }
+    #letter-top, #letter-bottom{ font-size: 14vw; }
+    #letter-top{ bottom: auto; top: calc(100vh * 3 - 14vw - 2vh); }
+}
+
+/* ===== Phone ===== */
+@media (max-width: 768px){
+    #header{ padding: 1px 10px; margin: 10px; }
+    #navbar a{ display: none; }
+
+    #intro{ left: 20px; right: 20px; bottom: 60px; }
+    #intro h1{ font-size: 2.2rem; }
+    #intro h2{ font-size: 1rem; }
+    #intro h4{ font-size: 0.85rem; }
+
+    #leave-left, #leave-right{ width: 140px; }
+
+    #letter-top, #letter-bottom{ font-size: 12vw; }
+    #letter-top{ left: 4vw; }
+    #letter-bottom{ right: 4vw; }
+
+    #title-layer{ display: none; }
+
+    #about-us, #place{ flex-direction: column; gap: 40px; padding: 60px 6%; }
+    .about-image{ width: 100%; height: 350px; }
+
+    #member-profile img{ width: 220px; }
+    #message h1{ font-size: 1.8em; }
+}
 
 

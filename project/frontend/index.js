@@ -2,36 +2,41 @@ history.scrollRestoration = 'manual';
 window.scrollTo({top: 0, left: 0, behavior: 'instant'});
 
 const number = document.getElementById('number');
+const band = document.querySelectorAll('.band');
+const swap_element = document.getElementById('swap');
+
 const hero_wrapper = document.querySelector('#hero-wrapper');
+const start_page = document.getElementById('start-page');
+const intro_h2 = document.querySelector('#intro h2');
+const intro_h4 = document.querySelector('#intro h4');
+const leave_right = document.getElementById('leave-right');
+const leave_left = document.getElementById('leave-left');
+const letter_top = document.querySelector('#letter-top');
+const letter_bottom = document.querySelector('#letter-bottom');
+const home_page = document.querySelector('#home-page');
+
 const about = document.querySelector('#about-us');
+const about_label = document.querySelector('.about-label');
+const about_content = document.querySelector('.about-content');
+const about_description = document.querySelector('.about-description');
+
+const badge_label = document.querySelector('.badge-label');
+const badge = document.querySelector('#badge-collection');
+
 const place = document.querySelector('#place');
 const place_label = document.querySelector('.place-label')
 const place_content_h2 = document.querySelector('.place-content h2');
 const place_description = document.querySelector('.place-description');
-const letter_top = document.querySelector('#letter-top');
-const letter_bottom = document.querySelector('#letter-bottom');
-const home_page = document.querySelector('#home-page');
-const about_label = document.querySelector('.about-label');
-const about_content = document.querySelector('.about-content');
-const about_description = document.querySelector('.about-description');
-const intro_h2 = document.querySelector('#intro h2');
-const intro_h4 = document.querySelector('#intro h4');
 
-const band = document.querySelectorAll('.band');
+const stats = document.querySelectorAll('#stat b');
+const student_joined_count = document.getElementById('student-joined-count');
 
-const start_page = document.getElementById('start-page');
+const step = document.querySelector('#step');
+const step_label = document.querySelector('#step-label'); 
 
-const swap_element = document.getElementById('swap');
 
-const leave_right = document.getElementById('leave-right');
 
-const leave_left = document.getElementById('leave-left');
 
-// how far is wrapper from the top of my screen.
-//if not scroll yet is 0 scroll abit 300 is -300
-const placeRect = place.getBoundingClientRect();
-const rect = hero_wrapper.getBoundingClientRect();
-const aboutRect = about.getBoundingClientRect();
 
 let shrinkProgress = 0;
 
@@ -62,10 +67,8 @@ function setupScrollAnimation(){
         const rect = hero_wrapper.getBoundingClientRect();
         const aboutRect = about.getBoundingClientRect();
         const placeRect = place.getBoundingClientRect();
-        
-        // ========================
-        // Intro Text
-        // =======================
+        const badgeRect = badge.getBoundingClientRect();
+        const stepRect = step.getBoundingClientRect();
 
         // wrapper.offsetHeight = how tall #hero-wrapper is (250vh is 2250px)
         // window.innerHeight = how tall your screen is (900px), the actuall scroll size
@@ -84,10 +87,14 @@ function setupScrollAnimation(){
         letter_top.style.opacity = shrinkProgress;
         letter_bottom.style.opacity = shrinkProgress;
 
-        let move = Math.min(Math.max(-rect.top, 0),hero_wrapper.offsetHeight - window.innerHeight);
+        // ========================
+        // Home page
+        // =======================
         home_page.style.transform = `scale(${1 - shrinkProgress * 0.3})`;
 
-        letter_top.style.transform = `translateY(${move}px)`;
+        // ========================
+        // Intro test 
+        // =======================
 
         intro_h2.style.opacity = progress > 0.3 ? 1 : 0;
         intro_h4.style.opacity = progress > 0.5 ? 1 : 0;
@@ -108,6 +115,16 @@ function setupScrollAnimation(){
         }
 
         // ========================
+        // Badge
+        // =======================
+
+        if (badgeRect.top < window.innerHeight * 0.7){
+            badge_label.classList.add('show');
+        } else {
+            badge_label.classList.remove('show');
+        }
+
+        // ========================
         // Place
         // =======================
         
@@ -121,6 +138,17 @@ function setupScrollAnimation(){
             place_content_h2.classList.remove('show');
             place_description.classList.remove('show');
         }
+
+        // ========================
+        // Step
+        // =======================
+        if (stepRect.top < window.innerHeight * 0.7){
+            step_label.classList.add('show')
+        } else {
+            step_label.classList.remove('show');
+        }
+
+        
     });
 }
 
@@ -160,7 +188,6 @@ function swap(){
 
 function first_page(){
 
-    
     loading();
     swap();
     setTimeout(() => {
@@ -171,6 +198,41 @@ function first_page(){
         leave_left.classList.add('play-animate');
     }, 3800);
 }
+
+// =========================
+// Stats
+// =========================
+
+function countUp(el){
+    clearInterval(el.timer);
+    const to = +el.dataset.to;
+    const step = Math.ceil(to / 60);
+    let n = 0;
+
+    el.timer = setInterval(() => {
+        n += step;
+        if (n >= to){
+            n = to;
+            clearInterval(el.timer);
+        }
+
+        el.textContent = n.toLocaleString();
+    }, 20);
+}
+const stat_observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (e.isIntersecting){
+            countUp(e.target);               // came into view: count up
+        } else {
+            clearInterval(e.target.timer);   // left the view: stop and reset
+            e.target.textContent = 0;
+        }
+    });
+}, { threshold: 0.5 });
+
+console.log(stats.length);
+
+stats.forEach(c => stat_observer.observe(c));
 
 // =========================
 // Login
@@ -204,16 +266,6 @@ function href_login(){
 //         .sort((a, b) => b.overflow - a.overflow)
 // );
 
-console.log(
-    [...document.querySelectorAll('*')].filter(el => {
-        const r = el.getBoundingClientRect();
-        return r.right > document.documentElement.clientWidth;
-    }).map(el => ({
-        element: el.tagName + (el.id ? '#' + el.id : ''),
-        right: el.getBoundingClientRect().right,
-        overflow: el.getBoundingClientRect().right - document.documentElement.clientWidth
-    }))
-);
 
 console.log(document.documentElement.clientWidth);
 console.log(document.documentElement.scrollWidth);
