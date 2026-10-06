@@ -1,3 +1,5 @@
+const API_BASE = "http://127.0.0.1:8000/backend/api"
+
 function swap(){
     setTimeout(() => {
 
@@ -16,6 +18,7 @@ function swap(){
             b.classList.add('play-back');
         })
     }, 3500)
-}
+};
+
 swap()
 
