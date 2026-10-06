@@ -17,6 +17,5 @@ function swap(){
         })
     }, 3500)
 }
-
 swap()
 
