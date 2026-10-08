@@ -90,7 +90,7 @@ function setupScrollAnimation(){
         // ========================
         // Home page
         // =======================
-        home_page.style.transform = `scale(${1 - shrinkProgress * 0.3})`;
+        home_page.style.transform = `scale(${1 - shrinkProgress * 0.6})`;
 
         // ========================
         // Intro test 
@@ -159,6 +159,7 @@ function setupScrollAnimation(){
 function swap(){
 
     document.body.classList.add('no-scroll');
+    document.documentElement.classList.add('no-scroll');
 
     setTimeout(() => {
         console.log("Hello Start page after 1s")
@@ -178,6 +179,7 @@ function swap(){
     setTimeout(() => {
       swap_element.style.display = 'none';
       document.body.classList.remove('no-scroll');
+      document.documentElement.classList.remove('no-scroll');
     }, 4300);
 
 }
@@ -219,6 +221,7 @@ function countUp(el){
         el.textContent = n.toLocaleString();
     }, 20);
 }
+
 const stat_observer = new IntersectionObserver(entries => {
     entries.forEach(e => {
         if (e.isIntersecting){
@@ -229,8 +232,6 @@ const stat_observer = new IntersectionObserver(entries => {
         }
     });
 }, { threshold: 0.5 });
-
-console.log(stats.length);
 
 stats.forEach(c => stat_observer.observe(c));
 
@@ -266,6 +267,7 @@ function href_login(){
 //         .sort((a, b) => b.overflow - a.overflow)
 // );
 
+console.log(window.devicePixelRatio, window.innerWidth, document.documentElement.getBoundingClientRect().width);
 
 console.log(document.documentElement.clientWidth);
 console.log(document.documentElement.scrollWidth);
@@ -273,4 +275,3 @@ console.log(document.documentElement.scrollWidth);
 first_page()
 setupScrollAnimation()
 href_login()
-

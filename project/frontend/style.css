@@ -13,8 +13,10 @@ html, body{
     background: #f5f5f5;
     margin: 0;
     color: rgb(0, 0, 0);
+    overflow-x: clip;
 }
 
+html.no-scroll,
 body.no-scroll{
     overflow: hidden;
 }
@@ -249,7 +251,6 @@ LEAVE
 #leave-left{
     position: absolute;
     bottom: 0;
-    left: -2px;
 }
 
 #leave-left.play-animate{
@@ -317,6 +318,9 @@ Letter behind the home page
     font-size: 20vh;
     z-index: 0;
     margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #letter-top p,
