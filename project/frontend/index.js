@@ -1,6 +1,8 @@
 history.scrollRestoration = 'manual';
 window.scrollTo({top: 0, left: 0, behavior: 'instant'});
 
+const header = document.getElementById('header');
+
 const number = document.getElementById('number');
 const band = document.querySelectorAll('.band');
 const swap_element = document.getElementById('swap');
@@ -11,9 +13,10 @@ const intro_h2 = document.querySelector('#intro h2');
 const intro_h4 = document.querySelector('#intro h4');
 const leave_right = document.getElementById('leave-right');
 const leave_left = document.getElementById('leave-left');
-const letter_top = document.querySelector('#letter-top');
-const letter_bottom = document.querySelector('#letter-bottom');
 const home_page = document.querySelector('#home-page');
+const letter = document.getElementById('letter');
+const circle_fill = document.getElementById('circle-fill');
+const letter_btn = document.querySelectorAll('.letter-btn');
 
 const about = document.querySelector('#about-us');
 const about_label = document.querySelector('.about-label');
@@ -33,10 +36,6 @@ const student_joined_count = document.getElementById('student-joined-count');
 
 const step = document.querySelector('#step');
 const step_label = document.querySelector('#step-label'); 
-
-
-
-
 
 let shrinkProgress = 0;
 
@@ -84,13 +83,34 @@ function setupScrollAnimation(){
         } else{
             shrinkProgress = 0;
         }
-        letter_top.style.opacity = shrinkProgress;
-        letter_bottom.style.opacity = shrinkProgress;
+        // ========================
+        // Header
+        // =======================
+        header.classList.toggle('dark', shrinkProgress > 0.3);
+
+        
 
         // ========================
         // Home page
         // =======================
-        home_page.style.transform = `scale(${1 - shrinkProgress * 0.6})`;
+        const hp = home_page.getBoundingClientRect();
+        const s  = slot.getBoundingClientRect();
+
+        // center of the "o", measured inside the home page
+        const cx = s.left + s.width / 2 - hp.left;
+        const cy = s.top  + s.height / 2 - hp.top;
+
+        // start radius: far enough to reach the farthest corner, so the page looks normal
+        const startR = Math.hypot(Math.max(cx, hp.width - cx), Math.max(cy, hp.height - cy));
+        // end radius: half the slot, so the circle is exactly the "o"
+        const endR = s.width / 2;
+
+        const radius = startR + (endR - startR) * shrinkProgress;
+        home_page.style.clipPath = `circle(${radius}px at ${cx}px ${cy}px)`;
+        header.classList.toggle('show-color', shrinkProgress >= 0.99);
+        letter_btn.forEach(b => b.classList.toggle('show', shrinkProgress >= 0.99));
+
+        circle_fill.style.opacity = Math.min(shrinkProgress* 1.5, 1);
 
         // ========================
         // Intro test 
@@ -180,6 +200,7 @@ function swap(){
       swap_element.style.display = 'none';
       document.body.classList.remove('no-scroll');
       document.documentElement.classList.remove('no-scroll');
+      header.classList.add('show');
     }, 4300);
 
 }

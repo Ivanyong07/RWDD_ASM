@@ -34,6 +34,9 @@ html{
     align-items: center;
     flex-direction: column;
     animation: fadeIn 1s ease-in;
+    z-index: 2000;
+    position: relative;
+    background-color: #f5f5f5;
 }
 
 @keyframes fadeIn {
@@ -52,7 +55,7 @@ swap
 =========================== */
 
 #swap{
-    z-index: 1;
+    z-index: 2000;
     position: fixed;
     inset: 0;
 }
@@ -121,10 +124,13 @@ HEADER
 
 
 #header {
-    position: sticky;
+    position: fixed;
     top: 0;
     z-index: 1000;
     height: 70px;
+    top: 0;
+    left: 0;
+    right: 0;
 
     display: flex;
     justify-content: space-between;
@@ -132,7 +138,25 @@ HEADER
 
     padding: 0 40px;
     box-sizing: border-box;
-    grid-template-columns: 1fr auto 1fr;
+    text-shadow: 0 2px 15px rgba(0,0,0,.8);
+    color: white;
+    transition: color .4s ease;
+    opacity: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#header.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#header.show-color{
+    background: #f0f2f1;
+}
+
+#header.dark{ 
+    color: #04140d; 
+    text-shadow: none; 
 }
 
 #header h3{
@@ -150,7 +174,7 @@ HEADER
 
 #navbar a{
     text-decoration: none;
-    color: rgb(7, 7, 7);
+    color: inherit;
 }
 
 #header-right{
@@ -197,6 +221,23 @@ HOME PAGE
 .15 means  15% opacity
 the more higher percentage the more lower effect from the black color*/
 
+#circle-fill{
+    position: absolute;
+    inset: 0;
+    background: -webkit-linear-gradient(#eaecea, #0de71f);
+    -webkit-text-fill-color: transparent;
+    opacity: 0;
+    z-index: 5;
+    pointer-events: none;
+}
+
+#stage{
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+}
+
 #hero-wrapper{
     position: relative; /* reference box */
     min-height: 400vh;
@@ -215,7 +256,7 @@ the more higher percentage the more lower effect from the black color*/
     background-size: cover;
     background-position: center;
     top: 0;
-    position: sticky;
+    position: absolute;
     color: white;
     z-index: 1;
     box-shadow: 10px 10px 5px #aaaaaa;
@@ -330,37 +371,78 @@ LEAVE
 }
 
 /* =============================
-Letter behind the home page
+Letter
 ============================= */
 
-#letter-top,
-#letter-bottom {
-    position: absolute;
-    font-size: 20vh;
+#letter{
+    position: sticky;
+    top: 0;
+    height: 100vh;
     z-index: 0;
-    margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
+    pointer-events: none;
+    inset: 0;
+    flex-direction: column;
+    gap: 50px;
+    cursor: pointer;
 }
 
-#letter-top p,
-#letter-bottom p {
+.letter-buttons{
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    margin-top:40px ;
+}
+
+.letter-btn{
+    pointer-events: auto;     /* so it can be clicked */
+    padding: 14px 28px;
+    border: 1px solid #0b0b0b;
+    border-radius: 30px;
+    color: #0c9260;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+    opacity: 0;               /* hidden until the circle is small */
+    transition: opacity .6s ease, background .3s ease, color .3s ease;
+}
+
+.letter-btn.show{ 
+    opacity: 1; 
+}
+
+.letter-btn:hover{
+    background: #0c9260;
+    color: white;
+}
+
+#letter p{
     margin: 0;
-    line-height: 1;
+    font-size: 11vw;
+    font-weight: 700;
+    font-family: Arial, Helvetica, sans-serif;
+    white-space: nowrap;
+    background: -webkit-linear-gradient(#eaecea, #0de71f);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-#letter-top {
-    position: absolute;
-    bottom: 78vh;
-    left: 10vh;
-    z-index: 0;
+.letter-tagline{
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 400;
+    font-size: clamp(1rem, 1.6vw, 1.5rem);
+    color: #060606;
 }
 
-#letter-bottom {
-    bottom: 0;
-    right: 5vw;
+#slot {
+    display: inline-block;
+    width: .55em;
+    height: .55em;
 }
+
 
 /* ==========================
 Title vertical
@@ -375,7 +457,7 @@ Title vertical
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: -100vh;
+    inset: 0;
 }
 
 #left-title-vertical{
@@ -778,7 +860,7 @@ team
 
 #member-profile img{
     width: 300px;
-   max-width: 100%;
+    max-width: 100%;
     cursor: pointer;
 }
 
