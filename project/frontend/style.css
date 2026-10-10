@@ -386,7 +386,6 @@ Letter
     inset: 0;
     flex-direction: column;
     gap: 50px;
-    cursor: pointer;
 }
 
 .letter-buttons{

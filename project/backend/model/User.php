@@ -3,13 +3,15 @@
 class User
 {
     private $username;
-    private $email;
     private $password;
+    private $email;
     private $age;
     private $tp_number;
+    private $created_at;
+    private $course;
 
 
-    public function __construct($username, $password, $email, $age, $tp_number)
+    public function __construct($username, $password, $email, $age, $tp_number, $created_at, $course)
     {
 
         $this->username = $username;
@@ -17,6 +19,8 @@ class User
         $this->email = $email;
         $this->age = $age;
         $this->tp_number = $tp_number;
+        $this->created_at = $created_at;
+        $this->course = $course;
     }
 
     public function getName()
@@ -67,5 +71,25 @@ class User
     public function setTpNumber($tp_number)
     {
         return $this->tp_number = $tp_number;
+    }
+
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt($created_at)
+    {
+        $this->created_at = $created_at;
+    }
+
+    public function setCourse()
+    {
+        return $this->course;
+    }
+
+    public function getCourse($course)
+    {
+        $this->course = $course;
     }
 }
