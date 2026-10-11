@@ -25,7 +25,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             if ($user["role"] == "admin") {
                 header("Location: ../../frontend/admin/index.html");
+            } else {
+                header("Location: ../../frontend/user/index.html");
             }
+        } else {
+            $error = "Wrong username or password";
         }
     }
 }
