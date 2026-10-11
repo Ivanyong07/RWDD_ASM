@@ -12,8 +12,7 @@ try {
         $db_pass,
         $db_name
     );
-} catch (mysqli_sql_exception) {
-    echo "Could not connect func collectors database";
+    mysqli_set_charset($conn, "utf8mb");
+} catch (mysqli_sql_exception $e) {
+    die("Could not connect: " . $e->getMessage());
 }
-
-echo "You are connected to fun collectors database";

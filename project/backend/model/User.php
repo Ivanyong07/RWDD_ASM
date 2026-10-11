@@ -9,9 +9,10 @@ class User
     private $tp_number;
     private $created_at;
     private $course;
+    private $role;
 
 
-    public function __construct($username, $password, $email, $age, $tp_number, $created_at, $course)
+    public function __construct($username, $password, $email, $age, $tp_number, $created_at, $course, $role)
     {
 
         $this->username = $username;
@@ -21,6 +22,7 @@ class User
         $this->tp_number = $tp_number;
         $this->created_at = $created_at;
         $this->course = $course;
+        $this->role = $role;
     }
 
     public function getName()
@@ -91,5 +93,15 @@ class User
     public function getCourse($course)
     {
         $this->course = $course;
+    }
+
+    public function getRole()
+    {
+        $this->role;
+    }
+
+    public function setRole($role)
+    {
+        $this->role = $role;
     }
 }
