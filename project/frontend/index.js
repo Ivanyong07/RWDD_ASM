@@ -9,6 +9,7 @@ const swap_element = document.getElementById('swap');
 
 const hero_wrapper = document.querySelector('#hero-wrapper');
 const start_page = document.getElementById('start-page');
+const intro = document.getElementById('intro');
 const intro_h2 = document.querySelector('#intro h2');
 const intro_h4 = document.querySelector('#intro h4');
 const leave_right = document.getElementById('leave-right');
@@ -22,6 +23,7 @@ const about = document.querySelector('#about-us');
 const about_label = document.querySelector('.about-label');
 const about_content = document.querySelector('.about-content');
 const about_description = document.querySelector('.about-description');
+const about_image = document.querySelector('.about-image');
 
 const badge_label = document.querySelector('.badge-label');
 const badge = document.querySelector('#badge-collection');
@@ -78,11 +80,10 @@ function setupScrollAnimation(){
         // this function is to measure how may size that you already scroll
         // 0 is havnet scroll, 0.5 scroll half, 1 is scroll finish
 
-        if (progress >= 0.6){
-            shrinkProgress = (progress - 0.6) / 0.4;
-        } else{
-            shrinkProgress = 0;
-        }
+        const START = 0.4;   // animation starts at 20% of the scroll
+        const END   = 0.85;  // animation is finished at 65% of the scroll
+
+        shrinkProgress = Math.min(Math.max((progress - START) / (END - START), 0), 1);
         // ========================
         // Header
         // =======================
@@ -116,9 +117,10 @@ function setupScrollAnimation(){
         // Intro test 
         // =======================
 
-        intro_h2.style.opacity = progress > 0.3 ? 1 : 0;
-        intro_h4.style.opacity = progress > 0.5 ? 1 : 0;
-        
+
+        intro_h2.style.opacity = progress > 0.05 ? 1 : 0;
+        intro_h4.style.opacity = progress > 0.12 ? 1 : 0;
+        intro.style.opacity = Math.max(1 - shrinkProgress * 3, 0);
         // ========================
         // About us
         // =======================
@@ -128,10 +130,12 @@ function setupScrollAnimation(){
             about_label.classList.add('show');
             about_content.classList.add('show');
             about_description.classList.add('show');
+            about_image.classList.add('show');
         } else {
             about_label.classList.remove('show');
             about_content.classList.remove('show');
             about_description.classList.remove('show');
+            about_image.classList.remove('show');
         }
 
         // ========================
