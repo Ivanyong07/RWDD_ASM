@@ -23,7 +23,7 @@ body.no-scroll{
 
 
 html{
-    scroll-behavior: auto;
+    scroll-behavior: smooth;
 }
 
 #start-page{
@@ -625,13 +625,12 @@ stats
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: row;
+    flex-direction: column;
     box-sizing: border-box;
     padding: 10vh 8%;
     gap: 100px;
     width: 100%;
     min-height: 80vh;
-    background-color: #0c9260;
 }
 
 .student-joined, .challenge, .item{
@@ -650,13 +649,28 @@ stats
     transform: translateY(0);
 }
 
+#stat-description{
+    font-size: 5em;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    color: rgb(130, 130, 130);
+}
+
+#stat-section{
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    justify-content: center;
+}
+
 .item:hover{
     animation: goUp 1s ease forwards;
 }
 
 @keyframes goUp {
     to {
-        transform: translateY(4px) scale(1.4);
+        transform: translateY(-4px) scale(1);
     }
 }
 
@@ -665,8 +679,7 @@ badge-collection
 ========================== */
 
 #badge-collection{
-    background: #ffffff;
-    min-height: 50vh;
+    min-height: 70vh;
     display: flex;
     align-items: center;
     justify-content: center;
