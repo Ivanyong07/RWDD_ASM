@@ -268,7 +268,7 @@ function href_login(){
     const login = document.getElementById('login');
 
     login.addEventListener('click', ()=> {
-        window.location.href = 'login/login.html'
+        window.location.href = 'auth/index.html'
     });
 }
 

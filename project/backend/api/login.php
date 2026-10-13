@@ -1,18 +1,17 @@
 <?php
 
 session_start();
-require_once "../validation/UserValidation.php";
-$conn = null;
-require "database.php";
-require "controllers/UserControllers.php";
+require_once __DIR__ . "/../validation/DataValidation.php";
+require "../config/database.php";
+require "../controllers/UserControllers.php";
 
 $error = "";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email = validateEmail(trim($_POST["email"] ?? ""));
-    $password = validatePassword(trim($_POST("password") ?? ""));
+    $password = $_POST["password"] ?? "";
 
-    if ($email == "" || $email == null || $password == "" || $password == null) {
+    if (!$email || $password === "") {
         $error = "Please fill in both line";
     } else {
         $controller = new UserControllers($conn);
@@ -28,6 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             } else {
                 header("Location: ../../frontend/user/index.html");
             }
+            exit;
         } else {
             $error = "Wrong username or password";
         }

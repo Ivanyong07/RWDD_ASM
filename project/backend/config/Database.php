@@ -12,7 +12,9 @@ try {
         $db_pass,
         $db_name
     );
-    mysqli_set_charset($conn, "utf8mb");
+    mysqli_set_charset($conn, "utf8mb4");
 } catch (mysqli_sql_exception $e) {
     die("Could not connect: " . $e->getMessage());
 }
+
+echo "You are connected";

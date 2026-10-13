@@ -38,8 +38,8 @@ class UserControllers
     // Update
     public function update($id, $username, $email, $age, $tp_number, $course, $created_at)
     {
-        $stmt = mysqli_prepare($this->conn, "UPDATE users SET username = ?, email = ?, age = ?, tp_number = ?, course = ?, created_at = ? WHERE id = ?");
-        mysqli_stmt_bind_param($stmt, "ssissi", $username, $email, $age, $tp_number, $course, $created_at, $id);
+        $stmt = mysqli_prepare($this->conn, "UPDATE users SET username = ?, email = ?, age = ?, tp_number = ?, course = ? WHERE id = ?");
+        mysqli_stmt_bind_param($stmt, "ssissi", $username, $email, $age, $tp_number, $course, $id);
         mysqli_stmt_execute($stmt);
         return mysqli_stmt_affected_rows($stmt);
     }
@@ -55,7 +55,7 @@ class UserControllers
 
     public function getByEmail($email)
     {
-        $stmt = mysqli_prepare($this->conn, "SELECT id = ?, role = ?, password = ? WHERE email = ?");
+        $stmt = mysqli_prepare($this->conn, "SELECT id, role, password FROM users WHERE email = ?");
         mysqli_stmt_bind_param($stmt, "s", $email);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);

@@ -377,7 +377,7 @@ Letter
 #letter{
     position: sticky;
     top: 0;
-    height: 100vh;
+    height: 80vh;
     z-index: 0;
     display: flex;
     justify-content: center;
@@ -385,7 +385,7 @@ Letter
     pointer-events: none;
     inset: 0;
     flex-direction: column;
-    gap: 50px;
+    gap: 10px;
 }
 
 .letter-buttons{
@@ -419,7 +419,7 @@ Letter
 
 #letter p{
     margin: 0;
-    font-size: 11vw;
+    font-size: 8vw;
     font-weight: 700;
     font-family: Arial, Helvetica, sans-serif;
     white-space: nowrap;
@@ -433,7 +433,7 @@ Letter
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 400;
     font-size: clamp(1rem, 1.6vw, 1.5rem);
-    color: #060606;
+    color: rgb(91, 95, 91);
 }
 
 #slot {
@@ -568,7 +568,7 @@ ABOUT-US
 }
 
 .about-image {
-    width: 45%;
+    width: 600px;
     height: 600px;
 
     overflow: hidden;
@@ -576,6 +576,7 @@ ABOUT-US
 
     clip-path: inset(100% 0 0 0);
     animation-delay: 0.5s;
+    box-shadow: 20px 20px 50px grey;
 }
 
 
@@ -710,7 +711,8 @@ badge-collection
 .track {
     display: flex;
     width: max-content;
-    animation: spin 15s linear infinite;
+    animation: spin 30s linear infinite;
+    will-change: transform;
     }
 
 .group {
@@ -719,7 +721,12 @@ badge-collection
     gap: 1em;
     padding-right: 1em;
     flex-shrink: 0;
-    }
+}
+
+.group img {
+    width: 100px;
+    height: 100px;
+}
 
 .card {
     flex: 0 0 4em;
@@ -732,13 +739,8 @@ badge-collection
 }
 
 @keyframes spin {
-    from {
-        transform: translateX(0);
-    }
-
-    to {
-        transform: translateX(-50%);
-    }
+    from { transform: translate3d(0, 0, 0); }
+    to   { transform: translate3d(-50%, 0, 0); }
 }
 
 
@@ -765,6 +767,7 @@ green center
     clip-path: inset(100% 0 0 0);
     transform: translateY(30px);
     font: 13px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .place-label.show{
@@ -781,21 +784,54 @@ green center
     font-size: clamp(3rem, 6vw, 6rem);
     line-height: 0.95;
     margin: 20px 0;
+    color: rgb(11, 66, 11);
+}
+
+.place-content span{
+    color: #0c9260;
 }
 
 .place-content h2.show {
     animation: fadeUp 1s cubic-bezier(.2,.8,.2,1) forwards 0.6s;
 }
 
-.place-description{
+.place-description {
     opacity: 0;
     max-width: 500px;
     line-height: 1.7;
     font-size: 17px;
+    color: rgb(91, 95, 91);
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .place-description.show{
     animation: fadeUp 0.9s ease forwards 0.7s;
+}
+
+.place-img {
+    display: flex;
+    align-items: center;
+}
+
+.place-img img {
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 20px 20px 50px grey;
+}
+
+#place-img1 {
+    position: relative;
+    z-index: 0;
+}
+
+#place-img2 {
+    position: relative;
+    z-index: 1;
+    margin-left: -40px;   /* how much it overlaps image 1 */
+    border: 5px solid #fff;
+    bottom: -30px;
 }
 
 /* ==========================

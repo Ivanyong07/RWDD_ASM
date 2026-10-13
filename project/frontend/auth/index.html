@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <link rel="stylesheet" href="login.css" />
+  <link rel="stylesheet" href="style.css" />
   <body>
     <!-- <div id="swap">
       <div class="band"></div>
@@ -17,10 +17,10 @@
     <div id="login">
       <form action="../../backend/api/login.php" method="POST">
         <label>Username:</label>
-        <input type="text" name="email" />
+        <input type="text" name="email" required />
 
         <label>Password</label>
-        <input type="text" name="password" />
+        <input type="text" name="password" required />
 
         <input type="submit" name="login" />
       </form>
@@ -44,6 +44,6 @@
       </form>
     </div>
 
-    <script src="login.js"></script>
+    <script src="index.js"></script>
   </body>
 </html>
