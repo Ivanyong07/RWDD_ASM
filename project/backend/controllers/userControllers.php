@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__  . "/../model/User.php";
 class UserControllers
 {
     private $conn;
@@ -9,11 +10,19 @@ class UserControllers
     }
 
     // Create
-    public function create($username, $password, $email, $age, $tp_number, $course, $created_at)
+    public function create(User $user)
     {
-        $hash = password_hash($password, PASSWORD_DEFAULT);
-        $stmt = mysqli_prepare($this->conn, "INSERT INTO users(username, password, email, age, tp_number, course, created_at) VALUES (?,?,?,?,?,?,?)");
-        mysqli_stmt_bind_param($stmt, "sssiss", $username, $hash, $email, $age, $tp_number, $course, $created_at);
+
+        $username = $user->getUsername();
+        $password = password_hash($user->getPassword(), PASSWORD_DEFAULT);
+        $email = $user->getEmail();
+        $age = $user->getAge();
+        $tp_number = $user->getTpNumber();
+        $course = $user->getCourse();
+        $role = $user->getRole();
+
+        $stmt = mysqli_prepare($this->conn, "INSERT INTO users(username, email, password, age, tp_number, course, role) VALUES (?,?,?,?,?,?,?)");
+        mysqli_stmt_bind_param($stmt, "sssisss", $username, $email, $password, $age, $tp_number, $course, $role);
         mysqli_stmt_execute($stmt);
         return mysqli_insert_id($this->conn);
     }

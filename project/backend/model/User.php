@@ -2,17 +2,16 @@
 
 class User
 {
-    private $username;
-    private $password;
-    private $email;
-    private $age;
-    private $tp_number;
-    private $created_at;
-    private $course;
-    private $role;
+    private string $username;
+    private string $password;
+    private string $email;
+    private int $age;
+    private string $tp_number;
+    private string $course;
+    private string $role;
 
 
-    public function __construct($username, $password, $email, $age, $tp_number, $created_at, $course, $role)
+    public function __construct(string $username, string $password, string $email, int $age, string $tp_number, string $course, string $role = "user")
     {
 
         $this->username = $username;
@@ -20,22 +19,21 @@ class User
         $this->email = $email;
         $this->age = $age;
         $this->tp_number = $tp_number;
-        $this->created_at = $created_at;
         $this->course = $course;
         $this->role = $role;
     }
 
-    public function getName()
+    public function getUsername(): string
     {
         return $this->username;
     }
 
-    public function setName($username)
+    public function setUsername($username)
     {
         $this->username = $username;
     }
 
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
     }
@@ -45,7 +43,7 @@ class User
         return $this->email = $email;
     }
 
-    public function getPassword()
+    public function getPassword(): string
     {
         return $this->password;
     }
@@ -55,17 +53,21 @@ class User
         return $this->password = $password;
     }
 
-    public function getAge()
+    public function getAge(): int
     {
         return $this->age;
     }
 
-    public function setAge($age)
+    public function setAge($age): void
     {
-        return $this->age = $age;
+        if ($age < 10 || $age > 100) {
+            throw new InvalidArgumentException("Invalid Age");
+        } else {
+            $this->age = $age;
+        }
     }
 
-    public function getTpNumber()
+    public function getTpNumber(): string
     {
         return $this->tp_number;
     }
@@ -75,29 +77,19 @@ class User
         return $this->tp_number = $tp_number;
     }
 
-    public function getCreatedAt()
-    {
-        return $this->created_at;
-    }
-
-    public function setCreatedAt($created_at)
-    {
-        $this->created_at = $created_at;
-    }
-
-    public function setCourse()
+    public function getCourse(): string
     {
         return $this->course;
     }
 
-    public function getCourse($course)
+    public function setCourse($course)
     {
         $this->course = $course;
     }
 
-    public function getRole()
+    public function getRole(): string
     {
-        $this->role;
+        return $this->role;
     }
 
     public function setRole($role)

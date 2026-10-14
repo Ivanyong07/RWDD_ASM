@@ -9,6 +9,7 @@ function validateEmail($email)
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         return "Invalid Email";
     }
+    return null;
 }
 
 function validatePassword($password)
@@ -21,5 +22,15 @@ function validatePassword($password)
         return "Password must be at least 8 characters";
     }
 
+    return null;
+}
+
+function validateAge($age)
+{
+    return null;
+}
+
+function validateTpNumber($tp_number)
+{
     return null;
 }

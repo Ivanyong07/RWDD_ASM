@@ -16,5 +16,3 @@ try {
 } catch (mysqli_sql_exception $e) {
     die("Could not connect: " . $e->getMessage());
 }
-
-echo "You are connected";

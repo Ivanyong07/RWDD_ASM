@@ -15,7 +15,7 @@
     </div> -->
 
     <div id="login">
-      <form action="../../backend/api/login.php" method="POST">
+      <form action="../../backend/api/Login.php" method="POST">
         <label>Username:</label>
         <input type="text" name="email" required />
 
@@ -26,19 +26,45 @@
       </form>
     </div>
 
-    <div id="logout">
-      <form action="backend/index.php" method="post">
+    <div id="register">
+      <form action="../../backend/api/Register.php" method="post">
         <label>Username:</label>
-        <input type="text" name="username" />
+        <input type="text" name="username" required placeholder="e.g Ivan" />
 
-        <label>Password</label>
-        <input type="text" name="password" />
+        <label>Email:</label>
+        <input
+          type="email"
+          name="email"
+          required
+          placeholder="e.g ivan@gmail.com"
+        />
 
-        <label>Confirmed Password</label>
-        <input type="text" name="password" />
+        <label>Password:</label>
+        <input
+          type="text"
+          name="password"
+          required
+          placeholder="e.g 12345678"
+        />
 
-        <label>Email</label>
-        <input type="text" name="email" />
+        <label>Age:</label>
+        <input type="number" name="age" required placeholder="e.g 19" />
+
+        <label>TP Number:</label>
+        <input
+          type="text"
+          name="tp_number"
+          required
+          placeholder="e.g TP12345"
+        />
+
+        <label>Course:</label>
+        <input
+          type="text"
+          name="course"
+          required
+          placeholder="e.g Diploma in Information Communication Technology"
+        />
 
         <input type="submit" name="login" />
       </form>
