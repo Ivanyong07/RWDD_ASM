@@ -1,361 +1,850 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Fun Collector | Badges</title>
-<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Fun Collector | Badges</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
-<style>
-/* ==========================================================================
+    <style>
+      /* ==========================================================================
    1. SHARED STYLES  (identical in every page: keep them in sync)
    ========================================================================== */
 
-/* ---- 1.1 Colours and base ---- */
-:root {
-  --bg: #eef0f0;
-  --card: #ffffff;
-  --soft: #f1f3f3;
-  --ink: #17231f;
-  --muted: #6a7a75;
-  --line: #e2e7e5;
-  --green: #12a875;
-  --green-dark: #0b4a3a;
-  --green-light: #dff5ec;
-  --bad: #c0452f;
-  --amber: #f2a541;
-}
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--ink);
-  font-family: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
-  line-height: 1.5;
-}
-h2, h3 { margin: 0; }
-button, input { font: inherit; color: inherit; }
-button { cursor: pointer; }
-a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid var(--green); outline-offset: 2px; }
-svg { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-.small { font-size: 14px; color: var(--muted); }
-[hidden] { display: none !important; }
+      /* ---- 1.1 Colours and base ---- */
+      :root {
+        --bg: #eef0f0;
+        --card: #ffffff;
+        --soft: #f1f3f3;
+        --ink: #17231f;
+        --muted: #6a7a75;
+        --line: #e2e7e5;
+        --green: #12a875;
+        --green-dark: #0b4a3a;
+        --green-light: #dff5ec;
+        --bad: #c0452f;
+        --amber: #f2a541;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family:
+          "Figtree",
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          sans-serif;
+        line-height: 1.5;
+      }
+      h2,
+      h3 {
+        margin: 0;
+      }
+      button,
+      input {
+        font: inherit;
+        color: inherit;
+      }
+      button {
+        cursor: pointer;
+      }
+      a:focus-visible,
+      button:focus-visible,
+      input:focus-visible {
+        outline: 3px solid var(--green);
+        outline-offset: 2px;
+      }
+      svg {
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.8;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .small {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      [hidden] {
+        display: none !important;
+      }
 
-/* ---- 1.2 Top bar ---- */
-.top { display: flex; justify-content: space-between; align-items: center; padding: 14px 24px; }
-.top-left, .top-right { display: flex; align-items: center; gap: 18px; }
-.brand { display: flex; align-items: center; gap: 8px; font-size: 22px; color: inherit; text-decoration: none; }
-.brand b { color: var(--green); font-weight: 700; }
-.logo-slot {                          /* blank box until the website logo is added */
-  position: relative; flex: none; width: 32px; height: 32px; overflow: hidden;
-  background: #d3dcd9; border-radius: 8px;
-}
-.logo-slot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
-.logo-slot img:not([src]) { display: none; }
-.sep { width: 1px; height: 26px; background: #c9d1ce; }
-.brand-sub { color: #44524d; }
-.icon-btn {
-  width: 36px; height: 36px;
-  display: grid; place-items: center;
-  background: none; border: 0; border-radius: 10px;
-  color: #2a3a35;
-}
-.icon-btn:hover { background: rgba(0, 0, 0, 0.06); }
-.icon-btn svg { width: 22px; height: 22px; }
+      /* ---- 1.2 Top bar ---- */
+      .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 14px 24px;
+      }
+      .top-left,
+      .top-right {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 22px;
+        color: inherit;
+        text-decoration: none;
+      }
+      .brand b {
+        color: var(--green);
+        font-weight: 700;
+      }
+      .logo-slot {
+        /* blank box until the website logo is added */
+        position: relative;
+        flex: none;
+        width: 32px;
+        height: 32px;
+        overflow: hidden;
+        background: #d3dcd9;
+        border-radius: 8px;
+      }
+      .logo-slot img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+      .logo-slot img:not([src]) {
+        display: none;
+      }
+      .sep {
+        width: 1px;
+        height: 26px;
+        background: #c9d1ce;
+      }
+      .brand-sub {
+        color: #44524d;
+      }
+      .icon-btn {
+        width: 36px;
+        height: 36px;
+        display: grid;
+        place-items: center;
+        background: none;
+        border: 0;
+        border-radius: 10px;
+        color: #2a3a35;
+      }
+      .icon-btn:hover {
+        background: rgba(0, 0, 0, 0.06);
+      }
+      .icon-btn svg {
+        width: 22px;
+        height: 22px;
+      }
 
-/* User pill + dropdown menu */
-.user-wrap { position: relative; }
-.user {
-  display: flex; align-items: center; gap: 14px;
-  background: var(--card); border: 0; border-radius: 16px;
-  padding: 8px 14px 8px 10px; font-weight: 600;
-}
-.pic-slot {                           /* blank circle until a profile picture is added */
-  position: relative; flex: none; width: 36px; height: 36px; overflow: hidden;
-  background: #d3dcd9; border-radius: 50%;
-}
-.pic-slot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.pic-slot img:not([src]) { display: none; }
-.chev { width: 20px; height: 20px; }
-.menu {
-  position: absolute; right: 0; top: calc(100% + 8px); z-index: 20;
-  min-width: 210px; padding: 8px;
-  background: var(--card); border-radius: 14px;
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.14);
-}
-.menu-info { display: flex; flex-direction: column; padding: 8px 10px; margin-bottom: 6px; border-bottom: 1px solid var(--line); }
-.menu button { width: 100%; padding: 9px 10px; text-align: left; background: none; border: 0; border-radius: 8px; }
-.menu button:hover { background: var(--soft); }
+      /* User pill + dropdown menu */
+      .user-wrap {
+        position: relative;
+      }
+      .user {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        background: var(--card);
+        border: 0;
+        border-radius: 16px;
+        padding: 8px 14px 8px 10px;
+        font-weight: 600;
+      }
+      .pic-slot {
+        /* blank circle until a profile picture is added */
+        position: relative;
+        flex: none;
+        width: 36px;
+        height: 36px;
+        overflow: hidden;
+        background: #d3dcd9;
+        border-radius: 50%;
+      }
+      .pic-slot img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .pic-slot img:not([src]) {
+        display: none;
+      }
+      .chev {
+        width: 20px;
+        height: 20px;
+      }
+      .menu {
+        position: absolute;
+        right: 0;
+        top: calc(100% + 8px);
+        z-index: 20;
+        min-width: 210px;
+        padding: 8px;
+        background: var(--card);
+        border-radius: 14px;
+        box-shadow: 0 8px 28px rgba(0, 0, 0, 0.14);
+      }
+      .menu-info {
+        display: flex;
+        flex-direction: column;
+        padding: 8px 10px;
+        margin-bottom: 6px;
+        border-bottom: 1px solid var(--line);
+      }
+      .menu button {
+        width: 100%;
+        padding: 9px 10px;
+        text-align: left;
+        background: none;
+        border: 0;
+        border-radius: 8px;
+      }
+      .menu button:hover {
+        background: var(--soft);
+      }
 
-/* ---- 1.3 Page layout: left menu + main panel ---- */
-.shell { display: grid; grid-template-columns: 110px 1fr; gap: 20px; padding: 0 16px 24px; align-items: start; }
-.shell.no-rail { grid-template-columns: 1fr; }
-.shell.no-rail .rail { display: none; }
-.rail {
-  position: sticky; top: 12px;
-  display: flex; flex-direction: column; gap: 14px;
-  padding: 20px 8px; background: var(--card); border-radius: 20px;
-}
-.rail a {
-  display: flex; flex-direction: column; align-items: center; gap: 6px;
-  padding: 8px 2px; color: var(--muted); font-size: 14px; font-weight: 500; text-decoration: none;
-}
-.rail .ic { width: 46px; height: 46px; display: grid; place-items: center; border-radius: 50%; }
-.rail .ic svg { width: 22px; height: 22px; }
-.rail a:hover .ic { background: var(--soft); }
-.rail a.active { color: var(--ink); }
-.rail a.active .ic { background: var(--green-light); color: var(--green); }
-.main { min-width: 0; padding: 24px; background: var(--card); border-radius: 20px; }
+      /* ---- 1.3 Page layout: left menu + main panel ---- */
+      .shell {
+        display: grid;
+        grid-template-columns: 110px 1fr;
+        gap: 20px;
+        padding: 0 16px 24px;
+        align-items: start;
+      }
+      .shell.no-rail {
+        grid-template-columns: 1fr;
+      }
+      .shell.no-rail .rail {
+        display: none;
+      }
+      .rail {
+        position: sticky;
+        top: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        padding: 20px 8px;
+        background: var(--card);
+        border-radius: 20px;
+      }
+      .rail a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 2px;
+        color: var(--muted);
+        font-size: 14px;
+        font-weight: 500;
+        text-decoration: none;
+      }
+      .rail .ic {
+        width: 46px;
+        height: 46px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+      }
+      .rail .ic svg {
+        width: 22px;
+        height: 22px;
+      }
+      .rail a:hover .ic {
+        background: var(--soft);
+      }
+      .rail a.active {
+        color: var(--ink);
+      }
+      .rail a.active .ic {
+        background: var(--green-light);
+        color: var(--green);
+      }
+      .main {
+        min-width: 0;
+        padding: 24px;
+        background: var(--card);
+        border-radius: 20px;
+      }
 
-/* ---- 1.4 Toolbar (points pill + search) ---- */
-.toolbar {
-  display: flex; align-items: center; flex-wrap: wrap; gap: 18px;
-  margin-bottom: 26px; padding: 16px 18px;
-  background: var(--soft); border-radius: 28px;
-}
-.pill { padding: 8px 20px; background: var(--green); color: #fff; font-weight: 700; border-radius: 99px; white-space: nowrap; }
-.tool-text { font-weight: 500; }
-.link { margin-left: auto; color: var(--green); font-weight: 600; text-decoration: none; }
-.search {
-  flex: 1 1 220px; height: 48px;
-  display: flex; align-items: center; gap: 8px;
-  padding: 0 14px; background: #fff; border-radius: 12px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
-}
-.search svg { width: 20px; height: 20px; flex: none; color: #44524d; }
-.search input { width: 100%; height: 100%; border: 0; outline: 0; background: none; }
+      /* ---- 1.4 Toolbar (points pill + search) ---- */
+      .toolbar {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 18px;
+        margin-bottom: 26px;
+        padding: 16px 18px;
+        background: var(--soft);
+        border-radius: 28px;
+      }
+      .pill {
+        padding: 8px 20px;
+        background: var(--green);
+        color: #fff;
+        font-weight: 700;
+        border-radius: 99px;
+        white-space: nowrap;
+      }
+      .tool-text {
+        font-weight: 500;
+      }
+      .link {
+        margin-left: auto;
+        color: var(--green);
+        font-weight: 600;
+        text-decoration: none;
+      }
+      .search {
+        flex: 1 1 220px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0 14px;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+      }
+      .search svg {
+        width: 20px;
+        height: 20px;
+        flex: none;
+        color: #44524d;
+      }
+      .search input {
+        width: 100%;
+        height: 100%;
+        border: 0;
+        outline: 0;
+        background: none;
+      }
 
-/* ---- 1.5 Section title, tiles and buttons ---- */
-.sec-head { margin: 6px 0 20px; }
-.sec-head h2 { display: inline-block; padding-bottom: 10px; font-size: 24px; font-weight: 600; border-bottom: 2px solid var(--green-dark); }
-.tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 22px 16px; }
-.tile { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 6px; text-align: center; }
-.tile .tile-icon {
-  width: 100px; height: 100px; margin-bottom: 8px;
-  display: grid; place-items: center;
-  overflow: hidden; border-radius: 24px; background: var(--tint, #e3f6ee);   /* blank until a photo is added */
-}
-.tile .tile-icon img { width: 100%; height: 100%; object-fit: cover; }
-.tile h4 { margin: 0; font-size: 16px; font-weight: 600; }
-.tile p { flex: 1; margin: 0; font-size: 13px; color: var(--muted); }
-.tile .meta { font-weight: 700; color: var(--green); }
-.btn { margin-top: 6px; padding: 7px 18px; background: var(--green-dark); color: #fff; font-weight: 600; border: 0; border-radius: 10px; }
-.btn:disabled { opacity: 0.4; cursor: not-allowed; }
-.btn.ghost { background: none; color: var(--ink); border: 1px solid var(--line); }
+      /* ---- 1.5 Section title, tiles and buttons ---- */
+      .sec-head {
+        margin: 6px 0 20px;
+      }
+      .sec-head h2 {
+        display: inline-block;
+        padding-bottom: 10px;
+        font-size: 24px;
+        font-weight: 600;
+        border-bottom: 2px solid var(--green-dark);
+      }
+      .tiles {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+        gap: 22px 16px;
+      }
+      .tile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        padding: 6px;
+        text-align: center;
+      }
+      .tile .tile-icon {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 8px;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+        border-radius: 24px;
+        background: var(--tint, #e3f6ee); /* blank until a photo is added */
+      }
+      .tile .tile-icon img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .tile h4 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 600;
+      }
+      .tile p {
+        flex: 1;
+        margin: 0;
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .tile .meta {
+        font-weight: 700;
+        color: var(--green);
+      }
+      .btn {
+        margin-top: 6px;
+        padding: 7px 18px;
+        background: var(--green-dark);
+        color: #fff;
+        font-weight: 600;
+        border: 0;
+        border-radius: 10px;
+      }
+      .btn:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+      .btn.ghost {
+        background: none;
+        color: var(--ink);
+        border: 1px solid var(--line);
+      }
 
-/* ---- 1.6 Toast message ---- */
-.toast {
-  position: fixed; left: 50%; bottom: 24px; z-index: 30;
-  max-width: 90%; padding: 12px 20px;
-  background: var(--green-dark); color: #fff; font-weight: 600; text-align: center;
-  border-radius: 12px; transform: translate(-50%, 120px); transition: transform 0.3s;
-}
-.toast.show { transform: translate(-50%, 0); }
+      /* ---- 1.6 Toast message ---- */
+      .toast {
+        position: fixed;
+        left: 50%;
+        bottom: 24px;
+        z-index: 30;
+        max-width: 90%;
+        padding: 12px 20px;
+        background: var(--green-dark);
+        color: #fff;
+        font-weight: 600;
+        text-align: center;
+        border-radius: 12px;
+        transform: translate(-50%, 120px);
+        transition: transform 0.3s;
+      }
+      .toast.show {
+        transform: translate(-50%, 0);
+      }
 
-/* ---- 1.7 Opening picture: split into strips that wipe left one after another ---- */
-body.splash-on { overflow: hidden; }
-.splash { position: fixed; inset: 0; z-index: 100; }
-.splash .slice {                              /* one strip of the picture (made by the script) */
-  position: absolute; inset: 0;
-  background: var(--green-dark) center / cover no-repeat;   /* plain colour until a picture is added */
-  transition: transform 0.6s cubic-bezier(0.77, 0, 0.18, 1);
-  transition-delay: calc(var(--i) * 90ms);                  /* each strip starts a little later */
-}
-.splash.wipe-left .slice { transform: translateX(-100%); }  /* every strip slides off to the left */
+      /* ---- 1.7 Opening picture: split into strips that wipe left one after another ---- */
+      body.splash-on {
+        overflow: hidden;
+      }
+      .splash {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+      }
+      .splash .slice {
+        /* one strip of the picture (made by the script) */
+        position: absolute;
+        inset: 0;
+        background: var(--green-dark) center / cover no-repeat; /* plain colour until a picture is added */
+        transition: transform 0.6s cubic-bezier(0.77, 0, 0.18, 1);
+        transition-delay: calc(
+          var(--i) * 90ms
+        ); /* each strip starts a little later */
+      }
+      .splash.wipe-left .slice {
+        transform: translateX(-100%);
+      } /* every strip slides off to the left */
 
-/* ---- 1.8 Responsive layout ---- */
+      /* ---- 1.8 Responsive layout ---- */
 
-/* Tablet and phone (up to 1024px):
+      /* Tablet and phone (up to 1024px):
    - the top bar (logo, profile picture, user name) stays fixed at the TOP of the screen
    - the menu (Rank, History, Badges, Rewards) stays fixed at the BOTTOM of the screen
    Only the content in the middle scrolls. */
-@media (max-width: 1024px) {
-  :root { --top-h: 64px; --nav-h: 76px; }                  /* heights of the fixed bars */
-  html { scroll-padding-top: calc(var(--top-h) + env(safe-area-inset-top, 0px) + 8px); }
-  body {                                                    /* keep content clear of the fixed bars */
-    padding-top: calc(var(--top-h) + env(safe-area-inset-top, 0px));
-    padding-bottom: calc(var(--nav-h) + env(safe-area-inset-bottom, 0px) + 16px);
-  }
+      @media (max-width: 1024px) {
+        :root {
+          --top-h: 64px;
+          --nav-h: 76px;
+        } /* heights of the fixed bars */
+        html {
+          scroll-padding-top: calc(
+            var(--top-h) + env(safe-area-inset-top, 0px) + 8px
+          );
+        }
+        body {
+          /* keep content clear of the fixed bars */
+          padding-top: calc(var(--top-h) + env(safe-area-inset-top, 0px));
+          padding-bottom: calc(
+            var(--nav-h) + env(safe-area-inset-bottom, 0px) + 16px
+          );
+        }
 
-  /* Fixed top bar */
-  .top {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 15;
-    height: calc(var(--top-h) + env(safe-area-inset-top, 0px));
-    padding: env(safe-area-inset-top, 0px) 16px 0;
-    background: var(--bg); box-shadow: 0 1px 0 var(--line);
-  }
-  #toggleRail { display: none; }                            /* hide/show menu button is not needed here */
+        /* Fixed top bar */
+        .top {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          z-index: 15;
+          height: calc(var(--top-h) + env(safe-area-inset-top, 0px));
+          padding: env(safe-area-inset-top, 0px) 16px 0;
+          background: var(--bg);
+          box-shadow: 0 1px 0 var(--line);
+        }
+        #toggleRail {
+          display: none;
+        } /* hide/show menu button is not needed here */
 
-  /* Fixed bottom menu */
-  .shell { grid-template-columns: 1fr; gap: 0; padding: 0 12px; }
-  .shell.no-rail .rail { display: flex; }
-  .rail {
-    position: fixed; top: auto; left: 0; right: 0; bottom: 0; z-index: 15;   /* top: auto cancels the desktop "top: 12px" */
-    height: auto;
-    flex-direction: row; justify-content: space-around; gap: 0;
-    padding: 8px 6px calc(8px + env(safe-area-inset-bottom, 0px));
-    border-radius: 20px 20px 0 0; box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
-  }
-  .rail a { flex: 1; font-size: 12px; }
-  .rail .ic { width: 40px; height: 40px; }
+        /* Fixed bottom menu */
+        .shell {
+          grid-template-columns: 1fr;
+          gap: 0;
+          padding: 0 12px;
+        }
+        .shell.no-rail .rail {
+          display: flex;
+        }
+        .rail {
+          position: fixed;
+          top: auto;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          z-index: 15; /* top: auto cancels the desktop "top: 12px" */
+          height: auto;
+          flex-direction: row;
+          justify-content: space-around;
+          gap: 0;
+          padding: 8px 6px calc(8px + env(safe-area-inset-bottom, 0px));
+          border-radius: 20px 20px 0 0;
+          box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+        }
+        .rail a {
+          flex: 1;
+          font-size: 12px;
+        }
+        .rail .ic {
+          width: 40px;
+          height: 40px;
+        }
 
-  /* Content */
-  .main { padding: 20px; }
-  .tiles { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 18px 12px; }
-  .tile .tile-icon { width: 88px; height: 88px; }
-  .toast { bottom: calc(var(--nav-h) + env(safe-area-inset-bottom, 0px) + 12px); }   /* above the bottom menu */
-}
+        /* Content */
+        .main {
+          padding: 20px;
+        }
+        .tiles {
+          grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+          gap: 18px 12px;
+        }
+        .tile .tile-icon {
+          width: 88px;
+          height: 88px;
+        }
+        .toast {
+          bottom: calc(var(--nav-h) + env(safe-area-inset-bottom, 0px) + 12px);
+        } /* above the bottom menu */
+      }
 
-/* Phone only (up to 760px): tighter top bar and two tiles per row */
-@media (max-width: 760px) {
-  .top { padding-left: 12px; padding-right: 12px; }
-  .top-left, .top-right { gap: 8px; }
-  .brand { font-size: 19px; }
-  .sep, .chev, .top-right > a.icon-btn { display: none; }  /* the Rank link in the bottom menu replaces Home */
-  .user { gap: 8px; padding: 6px 12px 6px 6px; }
-  #userName { max-width: 90px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 14px; }
-  .shell { padding: 0 10px; }
-  .main { padding: 16px; border-radius: 16px; }
-  .toolbar { gap: 12px; padding: 12px; border-radius: 20px; }
-  .search { order: 3; flex: 1 1 100%; height: 44px; }
-  .link { margin-left: auto; }
-  .tiles { grid-template-columns: repeat(2, 1fr); gap: 16px 10px; }
-  .tile .tile-icon { width: 80px; height: 80px; }
-}
+      /* Phone only (up to 760px): tighter top bar and two tiles per row */
+      @media (max-width: 760px) {
+        .top {
+          padding-left: 12px;
+          padding-right: 12px;
+        }
+        .top-left,
+        .top-right {
+          gap: 8px;
+        }
+        .brand {
+          font-size: 19px;
+        }
+        .sep,
+        .chev,
+        .top-right > a.icon-btn {
+          display: none;
+        } /* the Rank link in the bottom menu replaces Home */
+        .user {
+          gap: 8px;
+          padding: 6px 12px 6px 6px;
+        }
+        #userName {
+          max-width: 90px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          font-size: 14px;
+        }
+        .shell {
+          padding: 0 10px;
+        }
+        .main {
+          padding: 16px;
+          border-radius: 16px;
+        }
+        .toolbar {
+          gap: 12px;
+          padding: 12px;
+          border-radius: 20px;
+        }
+        .search {
+          order: 3;
+          flex: 1 1 100%;
+          height: 44px;
+        }
+        .link {
+          margin-left: auto;
+        }
+        .tiles {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 16px 10px;
+        }
+        .tile .tile-icon {
+          width: 80px;
+          height: 80px;
+        }
+      }
 
-/* Very small phones (up to 400px) */
-@media (max-width: 400px) {
-  .brand { font-size: 17px; }
-  #userName { max-width: 64px; }
-}
-@media (prefers-reduced-motion: reduce) { .toast, .splash .slice { transition: none; } }
+      /* Very small phones (up to 400px) */
+      @media (max-width: 400px) {
+        .brand {
+          font-size: 17px;
+        }
+        #userName {
+          max-width: 64px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .toast,
+        .splash .slice {
+          transition: none;
+        }
+      }
 
-/* ==========================================================================
+      /* ==========================================================================
    2. PAGE STYLES: Badges page only
    ========================================================================== */
-/* ---- 2.1 Locked badges are greyed out ---- */
-.tile.locked { opacity: 0.5; }
-.tile.locked .tile-icon { filter: grayscale(1); }
-</style>
-</head>
+      /* ---- 2.1 Locked badges are greyed out ---- */
+      .tile.locked {
+        opacity: 0.5;
+      }
+      .tile.locked .tile-icon {
+        filter: grayscale(1);
+      }
+    </style>
+  </head>
 
-<body class="splash-on">
-
-<!-- ==========================================================================
+  <body class="splash-on">
+    <!-- ==========================================================================
      SHARED: OPENING PICTURE  (identical in every page)
      Shows for 1.5 seconds each time a page opens, then splits into strips that
      wipe left. The strips are made by the script, so this box stays empty.
      >>> ADD YOUR PICTURE in the script: look for OPENING_PICTURE (section 1.6) <<<
      ========================================================================== -->
-<div class="splash" id="splash" aria-hidden="true"></div>
+    <div class="splash" id="splash" aria-hidden="true"></div>
 
-<!-- ==========================================================================
+    <!-- ==========================================================================
      SHARED: TOP BAR  (identical in every page)
      ========================================================================== -->
-<header class="top">
-  <div class="top-left">
-    <a class="brand" href="index.html">
-      <!-- Website logo: left blank. Add your image path, e.g. <img src="images/logo.png" alt="Fun Collector logo"> -->
-      <span class="logo-slot"><img alt="Fun Collector logo"></span>
-      <b>Fun</b><span class="sep"></span><span class="brand-sub">Collector</span>
-    </a>
-    <button class="icon-btn" id="toggleRail" aria-label="Show or hide menu">
-      <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16"/></svg>
-    </button>
-  </div>
+    <header class="top">
+      <div class="top-left">
+        <a class="brand" href="index.html">
+          <!-- Website logo: left blank. Add your image path, e.g. <img src="images/logo.png" alt="Fun Collector logo"> -->
+          <span class="logo-slot"><img alt="Fun Collector logo" /></span>
+          <b>Fun</b><span class="sep"></span
+          ><span class="brand-sub">Collector</span>
+        </a>
+        <button class="icon-btn" id="toggleRail" aria-label="Show or hide menu">
+          <svg viewBox="0 0 24 24">
+            <rect x="3" y="4" width="18" height="16" rx="2" />
+            <path d="M9 4v16" />
+          </svg>
+        </button>
+      </div>
 
-  <div class="top-right">
-    <a class="icon-btn" href="index.html" aria-label="Home"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10"/></svg></a>
-    <button class="icon-btn" id="bellBtn" aria-label="Notifications"><svg viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4zM10 21h4"/></svg></button>
+      <div class="top-right">
+        <a class="icon-btn" href="index.html" aria-label="Home"
+          ><svg viewBox="0 0 24 24">
+            <path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10" /></svg
+        ></a>
+        <button class="icon-btn" id="bellBtn" aria-label="Notifications">
+          <svg viewBox="0 0 24 24">
+            <path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4zM10 21h4" />
+          </svg>
+        </button>
 
-    <!-- Profile picture + user name.
+        <!-- Profile picture + user name.
          The picture is left blank: add your image path to the <img> below,
          for example  <img src="images/profile.jpg" alt="Profile picture">  -->
-    <div class="user-wrap">
-      <button class="user" id="userBtn" aria-haspopup="true" aria-expanded="false">
-        <span class="pic-slot"><img alt="Profile picture"></span>
-        <span id="userName">Aiman Rahman</span>
-        <svg viewBox="0 0 24 24" class="chev"><path d="M6 9l6 6 6-6"/></svg>
-      </button>
-      <div class="menu" id="userMenu" hidden>
-        <div class="menu-info"><b id="menuRank"></b><span class="small" id="menuPts"></span></div>
-        <button id="reset">Reset demo data</button>
+        <div class="user-wrap">
+          <button
+            class="user"
+            id="userBtn"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <span class="pic-slot"><img alt="Profile picture" /></span>
+            <span id="userName">Aiman Rahman</span>
+            <svg viewBox="0 0 24 24" class="chev">
+              <path d="M6 9l6 6 6-6" />
+            </svg>
+          </button>
+          <div class="menu" id="userMenu" hidden>
+            <div class="menu-info">
+              <b id="menuRank"></b><span class="small" id="menuPts"></span>
+            </div>
+            <button id="reset">Reset demo data</button>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</header>
+    </header>
 
-<div class="shell" id="shell">
-
-  <!-- ========================================================================
+    <div class="shell" id="shell">
+      <!-- ========================================================================
        SHARED: LEFT MENU  (identical in every page except the active link)
        ======================================================================== -->
-  <nav class="rail" aria-label="Dashboard">
-    <a href="index.html"><span class="ic"><svg viewBox="0 0 24 24"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0zM7 6H4v2a3 3 0 0 0 3 3M17 6h3v2a3 3 0 0 1-3 3"/></svg></span>Rank</a>
-    <a href="history.html"><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>History</a>
-    <a href="badges.html" class="active" aria-current="page"><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="6"/><path d="M8.5 14L7 22l5-3 5 3-1.5-8"/></svg></span>Badges</a>
-    <a href="rewards.html"><span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M5 12v9h14v-9M12 8C10 4 6 5 7 8c.5 1.5 3 1 5 0zm0 0c2-4 6-3 5 0-.5 1.5-3 1-5 0z"/></svg></span>Rewards</a>
-  </nav>
+      <nav class="rail" aria-label="Dashboard">
+        <a href="index.html"
+          ><span class="ic"
+            ><svg viewBox="0 0 24 24">
+              <path
+                d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0zM7 6H4v2a3 3 0 0 0 3 3M17 6h3v2a3 3 0 0 1-3 3"
+              /></svg></span
+          >Rank</a
+        >
+        <a href="history.html"
+          ><span class="ic"
+            ><svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="9" />
+              <path d="M12 7v5l3 2" /></svg></span
+          >History</a
+        >
+        <a href="badges.html" class="active" aria-current="page"
+          ><span class="ic"
+            ><svg viewBox="0 0 24 24">
+              <circle cx="12" cy="9" r="6" />
+              <path d="M8.5 14L7 22l5-3 5 3-1.5-8" /></svg></span
+          >Badges</a
+        >
+        <a href="rewards.html"
+          ><span class="ic"
+            ><svg viewBox="0 0 24 24">
+              <rect x="3" y="8" width="18" height="4" rx="1" />
+              <path
+                d="M12 8v13M5 12v9h14v-9M12 8C10 4 6 5 7 8c.5 1.5 3 1 5 0zm0 0c2-4 6-3 5 0-.5 1.5-3 1-5 0z"
+              /></svg></span
+          >Rewards</a
+        >
+      </nav>
 
-  <main class="main">
-
-    <!-- ======================================================================
+      <main class="main">
+        <!-- ======================================================================
          SHARED: TOOLBAR  (points, rank and search)
          ====================================================================== -->
-    <div class="toolbar">
-      <span class="pill" id="ptsPill">0 pts</span>
-      <span class="tool-text" id="toolText"></span>
-      <label class="search">
-        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
-        <input id="search" type="search" placeholder="Search this page" aria-label="Search this page">
-      </label>
-      <a class="link" href="history.html">View history ↗</a>
-    </div>
+        <div class="toolbar">
+          <span class="pill" id="ptsPill">0 pts</span>
+          <span class="tool-text" id="toolText"></span>
+          <label class="search">
+            <svg viewBox="0 0 24 24">
+              <circle cx="11" cy="11" r="7" />
+              <path d="M20 20l-4-4" />
+            </svg>
+            <input
+              id="search"
+              type="search"
+              placeholder="Search this page"
+              aria-label="Search this page"
+            />
+          </label>
+          <a class="link" href="history.html">View history ↗</a>
+        </div>
 
-    <!-- ======================================================================
+        <!-- ======================================================================
          PAGE CONTENT: BADGES
          ====================================================================== -->
-    <div class="sec-head"><h2>Badge collection</h2></div>
-    <p class="small" id="badgeCount"></p>
+        <div class="sec-head"><h2>Badge collection</h2></div>
+        <p class="small" id="badgeCount"></p>
 
-    <!-- Badge tiles (filled by the script) -->
-    <div class="tiles" id="badgeGrid"></div>
+        <!-- Badge tiles (filled by the script) -->
+        <div class="tiles" id="badgeGrid"></div>
+      </main>
+    </div>
 
-  </main>
-</div>
+    <!-- SHARED: toast message -->
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<!-- SHARED: toast message -->
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
-
-<script>
-/* ==========================================================================
+    <script>
+      /* ==========================================================================
    1. SHARED SCRIPT  (identical in every page: keep it in sync)
    ========================================================================== */
 
-/* ---- 1.1 Shared data: edit ranks and badges here ---- */
-const RANKS = [
-  { name: "Bronze",   min: 0 },
-  { name: "Silver",   min: 200 },
-  { name: "Gold",     min: 500 },
-  { name: "Platinum", min: 900 },
-  { name: "Diamond",  min: 1500 }
-];
+      /* ---- 1.1 Shared data: edit ranks and badges here ---- */
+      const RANKS = [
+        { name: "Bronze", min: 0 },
+        { name: "Silver", min: 200 },
+        { name: "Gold", min: 500 },
+        { name: "Platinum", min: 900 },
+        { name: "Diamond", min: 1500 },
+      ];
 
-// image    = badge logo, left blank: add a path such as "images/badges/first.png"
-// unlocked = rule that decides when the badge is earned (s = the saved state)
-const BADGES = [
-  { id: "first",  image: "", name: "First step",    how: "Complete 1 challenge",      unlocked: s => s.completed >= 1 },
-  { id: "roll",   image: "", name: "On a roll",     how: "Complete 5 challenges",     unlocked: s => s.completed >= 5 },
-  { id: "social", image: "", name: "Connector",     how: "Refer a friend",            unlocked: s => (s.counts.refer || 0) >= 1 },
-  { id: "silver", image: "", name: "Silver member", how: "Reach Silver rank",         unlocked: s => getRankIndex(s) >= 1 },
-  { id: "gold",   image: "", name: "Gold member",   how: "Reach Gold rank",           unlocked: s => getRankIndex(s) >= 2 },
-  { id: "shop",   image: "", name: "First redeem",  how: "Redeem a reward",           unlocked: s => s.redeemed >= 1 },
-  { id: "spend",  image: "", name: "Big spender",   how: "Spend 500 points in total", unlocked: s => s.spent >= 500 }
-];
+      // image    = badge logo, left blank: add a path such as "images/badges/first.png"
+      // unlocked = rule that decides when the badge is earned (s = the saved state)
+      const BADGES = [
+        {
+          id: "first",
+          image: "",
+          name: "First step",
+          how: "Complete 1 challenge",
+          unlocked: (s) => s.completed >= 1,
+        },
+        {
+          id: "roll",
+          image: "",
+          name: "On a roll",
+          how: "Complete 5 challenges",
+          unlocked: (s) => s.completed >= 5,
+        },
+        {
+          id: "social",
+          image: "",
+          name: "Connector",
+          how: "Refer a friend",
+          unlocked: (s) => (s.counts.refer || 0) >= 1,
+        },
+        {
+          id: "silver",
+          image: "",
+          name: "Silver member",
+          how: "Reach Silver rank",
+          unlocked: (s) => getRankIndex(s) >= 1,
+        },
+        {
+          id: "gold",
+          image: "",
+          name: "Gold member",
+          how: "Reach Gold rank",
+          unlocked: (s) => getRankIndex(s) >= 2,
+        },
+        {
+          id: "shop",
+          image: "",
+          name: "First redeem",
+          how: "Redeem a reward",
+          unlocked: (s) => s.redeemed >= 1,
+        },
+        {
+          id: "spend",
+          image: "",
+          name: "Big spender",
+          how: "Spend 500 points in total",
+          unlocked: (s) => s.spent >= 500,
+        },
+      ];
 
-const TINTS = ["#e3f6ee", "#e4efff", "#fff1db", "#fde6ee", "#ece6ff", "#e0f4f7"]; // tile colours
+      const TINTS = [
+        "#e3f6ee",
+        "#e4efff",
+        "#fff1db",
+        "#fde6ee",
+        "#ece6ff",
+        "#e0f4f7",
+      ]; // tile colours
 
-/* ---- 1.2 Saved user data (kept in the browser's localStorage) ----
+      /* ---- 1.2 Saved user data (kept in the browser's localStorage) ----
    points    = points the user can spend
    lifetime  = all points ever earned (decides the rank)
    completed = number of challenges finished
@@ -364,163 +853,231 @@ const TINTS = ["#e3f6ee", "#e4efff", "#fff1db", "#fde6ee", "#ece6ff", "#e0f4f7"]
    counts    = how many times each challenge was done
    badges    = ids of unlocked badges
    history   = list of { type: "earn" | "spend", title, points, date }    */
-const STORAGE_KEY = "fun-collector-v1";
+      const STORAGE_KEY = "fun-collector-v1";
 
-function createDemoData() {
-  const day = 864e5;
-  return {
-    points: 180, lifetime: 180, completed: 2, spent: 0, redeemed: 0,
-    counts: { checkin: 1, run: 1 },
-    badges: ["first"],
-    history: [
-      { type: "earn", title: "Welcome bonus", points: 60,  date: Date.now() - 6 * day },
-      { type: "earn", title: "Daily check-in", points: 20, date: Date.now() - 3 * day },
-      { type: "earn", title: "Run 5 km",       points: 100, date: Date.now() - 1 * day }
-    ]
-  };
-}
+      function createDemoData() {
+        const day = 864e5;
+        return {
+          points: 180,
+          lifetime: 180,
+          completed: 2,
+          spent: 0,
+          redeemed: 0,
+          counts: { checkin: 1, run: 1 },
+          badges: ["first"],
+          history: [
+            {
+              type: "earn",
+              title: "Welcome bonus",
+              points: 60,
+              date: Date.now() - 6 * day,
+            },
+            {
+              type: "earn",
+              title: "Daily check-in",
+              points: 20,
+              date: Date.now() - 3 * day,
+            },
+            {
+              type: "earn",
+              title: "Run 5 km",
+              points: 100,
+              date: Date.now() - 1 * day,
+            },
+          ],
+        };
+      }
 
-let state;
-try { state = JSON.parse(localStorage.getItem(STORAGE_KEY)); } catch (e) { /* ignore */ }
-if (!state) state = createDemoData();
+      let state;
+      try {
+        state = JSON.parse(localStorage.getItem(STORAGE_KEY));
+      } catch (e) {
+        /* ignore */
+      }
+      if (!state) state = createDemoData();
 
-function saveState() {
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) { /* ignore */ }
-}
+      function saveState() {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        } catch (e) {
+          /* ignore */
+        }
+      }
 
-/* ---- 1.3 Helper functions ---- */
-const $ = id => document.getElementById(id);
+      /* ---- 1.3 Helper functions ---- */
+      const $ = (id) => document.getElementById(id);
 
-function getRankIndex(s) {                 // which rank the user is in (0 = Bronze)
-  let index = 0;
-  RANKS.forEach((rank, i) => { if (s.lifetime >= rank.min) index = i; });
-  return index;
-}
+      function getRankIndex(s) {
+        // which rank the user is in (0 = Bronze)
+        let index = 0;
+        RANKS.forEach((rank, i) => {
+          if (s.lifetime >= rank.min) index = i;
+        });
+        return index;
+      }
 
-function tileImage(path, name) {           // a photo for a tile; blank tile when no path is given
-  return path ? `<img src="${path}" alt="${name}">` : "";
-}
+      function tileImage(path, name) {
+        // a photo for a tile; blank tile when no path is given
+        return path ? `<img src="${path}" alt="${name}">` : "";
+      }
 
-function formatDate(time) {
-  return new Date(time).toLocaleDateString(undefined, { day: "numeric", month: "short", year: "numeric" });
-}
+      function formatDate(time) {
+        return new Date(time).toLocaleDateString(undefined, {
+          day: "numeric",
+          month: "short",
+          year: "numeric",
+        });
+      }
 
-function showToast(message) {
-  const toast = $("toast");
-  toast.textContent = message;
-  toast.classList.add("show");
-  clearTimeout(showToast.timer);
-  showToast.timer = setTimeout(() => toast.classList.remove("show"), 2600);
-}
+      function showToast(message) {
+        const toast = $("toast");
+        toast.textContent = message;
+        toast.classList.add("show");
+        clearTimeout(showToast.timer);
+        showToast.timer = setTimeout(
+          () => toast.classList.remove("show"),
+          2600,
+        );
+      }
 
-function checkBadges() {                   // unlock any badge whose rule is now true
-  BADGES.forEach(badge => {
-    if (!state.badges.includes(badge.id) && badge.unlocked(state)) {
-      state.badges.push(badge.id);
-      setTimeout(() => showToast("Badge unlocked: " + badge.name), 900);
-    }
-  });
-}
+      function checkBadges() {
+        // unlock any badge whose rule is now true
+        BADGES.forEach((badge) => {
+          if (!state.badges.includes(badge.id) && badge.unlocked(state)) {
+            state.badges.push(badge.id);
+            setTimeout(() => showToast("Badge unlocked: " + badge.name), 900);
+          }
+        });
+      }
 
-function applySearch() {                   // hide every ".item" that does not match the search box
-  const query = $("search").value.trim().toLowerCase();
-  document.querySelectorAll(".item").forEach(item => {
-    item.hidden = query !== "" && !item.textContent.toLowerCase().includes(query);
-  });
-}
+      function applySearch() {
+        // hide every ".item" that does not match the search box
+        const query = $("search").value.trim().toLowerCase();
+        document.querySelectorAll(".item").forEach((item) => {
+          item.hidden =
+            query !== "" && !item.textContent.toLowerCase().includes(query);
+        });
+      }
 
-/* ---- 1.4 Update the shared parts of the page (top bar + toolbar) ---- */
-function renderShared() {
-  const rank = RANKS[getRankIndex(state)];
-  const points = state.points.toLocaleString();
-  $("menuRank").textContent = rank.name + " member";
-  $("menuPts").textContent  = points + " points";
-  $("ptsPill").textContent  = points + " pts";
-  $("toolText").textContent = rank.name + " rank";
-}
+      /* ---- 1.4 Update the shared parts of the page (top bar + toolbar) ---- */
+      function renderShared() {
+        const rank = RANKS[getRankIndex(state)];
+        const points = state.points.toLocaleString();
+        $("menuRank").textContent = rank.name + " member";
+        $("menuPts").textContent = points + " points";
+        $("ptsPill").textContent = points + " pts";
+        $("toolText").textContent = rank.name + " rank";
+      }
 
-/* ---- 1.5 Shared events (menu, bell, search, reset) ---- */
-$("search").addEventListener("input", applySearch);
-$("toggleRail").onclick = () => $("shell").classList.toggle("no-rail");
+      /* ---- 1.5 Shared events (menu, bell, search, reset) ---- */
+      $("search").addEventListener("input", applySearch);
+      $("toggleRail").onclick = () => $("shell").classList.toggle("no-rail");
 
-$("bellBtn").onclick = () => {
-  const last = state.history[0];
-  showToast(last ? "Latest: " + last.title + " (" + (last.type === "earn" ? "+" : "−") + last.points + " pts)" : "No new notifications");
-};
+      $("bellBtn").onclick = () => {
+        const last = state.history[0];
+        showToast(
+          last
+            ? "Latest: " +
+                last.title +
+                " (" +
+                (last.type === "earn" ? "+" : "−") +
+                last.points +
+                " pts)"
+            : "No new notifications",
+        );
+      };
 
-$("userBtn").onclick = () => {
-  const menu = $("userMenu");
-  menu.hidden = !menu.hidden;
-  $("userBtn").setAttribute("aria-expanded", !menu.hidden);
-};
-document.addEventListener("click", e => {          // close the user menu when clicking elsewhere
-  if (!e.target.closest(".user-wrap")) { $("userMenu").hidden = true; $("userBtn").setAttribute("aria-expanded", "false"); }
-});
+      $("userBtn").onclick = () => {
+        const menu = $("userMenu");
+        menu.hidden = !menu.hidden;
+        $("userBtn").setAttribute("aria-expanded", !menu.hidden);
+      };
+      document.addEventListener("click", (e) => {
+        // close the user menu when clicking elsewhere
+        if (!e.target.closest(".user-wrap")) {
+          $("userMenu").hidden = true;
+          $("userBtn").setAttribute("aria-expanded", "false");
+        }
+      });
 
-$("reset").onclick = () => { state = createDemoData(); saveState(); location.reload(); };
+      $("reset").onclick = () => {
+        state = createDemoData();
+        saveState();
+        location.reload();
+      };
 
-/* ---- 1.6 Opening picture: stays 1.5 seconds, then splits into strips that wipe left ---- */
+      /* ---- 1.6 Opening picture: stays 1.5 seconds, then splits into strips that wipe left ---- */
 
-/* >>> PUT YOUR OPENING PICTURE HERE (leave "" for a plain green screen) <<<
+      /* >>> PUT YOUR OPENING PICTURE HERE (leave "" for a plain green screen) <<<
    Example: const OPENING_PICTURE = "images/opening.jpg";                     */
-const OPENING_PICTURE = "";
+      const OPENING_PICTURE = "";
 
-const SLICES = 5;          // number of strips (1 = a plain wipe of the whole picture)
-const HOLD_TIME = 150;    // how long the picture stays before wiping (milliseconds)
+      const SLICES = 5; // number of strips (1 = a plain wipe of the whole picture)
+      const HOLD_TIME = 150; // how long the picture stays before wiping (milliseconds)
 
-function playOpeningAnimation() {
-  const splash = $("splash");
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      function playOpeningAnimation() {
+        const splash = $("splash");
+        const reduceMotion = window.matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        ).matches;
 
-  // Cut the picture into horizontal strips (each strip shows its own part of the picture)
-  for (let i = 0; i < SLICES; i++) {
-    const strip = document.createElement("div");
-    strip.className = "slice";
-    strip.style.setProperty("--i", i);                         // used for the delay between strips
-    const top = i * 100 / SLICES;
-    const bottom = 100 - (i + 1) * 100 / SLICES;
-    strip.style.clipPath = `inset(calc(${top}% - 0.5px) 0 calc(${bottom}% - 0.5px) 0)`;
-    if (OPENING_PICTURE) strip.style.backgroundImage = `url("${OPENING_PICTURE}")`;
-    splash.appendChild(strip);
-  }
+        // Cut the picture into horizontal strips (each strip shows its own part of the picture)
+        for (let i = 0; i < SLICES; i++) {
+          const strip = document.createElement("div");
+          strip.className = "slice";
+          strip.style.setProperty("--i", i); // used for the delay between strips
+          const top = (i * 100) / SLICES;
+          const bottom = 100 - ((i + 1) * 100) / SLICES;
+          strip.style.clipPath = `inset(calc(${top}% - 0.5px) 0 calc(${bottom}% - 0.5px) 0)`;
+          if (OPENING_PICTURE)
+            strip.style.backgroundImage = `url("${OPENING_PICTURE}")`;
+          splash.appendChild(strip);
+        }
 
-  function finish() {                                          // remove the picture and allow scrolling
-    splash.remove();
-    document.body.classList.remove("splash-on");
-  }
+        function finish() {
+          // remove the picture and allow scrolling
+          splash.remove();
+          document.body.classList.remove("splash-on");
+        }
 
-  setTimeout(() => {
-    if (reduceMotion) { finish(); return; }                    // no animation for people who turn it off
-    splash.classList.add("wipe-left");                         // start the split wipe
-    splash.lastElementChild.addEventListener("transitionend", finish, { once: true });
-    setTimeout(finish, 2500);                                  // safety: always remove it
-  }, HOLD_TIME);
-}
-playOpeningAnimation();
+        setTimeout(() => {
+          if (reduceMotion) {
+            finish();
+            return;
+          } // no animation for people who turn it off
+          splash.classList.add("wipe-left"); // start the split wipe
+          splash.lastElementChild.addEventListener("transitionend", finish, {
+            once: true,
+          });
+          setTimeout(finish, 2500); // safety: always remove it
+        }, HOLD_TIME);
+      }
+      playOpeningAnimation();
 
-/* ==========================================================================
+      /* ==========================================================================
    2. PAGE SCRIPT: Badges page only
    ========================================================================== */
-/* ---- 2.1 Draw the whole page ---- */
-function render() {
-  renderShared();
+      /* ---- 2.1 Draw the whole page ---- */
+      function render() {
+        renderShared();
 
-  $("badgeCount").textContent = state.badges.length + " of " + BADGES.length + " badges collected";
+        $("badgeCount").textContent =
+          state.badges.length + " of " + BADGES.length + " badges collected";
 
-  $("badgeGrid").innerHTML = BADGES.map((badge, i) => {
-    const owned = state.badges.includes(badge.id);
-    return `
+        $("badgeGrid").innerHTML = BADGES.map((badge, i) => {
+          const owned = state.badges.includes(badge.id);
+          return `
       <div class="tile item ${owned ? "" : "locked"}" style="--tint:${TINTS[i % TINTS.length]}">
         <div class="tile-icon">${tileImage(badge.image, badge.name)}</div>
         <h4>${badge.name}</h4>
         <p>${owned ? "Unlocked" : badge.how}</p>
       </div>`;
-  }).join("");
+        }).join("");
 
-  applySearch();
-}
+        applySearch();
+      }
 
-render();   // start
-</script>
-</body>
+      render(); // start
+    </script>
+  </body>
 </html>
