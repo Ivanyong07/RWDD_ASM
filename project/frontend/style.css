@@ -7,6 +7,11 @@
 =================================
 */
 
+:root{
+    --green: #0c9260;
+    --ligh-green:rgb(11, 66, 11);
+}
+
 
 
 html, body{
@@ -481,7 +486,8 @@ ABOUT-US
 ========================== */
 
 #about-us {
-    min-height: 100vh;
+    flex-wrap: wrap;
+    min-height: 200vh;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -544,6 +550,7 @@ ABOUT-US
     animation: fadeUp 0.9s ease forwards 0.7s;
 }
 
+
 .about-button {
     display: inline-block;
 
@@ -582,6 +589,111 @@ ABOUT-US
 
 .about-image.show{
     animation: imageReveal 1.3s cubic-bezier(.77,0,.18,1) forwards;
+}
+.three-r-intro{
+    margin-top: 200px;
+    flex-basis: 100%;            /* takes its own row above the cards */
+    text-align: center;
+}
+
+.three-r-label{
+    margin: 0;
+    letter-spacing: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #090909;
+}
+
+.three-r-intro h2{
+    margin: 14px 0;
+    font-size: clamp(2rem, 4.5vw, 3.6rem);
+    line-height: 1.05;
+    color: rgb(11, 66, 11);      /* same green as your About headings */
+}
+
+.three-r-intro p:last-child{
+    margin: 0;
+    color: #55645b;
+}
+
+.three-r{
+    flex-basis: 100%;
+    display: flex;
+    flex-direction: row;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 100px;
+    align-items: center;
+    justify-content: center;
+}
+
+.r-card{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    padding: 14px;
+    border-radius: 32px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.08);
+    cursor: pointer;
+    transition: transform .3s ease, box-shadow .3s ease;
+}
+
+
+.r-card:hover{
+    transform: translateY(-6px);
+    box-shadow: 0 18px 40px rgba(70, 84, 71, 0.299);
+}
+
+.r-media{
+    position: relative; /* create the frame, so the picture can be placed inside it */
+    height: 260px;
+    border-radius: 20px;
+    background: #c5c5e7 center / cover no-repeat;
+    display: flex;
+    align-items: flex-end;
+    padding: 20px;
+    overflow: hidden; /* cuts the picture at the rounded corners */
+}
+
+.r-media img{
+    position: absolute; /* quit out the noemal flow and use cordinate to store the position */
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+ .r-media::after{ /* create one more layer */
+    content: "";
+    position: absolute;
+     inset: 0; /* shorcut of top: 0; right: 0; bottom: 0; left: 0; */
+    background: linear-gradient(to top, rgba(4,20,13,.7), rgba(4,20,13,0) 60%);
+}
+
+.three-r-title{
+    height: 100px;
+    background-color: #a3a3d1;
+    border-radius: 20px;
+    
+}
+
+.r-media h3{ 
+    position: relative;
+    z-index: 1;
+    margin: 0; 
+    color: #f5f4f4; 
+    font-size: 1.6rem; 
+}
+
+.r-card p{
+    margin: 0;
+    padding: 0 12px;
+    flex-grow: 1;
+    font-size: 1em;
+    line-height: 1.6;
+    color: rgb(91, 95, 91);
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 @keyframes fadeUp {
@@ -652,10 +764,19 @@ stats
 
 #stat-description{
     font-size: 5em;
-    display: flex;
-    justify-content: center;
     text-align: center;
     color: rgb(130, 130, 130);
+    line-height: 1.3;
+}
+
+#stat-description span{
+    display: inline;
+    color: rgba(11, 234, 138, 0.18);
+    transition: color .3s ease;
+}
+
+#stat-description span.on{
+    color: rgb(11, 66, 11);
 }
 
 #stat-section{

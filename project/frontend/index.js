@@ -34,10 +34,11 @@ const place_content_h2 = document.querySelector('.place-content h2');
 const place_description = document.querySelector('.place-description');
 
 const stats = document.querySelectorAll('#stat b');
+const stat_description = document.getElementById('stat-description');
 const student_joined_count = document.getElementById('student-joined-count');
 
 const step = document.querySelector('#step');
-const step_label = document.querySelector('#step-label'); 
+const step_label = document.querySelector('#step-label');
 
 let shrinkProgress = 0;
 
@@ -70,6 +71,7 @@ function setupScrollAnimation(){
         const placeRect = place.getBoundingClientRect();
         const badgeRect = badge.getBoundingClientRect();
         const stepRect = step.getBoundingClientRect();
+        const statRectDescription = stat_description.getBoundingClientRect();
 
         // wrapper.offsetHeight = how tall #hero-wrapper is (250vh is 2250px)
         // window.innerHeight = how tall your screen is (900px), the actuall scroll size
@@ -89,8 +91,7 @@ function setupScrollAnimation(){
         // =======================
         header.classList.toggle('dark', shrinkProgress > 0.3);
 
-        
-
+    
         // ========================
         // Home page
         // =======================
@@ -137,6 +138,23 @@ function setupScrollAnimation(){
             about_description.classList.remove('show');
             about_image.classList.remove('show');
         }
+
+        // ========================
+        // Stat
+        // =======================
+
+        stat_description.innerHTML = stat_description.textContent.trim().split(' ').map(w => `<span>${w}</span>`).join(' ');
+
+        const stat_words = stat_description.querySelectorAll('span');
+
+        // 0 when the heading is 85% down the screen, 1 when it has moved up to 35%
+        const p = Math.min(Math.max(
+            (window.innerHeight * 0.85 - statRectDescription.top) / (window.innerHeight * 0.5), 0), 1);
+
+        stat_words.forEach((w, i) => {
+            w.classList.toggle('on', i / stat_words.length < p);
+        });
+
 
         // ========================
         // Badge

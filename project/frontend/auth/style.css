@@ -50,6 +50,19 @@ body{
     top: 75%;
     animation-delay: 0.24s;
 }
+.auth-page{
+    display: flex;
+    flex-direction: row;
+}
+
+.wall{
+    width: clamp();
+}
+
+.login{
+
+}
+
 
 
 @keyframes swapIn {

@@ -14,60 +14,67 @@
       <div class="band"></div>
     </div> -->
 
-    <div id="login">
-      <form action="../../backend/api/Login.php" method="POST">
-        <label>Username:</label>
-        <input type="text" name="email" required />
+    <div class="auth-page">
+      <div class="wall">
+        <div id="header"><h1>Welcome to APU Fun Collectors</h1></div>
+        <p id="description">Join challenge and win the price</p>
+      </div>
 
-        <label>Password</label>
-        <input type="text" name="password" required />
+      <div class="login">
+        <form action="../../backend/api/Login.php" method="POST">
+          <label>Username:</label>
+          <input type="text" name="email" required />
 
-        <input type="submit" name="login" />
-      </form>
-    </div>
+          <label>Password</label>
+          <input type="text" name="password" required />
 
-    <div id="register">
-      <form action="../../backend/api/Register.php" method="post">
-        <label>Username:</label>
-        <input type="text" name="username" required placeholder="e.g Ivan" />
+          <input type="submit" name="login" />
+        </form>
+      </div>
 
-        <label>Email:</label>
-        <input
-          type="email"
-          name="email"
-          required
-          placeholder="e.g ivan@gmail.com"
-        />
+      <div id="register">
+        <form action="../../backend/api/Register.php" method="post">
+          <label>Username:</label>
+          <input type="text" name="username" required placeholder="e.g Ivan" />
 
-        <label>Password:</label>
-        <input
-          type="text"
-          name="password"
-          required
-          placeholder="e.g 12345678"
-        />
+          <label>Email:</label>
+          <input
+            type="email"
+            name="email"
+            required
+            placeholder="e.g ivan@gmail.com"
+          />
 
-        <label>Age:</label>
-        <input type="number" name="age" required placeholder="e.g 19" />
+          <label>Password:</label>
+          <input
+            type="text"
+            name="password"
+            required
+            placeholder="e.g 12345678"
+          />
 
-        <label>TP Number:</label>
-        <input
-          type="text"
-          name="tp_number"
-          required
-          placeholder="e.g TP12345"
-        />
+          <label>Age:</label>
+          <input type="number" name="age" required placeholder="e.g 19" />
 
-        <label>Course:</label>
-        <input
-          type="text"
-          name="course"
-          required
-          placeholder="e.g Diploma in Information Communication Technology"
-        />
+          <label>TP Number:</label>
+          <input
+            type="text"
+            name="tp_number"
+            required
+            placeholder="e.g TP12345"
+          />
 
-        <input type="submit" name="login" />
-      </form>
+          <label>Course:</label>
+          <input
+            type="text"
+            name="course"
+            required
+            placeholder="e.g Diploma in Information Communication Technology"
+          />
+
+          <input type="submit" name="login" />
+        </form>
+      </div>
     </div>
 
     <script src="index.js"></script>
