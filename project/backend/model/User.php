@@ -2,6 +2,7 @@
 
 class User
 {
+    private ?int $userId = null;
     private string $username;
     private string $password;
     private string $email;
@@ -9,18 +10,37 @@ class User
     private string $tp_number;
     private string $course;
     private string $role;
+    private int $total_xp;
+    private int $level;
+    private int $points_balance;
+    private ?string $created_at;
 
 
-    public function __construct(string $username, string $password, string $email, int $age, string $tp_number, string $course, string $role = "user")
+    public function __construct(string $username, string $password, string $email, int $age, string $tp_number, string $course, int $level, int $points_balance, int $total_xp, string $role = "user", ?int $userId = null, ?string $created_at = null)
     {
 
         $this->username = $username;
         $this->password = $password;
         $this->email = $email;
-        $this->age = $age;
+        $this->setAge($age);
         $this->tp_number = $tp_number;
         $this->course = $course;
         $this->role = $role;
+        $this->level = $level;
+        $this->points_balance = $points_balance;
+        $this->total_xp = $total_xp;
+        $this->userId = $userId;
+        $this->created_at = $created_at;
+    }
+
+    public function getUserId(): ?int
+    {
+        return $this->userId;
+    }
+
+    public function setUserId(int $userId): void
+    {
+        $this->userId = $userId;
     }
 
     public function getUsername(): string
@@ -28,7 +48,7 @@ class User
         return $this->username;
     }
 
-    public function setUsername($username)
+    public function setUsername(string $username): void
     {
         $this->username = $username;
     }
@@ -38,9 +58,9 @@ class User
         return $this->email;
     }
 
-    public function setEmail($email)
+    public function setEmail(string $email): void
     {
-        return $this->email = $email;
+        $this->email = $email;
     }
 
     public function getPassword(): string
@@ -48,9 +68,9 @@ class User
         return $this->password;
     }
 
-    public function setPassword($password)
+    public function setPassword(string $password): void
     {
-        return $this->password = $password;
+        $this->password = $password;
     }
 
     public function getAge(): int
@@ -58,7 +78,7 @@ class User
         return $this->age;
     }
 
-    public function setAge($age): void
+    public function setAge(int $age): void
     {
         if ($age < 10 || $age > 100) {
             throw new InvalidArgumentException("Invalid Age");
@@ -72,9 +92,9 @@ class User
         return $this->tp_number;
     }
 
-    public function setTpNumber($tp_number)
+    public function setTpNumber(string $tp_number): void
     {
-        return $this->tp_number = $tp_number;
+        $this->tp_number = $tp_number;
     }
 
     public function getCourse(): string
@@ -82,7 +102,7 @@ class User
         return $this->course;
     }
 
-    public function setCourse($course)
+    public function setCourse(string $course): void
     {
         $this->course = $course;
     }
@@ -92,8 +112,48 @@ class User
         return $this->role;
     }
 
-    public function setRole($role)
+    public function setRole(string $role): void
     {
         $this->role = $role;
+    }
+
+    public function getLevel(): int
+    {
+        return $this->level;
+    }
+
+    public function setLevel(int $level): void
+    {
+        $this->level = $level;
+    }
+
+    public function getTotalXp(): int
+    {
+        return $this->total_xp;
+    }
+
+    public function setTotalXp(int $total_xp): void
+    {
+        $this->total_xp = $total_xp;
+    }
+
+    public function getPointsBalance(): int
+    {
+        return $this->points_balance;
+    }
+
+    public function setPointsBalance(int $points_balance): void
+    {
+        $this->points_balance = $points_balance;
+    }
+
+    public function getCreatedAt(): ?int
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt(string $created_at)
+    {
+        $this->created_at = $created_at;
     }
 }

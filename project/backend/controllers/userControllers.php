@@ -1,3 +1,10 @@
+<!-- =================================
+* Filename : UserControllers.php
+* Date : 16/10/2026
+* Author : Ivan Yong
+* Description : For delete, login, get all list of users, and upate create users
+================================= -->
+
 <?php
 require_once __DIR__  . "/../model/User.php";
 class UserControllers
@@ -10,7 +17,7 @@ class UserControllers
     }
 
     // Create
-    public function create(User $user)
+    public function createUser(User $user)
     {
 
         $username = $user->getUsername();
@@ -28,14 +35,14 @@ class UserControllers
     }
 
     // Read all
-    public function getAll()
+    public function getAllUser()
     {
         $result = mysqli_query($this->conn, "SELECT id, username, password, email, age, tp_number, course, created_at FROM users");
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
 
     //Read one
-    public function getById($id)
+    public function getUserById(int $id)
     {
         $stmt = mysqli_prepare($this->conn, "SELECT id, username, password, email, age, tp_number, course, created_at FROM users WHERE id = ?");
         mysqli_stmt_bind_param($stmt, "i", $id);
@@ -45,7 +52,7 @@ class UserControllers
     }
 
     // Update
-    public function update($id, $username, $email, $age, $tp_number, $course, $created_at)
+    public function updateUser($id, $username, $email, $age, $tp_number, $course)
     {
         $stmt = mysqli_prepare($this->conn, "UPDATE users SET username = ?, email = ?, age = ?, tp_number = ?, course = ? WHERE id = ?");
         mysqli_stmt_bind_param($stmt, "ssissi", $username, $email, $age, $tp_number, $course, $id);
@@ -54,7 +61,7 @@ class UserControllers
     }
 
     // Detele
-    public function delete($id)
+    public function deleteUser(int $id)
     {
         $stmt = mysqli_prepare($this->conn, "DELETE FROM users WHERE id = ?");
         mysqli_stmt_bind_param($stmt, "i", $id);
@@ -62,7 +69,9 @@ class UserControllers
         return mysqli_stmt_affected_rows($stmt);
     }
 
-    public function getByEmail($email)
+
+    // Get User Email
+    public function getByEmail(string $email)
     {
         $stmt = mysqli_prepare($this->conn, "SELECT id, role, password FROM users WHERE email = ?");
         mysqli_stmt_bind_param($stmt, "s", $email);

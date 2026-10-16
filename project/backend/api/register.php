@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     } else {
         $user = new User($username, $password, $email, (int)$age, $tp_number, $course);
         $controller = new UserControllers($conn);
-        $newId = $controller->create($user);
+        $newId = $controller->createUser($user);
 
         session_regenerate_id(true);
         $_SESSION["user_id"] = $newId;
