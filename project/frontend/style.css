@@ -956,45 +956,109 @@ green center
 }
 
 /* ==========================
-rank
+timeline
 ========================== */
 
-#step{
-    min-height: 100vh;
+#timeline {
     display: flex;
-    align-items: center;
     justify-content: center;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 24px;
+    padding: 100px 8%;
     box-sizing: border-box;
 }
 
-#step-label{
-    opacity: 1;
-    letter-spacing: 4px;
+.tl-wrap {
+    width: min(100%, 1000px);
+    padding: clamp(2rem, 5vw, 4rem);
+    box-sizing: border-box;
+    background: #fafafa;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 28px;
+    box-shadow: 0 25px 60px -20px rgba(0, 0, 0, 0.25);
+}
+
+.tl-title {
+    margin: 0 0 3rem;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1;
+    color: rgb(11, 66, 11);
+}
+
+.tl-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* each row: date | line + dot | text */
+.tl-item {
+    display: grid;
+    grid-template-columns: 9rem 2rem 1fr;
+    column-gap: 1rem;
+    padding-bottom: 3rem;
+}
+
+.tl-item:last-child {
+    padding-bottom: 0;
+}
+
+.tl-date {
+    padding-top: 0.1rem;
+    text-align: right;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.95rem;
     font-weight: 600;
-    clip-path: inset(100% 0 0 0);
-    transform: translateY(30px);
-    font: 13px;
-    flex-basis: 100%;           /* label takes its own line on top */
-    text-align: center;
+    color: var(--green);
 }
 
-#step-label.show{
-    animation: clip 1s ease forwards 0s;
+/* line + dot */
+.tl-marker {
+    position: relative;
+    display: flex;
+    justify-content: center;
 }
 
-#step > div{
-    flex: 0 0 calc((100% - 48px) / 3);
-    max-width: none;
-    text-align: center;
+.tl-marker::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: calc(0.3rem + 7px);      /* starts at the centre of the dot */
+    bottom: -3rem;                /* reaches the next dot */
+    width: 2px;
+    background: var(--green);
 }
 
-#step img{
-    width: 400px;
-    height: 200px
+.tl-item:last-child .tl-marker::before {
+    display: none;
 }
+
+.tl-dot {
+    position: relative;
+    z-index: 1;
+    width: 14px;
+    height: 14px;
+    margin-top: 0.3rem;
+    border-radius: 50%;
+    background: var(--green);
+}
+
+.tl-content h3 {
+    margin: 0 0 0.4rem;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.3rem;
+    color: rgb(11, 66, 11);
+}
+
+.tl-content p {
+    margin: 0;
+    max-width: 50ch;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgb(91, 95, 91);
+}
+
+
 
 /* ==========================
 team
@@ -1046,11 +1110,13 @@ team
 }
 
 
+
 /* ==========================
 message
 ========================== */
 
 #message{
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1061,13 +1127,117 @@ message
     font-size: 3em;
 }
 
-    
+/* ==========================
+register-section
+========================== */
+
+#register-section {
+  display: flex;
+  justify-content: center;
+  padding: 4rem 1.5rem;
+}
+
+#register-container {
+  --accent: #5cb25c;
+  --bg: #fafafa;
+
+  position: relative;
+  overflow: hidden;              /* keeps the glow inside the card */
+  width: min(100%, 1200px);      /* wider: was 800px */
+  padding: 4.5rem 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  color: #0f0f0f;
+  background: var(--bg);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 28px;
+  box-shadow: 0 25px 60px -20px rgba(0, 0, 0, 0.5);
+}
+
+/* the small green element: a soft glow in the corner */
+#register-container::before {
+  content: "";
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 260px;
+  height: 260px;
+  background: var(--accent);
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+/* keep the text above the glow */
+#register-container > * {
+  position: relative;
+}
+
+#register-container h1 {
+  margin: 0;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.subtitle {
+  margin: 0;
+  max-width: 48ch;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #78797a;
+}
+
+#register-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.9rem 2rem;
+  margin-top: 0.5rem;
+  background: var(--accent);
+  color: #052e16;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 999px;
+  box-shadow: 0 8px 24px rgba(34, 197, 94, 0.35);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+#register-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 32px rgba(34, 197, 94, 0.5);
+}
+
+#register-btn:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+}
+
+.contact {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #94a3b8;
+}
+
+.contact a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 /* ==========================
 footer
 ========================== */
 
 #footer{
-    min-height: 40vh;
+    min-height: 60vh;
     background-color: #0c9260;
 }
 
@@ -1106,6 +1276,31 @@ footer
 
     #member-profile img{ width: 220px; }
     #message h1{ font-size: 1.8em; }
+    #timeline {
+        padding: 60px 6%;
+    }
+
+    .tl-item {
+        grid-template-columns: 1.5rem 1fr;
+        column-gap: 0.75rem;
+    }
+
+    .tl-date {
+        grid-column: 2;
+        grid-row: 1;
+        text-align: left;
+        padding-bottom: 0.2rem;
+    }
+
+    .tl-marker {
+        grid-column: 1;
+        grid-row: 1 / span 2;
+    }
+
+    .tl-content {
+        grid-column: 2;
+        grid-row: 2;
+    }
 }
 
 

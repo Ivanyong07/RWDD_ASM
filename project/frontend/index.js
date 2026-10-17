@@ -70,7 +70,6 @@ function setupScrollAnimation(){
         const aboutRect = about.getBoundingClientRect();
         const placeRect = place.getBoundingClientRect();
         const badgeRect = badge.getBoundingClientRect();
-        const stepRect = step.getBoundingClientRect();
         const statRectDescription = stat_description.getBoundingClientRect();
 
         // wrapper.offsetHeight = how tall #hero-wrapper is (250vh is 2250px)
@@ -180,16 +179,6 @@ function setupScrollAnimation(){
             place_content_h2.classList.remove('show');
             place_description.classList.remove('show');
         }
-
-        // ========================
-        // Step
-        // =======================
-        if (stepRect.top < window.innerHeight * 0.7){
-            step_label.classList.add('show')
-        } else {
-            step_label.classList.remove('show');
-        }
-
         
     });
 }
