@@ -2,7 +2,7 @@
 * Filename : UserControllers.php
 * Date : 16/10/2026
 * Author : Ivan Yong
-* Description : For delete, login, get all list of users, and upate create users
+* Description : For delete, login, get all list of users, and upate user
 ================================= -->
 
 <?php
@@ -68,7 +68,6 @@ class UserControllers
         mysqli_stmt_execute($stmt);
         return mysqli_stmt_affected_rows($stmt);
     }
-
 
     // Get User Email
     public function getByEmail(string $email)

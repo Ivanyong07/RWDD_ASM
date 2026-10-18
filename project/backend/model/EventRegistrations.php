@@ -11,7 +11,6 @@ class EventRegistrations
 
     public function __construct(int $user_id, int $event_id, string $verified_by, int $attended = 0, ?int $registration_id = null)
     {
-
         $this->registration_id = $registration_id;
         $this->user_id = $user_id;
         $this->event_id = $event_id;
@@ -23,6 +22,7 @@ class EventRegistrations
     {
         return $this->registration_id;
     }
+
     public function setRegistrationId(int $registration_id): void
     {
         $this->registration_id = $registration_id;
