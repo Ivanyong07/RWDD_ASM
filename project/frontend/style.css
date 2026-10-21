@@ -493,6 +493,133 @@ Letter
     }
 }
 
+/* ==========================
+small note
+========================== */
+
+#collect-recycle-impact{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 40px;
+    margin-top: 60px;
+    font-size: 15px;
+    color: #555;
+}
+
+#collect-recycle-impact  p{
+    margin: 0;
+}
+
+#left-small-note{
+    margin-left: 70px;
+}
+
+#right-small-note{
+    position: relative;
+    right: 100px;
+}
+
+/* ==========================
+hands picture
+========================== */
+
+#left-hand, #right-hand{
+    position: absolute;
+    bottom: 0;
+    z-index: -1;
+    pointer-events: none;
+}
+
+#left-hand{
+    bottom: 280px;
+    left: -120px;
+    opacity: 0;
+}
+
+#right-hand{
+    bottom: 150px;
+    right: 10px;
+    opacity: 0;
+}
+
+#left-hand img, #right-hand img{
+    display: block;
+    height: auto;
+}
+
+#right-hand img {
+    width: 800px;
+    transform: rotate(20deg);
+    transform-origin: bottom left;
+}
+
+#left-hand img{
+    width: 600px;
+    transform: rotate(20deg);
+    transform-origin: bottom right;
+}
+
+#left-hand.play-animate{
+    animation: handInLeft 1s ease-out forwards;
+}
+
+#right-hand.play-animate{
+    animation: handInRight 1s ease-out forwards;
+}
+
+@keyframes handInLeft{
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    } to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes handInRight{
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    } to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Tablet (768px to 1024px) */
+@media (min-width: 768px) and (max-width: 1024px){
+    #left-hand{
+        bottom: 600px;
+        left: -80px;
+    }
+    #right-hand{
+        bottom: 500px;
+        right: 0;
+    }
+
+    #left-hand img{ width: 420px; }
+    #right-hand img{ width: 540px; }
+}
+
+/* Phone (767px and below) */
+@media (max-width: 767px){
+    #left-hand{
+        bottom: 120px;
+        left: -50px;
+    }
+    #right-hand{
+        bottom: 60px;
+        right: -20px;
+    }
+
+    #left-hand img{ width: 220px; }
+    #right-hand img{ width: 280px; }
+}
+
 
 /* ==========================
 Title vertical
@@ -1440,41 +1567,131 @@ footer
 
 #footer{
     min-height: 60vh;
-    background-color: #0c9260;
+    background-color: #686764;
+    position: relative;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    padding: 60px 40px 30px;
+    box-sizing: border-box;
+}
+
+.footer-content{
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr 1.4fr 2fr;  /* logo | explore | contact | venue */
+    align-items: start;                            /* all columns start at the top */
+    gap: 50px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Logo + title */
+#footer-logo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;                  /* space between logo and project title */
 }
 
 #footer-logo img{
     width: 50px;
     height: 50px;
-    margin:50px;
-}
-
-#footer-logo{
-    display: flex;
-    flex-direction: row;
+    margin: 0;                  /* removed the 50px margin, gap handles it now */
+    object-fit: cover;
 }
 
 #footer-logo p{
-    margin-top: 60px;
-    font-family: Arial, Helvetica, sans-serif;
-    color: white;
+    margin: 0;
     font-weight: 700;
 }
 
-.footer-content{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    gap: 500px;
-}
-
-.explore{
+/* Explore / Contact / Venue columns */
+.explore, .contact-us, .venue{
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
 }
 
+.explore p, .contact-us p, .venue p{
+    margin: 0 0 8px;
+    font-size: 13px;
+    letter-spacing: 2px;
+    font-weight: 700;
+}
 
+.explore a, .contact-us a, .venue a{
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+    transition: color .3s ease;
+}
 
+.explore a:hover, .contact-us a:hover, .venue a:hover{
+    color: var(--green);        /* your theme green instead of plain "green" */
+}
 
+/* Venue (map) */
+.venue h5{
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.venue iframe{
+    width: 100%;
+    height: 200px;
+    border: 0;
+    border-radius: 15px;
+}
+
+/* HR + copyright spacing */
+#footer hr{
+    margin: 60px 0 25px;        /* space above and below the line */
+    border: 0;
+    border-top: 1px solid rgba(255, 255, 255, .3);
+}
+
+.copyright{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 13px;
+    color: #e0e0e0;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.copyright p{
+    margin: 0;
+}
+
+/* Tablet */
+@media (max-width: 1024px){
+    .footer-content{
+        grid-template-columns: 1fr 1fr;     /* 2 columns */
+    }
+
+    .venue{
+        grid-column: 1 / -1;                /* map takes the full row */
+    }
+}
+
+/* Phone */
+@media (max-width: 767px){
+    #footer{
+        padding: 40px 20px 20px;
+    }
+
+    .footer-content{
+        grid-template-columns: 1fr;         /* everything stacked */
+        gap: 35px;
+    }
+
+    #footer hr{
+        margin: 40px 0 20px;
+    }
+
+    .copyright{
+        flex-direction: column;
+        text-align: center;
+    }
+}

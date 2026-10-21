@@ -18,6 +18,8 @@ const home_page = document.querySelector('#home-page');
 const letter = document.getElementById('letter');
 const circle_fill = document.getElementById('circle-fill');
 const letter_btn = document.querySelectorAll('.letter-btn');
+const left_hand = document.getElementById("left-hand");
+const right_hand = document.getElementById("right-hand");
 
 const about = document.querySelector('#about-us');
 const about_label = document.querySelector('.about-label');
@@ -90,10 +92,15 @@ function setupScrollAnimation(){
         // =======================
         header.classList.toggle('dark', shrinkProgress > 0.3);
 
-    
         // ========================
-        // Home page
+        // Start Page 
         // =======================
+
+
+        intro_h2.style.opacity = progress > 0.05 ? 1 : 0;
+        intro_h4.style.opacity = progress > 0.12 ? 1 : 0;
+        intro.style.opacity = Math.max(1 - shrinkProgress * 3, 0);
+
         const hp = home_page.getBoundingClientRect();
         const s  = slot.getBoundingClientRect();
 
@@ -106,21 +113,26 @@ function setupScrollAnimation(){
         // end radius: half the slot, so the circle is exactly the "o"
         const endR = s.width / 2;
 
+        // ========================
+        // Home Page
+        // =======================
         const radius = startR + (endR - startR) * shrinkProgress;
+        const handP = 1 - shrinkProgress;
+
         home_page.style.clipPath = `circle(${radius}px at ${cx}px ${cy}px)`;
         header.classList.toggle('show-color', shrinkProgress >= 0.99);
+
         letter_btn.forEach(b => b.classList.toggle('show', shrinkProgress >= 0.99));
+
+        left_hand.style.transform = `translateX(${-handP * 100}%)`;
+        right_hand.style.transform = `translateX(${handP * 100}%)`;
+        left_hand.style.opacity  = shrinkProgress;
+        right_hand.style.opacity = shrinkProgress;
 
         circle_fill.style.opacity = Math.min(shrinkProgress* 1.5, 1);
 
-        // ========================
-        // Intro test 
-        // =======================
 
 
-        intro_h2.style.opacity = progress > 0.05 ? 1 : 0;
-        intro_h4.style.opacity = progress > 0.12 ? 1 : 0;
-        intro.style.opacity = Math.max(1 - shrinkProgress * 3, 0);
         // ========================
         // About us
         // =======================
