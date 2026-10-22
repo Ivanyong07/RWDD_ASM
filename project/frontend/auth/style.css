@@ -1,8 +1,21 @@
+:root{
+  --green:#0c9260;
+  --dark:rgb(11,66,11);
+  --bg:#f5f3e9;
+  --ink:#04140d;
+  --muted:rgb(91,95,91);
+}
+
+
 body{
-    background: rgb(0, 0, 0);
+    background: var(--bg);
     margin: 0;
     color: rgb(244, 240, 240);
 }
+
+/* ==============================
+Wall
+============================== */
 
 #swap{
     z-index: 1;
@@ -55,16 +68,6 @@ body{
     flex-direction: row;
 }
 
-.wall{
-    width: clamp();
-}
-
-.login{
-
-}
-
-
-
 @keyframes swapIn {
     from{
         transform: translateX(-100%);
@@ -79,4 +82,68 @@ body{
     } to {
         transform:translateX(-100%) ;
     }
+}
+
+/* ==============================
+Wall
+============================== */
+
+.wall{
+    width: 100%;
+    height: 100%;
+    background:var(--green);
+}
+
+#header{
+
+}
+
+#header h1{
+
+}
+
+#description{
+
+}
+
+/* ==============================
+Swap-page
+============================== */
+#swap-page{
+    width: 200px;
+    background: var(--bg);
+    height: 20px;
+    border: 1px solid rgb(174, 174, 174);
+}
+
+#swap-page a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 1px solid transparent;
+    text-decoration: none;
+    background: var(--green);
+}
+
+#swap-page a:hover{
+    color: #0c9260;
+}
+
+
+/* ==============================
+Login
+============================== */
+.login{
+    display: flex;
+    justify-items: center;
+    align-items: center;
+}
+
+/* ==============================
+Register
+============================== */
+
+#register{
+    display: none;
 }

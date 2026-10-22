@@ -7,73 +7,93 @@
   </head>
   <link rel="stylesheet" href="style.css" />
   <body>
-    <!-- <div id="swap">
+    <div id="swap">
       <div class="band"></div>
       <div class="band"></div>
       <div class="band"><h1>Fun Collectors</h1></div>
       <div class="band"></div>
-    </div> -->
+    </div>
 
     <div class="auth-page">
       <div class="wall">
-        <div id="header"><h1>Welcome to APU Fun Collectors</h1></div>
+        <div id="header">
+          <h1>Welcome to APU Fun Collectors</h1>
+        </div>
         <p id="description">Join challenge and win the price</p>
       </div>
 
-      <div class="login">
-        <form action="../../backend/api/Login.php" method="POST">
-          <label>Username:</label>
-          <input type="text" name="email" required />
+      <div id="auth-section">
+        <div id="swap-page"><a href="">Login</a><a href="">Register</a></div>
+        <div id="login">
+          <form action="../../backend/api/Login.php" method="POST">
+            <label>Email:</label>
+            <input
+              type="text"
+              name="email"
+              required
+              placeholder="ivan@gmail.com"
+            />
 
-          <label>Password</label>
-          <input type="text" name="password" required />
+            <label>Password</label>
+            <input
+              type="password"
+              name="password"
+              required
+              placeholder="********"
+            />
 
-          <input type="submit" name="login" />
-        </form>
-      </div>
+            <input type="submit" name="login" />
+          </form>
+        </div>
 
-      <div id="register">
-        <form action="../../backend/api/Register.php" method="post">
-          <label>Username:</label>
-          <input type="text" name="username" required placeholder="e.g Ivan" />
+        <div id="register">
+          <form action="../../backend/api/Register.php" method="post">
+            <label>Username:</label>
+            <input
+              type="text"
+              name="username"
+              required
+              placeholder="e.g Ivan"
+            />
 
-          <label>Email:</label>
-          <input
-            type="email"
-            name="email"
-            required
-            placeholder="e.g ivan@gmail.com"
-          />
+            <label>Email:</label>
+            <input
+              type="email"
+              name="email"
+              required
+              placeholder="e.g ivan@gmail.com"
+            />
 
-          <label>Password:</label>
-          <input
-            type="text"
-            name="password"
-            required
-            placeholder="e.g 12345678"
-          />
+            <label>Password:</label>
+            <input
+              type="text"
+              name="password"
+              required
+              placeholder="e.g 12345678"
+            />
 
-          <label>Age:</label>
-          <input type="number" name="age" required placeholder="e.g 19" />
+            <label>Age:</label>
+            <input type="number" name="age" required placeholder="e.g 19" />
 
-          <label>TP Number:</label>
-          <input
-            type="text"
-            name="tp_number"
-            required
-            placeholder="e.g TP12345"
-          />
+            <label>TP Number:</label>
+            <input
+              type="text"
+              name="tp_number"
+              required
+              placeholder="e.g TP12345"
+            />
 
-          <label>Course:</label>
-          <input
-            type="text"
-            name="course"
-            required
-            placeholder="e.g Diploma in Information Communication Technology"
-          />
+            <label>Course:</label>
+            <input
+              type="text"
+              name="course"
+              required
+              placeholder="e.g Diploma in Information Communication Technology"
+            />
 
-          <input type="submit" name="login" />
-        </form>
+            <input type="submit" name="login" />
+          </form>
+        </div>
       </div>
     </div>
 

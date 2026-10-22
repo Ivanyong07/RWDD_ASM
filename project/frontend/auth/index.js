@@ -16,8 +16,8 @@ function swap(){
 
             document.getElementById('swap').style.display = 'none';
             b.classList.add('play-back');
-        })
-    }, 3500)
+        });
+    }, 3500);
 };
 
 swap()

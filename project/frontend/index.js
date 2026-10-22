@@ -6,6 +6,8 @@ const header = document.getElementById('header');
 const number = document.getElementById('number');
 const band = document.querySelectorAll('.band');
 const swap_element = document.getElementById('swap');
+const navbar = document.getElementById('navbar');
+const menu_btn = document.getElementById('menu-btn');
 
 const hero_wrapper = document.querySelector('#hero-wrapper');
 const start_page = document.getElementById('start-page');
@@ -59,6 +61,24 @@ function loading(){
             clearInterval(counter);
         }
     }, 20);
+}
+
+// =========================
+// Mobile Menu
+// =========================
+
+function setupMenu(){
+    menu_btn.addEventListener('click', ()=>{
+        const open = header.classList.toggle('menu-open');
+        menu_btn.setAttribute('aria-expanded', open);
+    });
+
+    document.querySelectorAll('#navbar a').forEach(a => {
+        a.addEventListener('click', ()=>{
+            header.classList.remove('menu-open');
+            menu_btn.setAttribute('aria-expanded', false);
+        })
+    })
 }
 
 // =========================
@@ -237,7 +257,10 @@ function first_page(){
     loading();
     swap();
     setTimeout(() => {
+        console.log(navbar);
         leave_right.classList.add('play-animate');
+        navbar.classList.add('play-animate');
+
     }, 3600);
 
     setTimeout(() => {
@@ -319,3 +342,4 @@ console.log(document.documentElement.scrollWidth);
 first_page()
 setupScrollAnimation()
 href_login()
+setupMenu()
