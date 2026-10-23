@@ -1,0 +1,116 @@
+/*
+=================================
+* Filename : base.css
+* Date : 18/10/2026
+* Author : (add your name)
+* Description : Colours, fonts and basic rules used by every user page
+=================================
+*/
+
+/* ---------- 1. COLOURS, SIZES AND FONT (change the look here) ---------- */
+:root {
+    /* colours */
+    --bg: #f5f3e9;               /* page background */
+    --card: #ffffff;
+    --line: #e7e3d3;             /* thin borders */
+    --ink: #1f2a24;              /* main text */
+    --muted: #76786c;            /* grey text */
+    --green: #0c9260;            /* brand green (same as the landing page) */
+    --green-dark: #087048;
+    --green-soft: #e2f2ea;
+    --amber: #f5a623;
+    --amber-soft: #fdf0d5;
+    --red: #d64545;
+    --red-soft: #fbe4e4;
+
+    /* shape */
+    --radius: 16px;
+    --layer: #b9ddc8;            /* the green layer behind every box */
+    --shadow: -6px 6px 0 var(--layer), 0 2px 8px rgba(31, 42, 36, 0.06);
+    --shadow-hover: -9px 9px 0 var(--layer), 0 14px 28px rgba(31, 42, 36, 0.12);
+
+    /* sizes of the bars */
+    --top-h: 68px;
+    --side-w: 232px;
+    --nav-h: 68px;
+
+    --font: "Figtree", system-ui, sans-serif;
+}
+
+/* ---------- 2. RESET ---------- */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    color: var(--ink);
+    font-family: var(--font);
+    line-height: 1.5;
+    background: var(--bg);
+}
+
+body.splash-on {
+    overflow: hidden;
+}
+
+h1, h2, h3, h4, p {
+    margin: 0;
+}
+
+h1 {
+    font-size: 1.8rem;
+    line-height: 1.2;
+}
+
+h2 {
+    font-size: 1.25rem;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+img:not([src]) {                 /* a picture slot with no file yet stays empty */
+    display: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button, input {
+    font: inherit;
+    color: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+svg {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+:focus-visible {
+    outline: 2px solid var(--green);
+    outline-offset: 2px;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+.muted {
+    color: var(--muted);
+}

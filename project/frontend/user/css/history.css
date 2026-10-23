@@ -1,0 +1,80 @@
+/*
+=================================
+* Filename : history.css
+* Date : 18/10/2026
+* Author : (add your name)
+* Description : Styles used only by the History page (history.html)
+=================================
+*/
+
+/* ---------- 1. LIST OF POINTS EARNED AND SPENT ---------- */
+.list {
+    margin-top: 16px;
+    overflow: hidden;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 22px;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.2s;
+}
+
+.row:last-child {
+    border-bottom: 0;
+}
+
+.row:hover {
+    background: #faf9f2;
+}
+
+.row-icon {
+    flex: none;
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    color: var(--green-dark);
+    background: var(--green-soft);
+    border-radius: 12px;
+}
+
+.row-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+.row--spend .row-icon   { color: #8a5a00; background: var(--amber-soft); }
+.row--pending .row-icon { color: var(--muted); background: #f0eee0; }
+.row--rejected .row-icon { color: var(--red); background: var(--red-soft); }
+
+.row-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.row-title {
+    font-weight: 600;
+}
+
+.row-points {
+    font-size: 1.1rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.row-points--earn  { color: var(--green); }
+.row-points--spend { color: var(--red); }
+.row-points--wait  { color: var(--muted); }
+
+.empty {
+    padding: 40px 0;
+    text-align: center;
+    color: var(--muted);
+}

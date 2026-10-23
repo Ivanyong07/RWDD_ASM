@@ -1,0 +1,142 @@
+<!doctype html>
+<!--
+=================================
+* Filename : leaderboard.html
+* Date : 18/10/2026
+* Author : (add your name)
+* Description : The Leaderboard page: the top 20 users by points
+=================================
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Fun Collectors | Leaderboard</title>
+
+    <!-- FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- CSS: shared files first, then the file of this page (each file uses the ones above it) -->
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/effects.css" />
+    <link rel="stylesheet" href="css/leaderboard.css" />
+  </head>
+
+  <body class="splash-on">
+    <!-- 1. OPENING PICTURE (filled by js/effects.js, then wipes left) -->
+    <div id="splash" aria-hidden="true"></div>
+
+    <!-- BACKGROUND: small leaves moving slowly behind the page (made by js/effects.js) -->
+    <div id="leaves" aria-hidden="true"></div>
+
+    <!-- 2. TOP BAR: logo, points, notifications, user (same in every page) -->
+    <header class="topbar">
+      <a class="brand" href="index.html">
+        <span class="logo">
+          <svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 1-15.5 6.2M3 12A9 9 0 0 1 18.5 5.8" /><path d="M18.5 2v4h-4M5.5 22v-4h4" /></svg>
+          <!-- website logo: blank for now. Write the file name in LOGO_PICTURE (js/config.js) -->
+          <img id="logoPic" alt="Fun Collectors logo" onerror="this.remove()" />
+        </span>
+        Fun Collectors
+      </a>
+
+      <div class="top-right">
+        <span class="points-pill" title="Points to spend">
+          <svg viewBox="0 0 24 24"><path d="M12 3l2.7 5.6 6.1.8-4.5 4.3 1.1 6.1L12 16.9 6.6 19.8l1.1-6.1L3.2 9.4l6.1-.8z" /></svg>
+          <span id="ptsText">0</span>
+        </span>
+
+        <button class="icon-btn" id="bellBtn" aria-label="Notifications">
+          <svg viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4zM10 21h4" /></svg>
+        </button>
+
+        <div class="user-wrap">
+          <button class="user" id="userBtn" aria-haspopup="true" aria-expanded="false">
+            <!-- profile picture: filled by js/common.js (the first letter shows if there is no picture) -->
+            <span class="avatar"><span id="userInitial"></span><img id="userPic" alt="Profile picture" onerror="this.remove()" /></span>
+            <span class="user-name" id="userName">Loading...</span>
+            <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" /></svg>
+          </button>
+          <div class="menu" id="userMenu" hidden>
+            <div class="menu-info"><b id="menuRank"></b><span class="muted" id="menuPts"></span></div>
+            <button id="demoApprove" hidden>Demo: approve my pending photos</button>
+            <!-- BACKEND: the logout should also end the session -->
+            <a href="../auth/index.html">Log out</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- 3. MENU: sidebar on a computer, bar at the bottom on a tablet or phone (same in every page) -->
+    <nav class="sidebar" aria-label="Dashboard">
+      <a href="index.html">
+        <svg viewBox="0 0 24 24"><path d="M5 21V4M5 4h11l-2 4 2 4H5" /></svg>
+        Challenge
+      </a>
+      <a href="history.html">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>
+        History
+      </a>
+      <a href="badges.html">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="6" /><path d="M8.5 14L7 22l5-3 5 3-1.5-8" /></svg>
+        Badges
+      </a>
+      <a href="rewards.html">
+        <svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1" /><path d="M12 8v13M5 12v9h14v-9M12 8C10 4 6 5 7 8c.5 1.5 3 1 5 0zm0 0c2-4 6-3 5 0-.5 1.5-3 1-5 0z" /></svg>
+        Rewards
+      </a>
+      <a href="leaderboard.html" class="active" aria-current="page">
+        <svg viewBox="0 0 24 24"><path d="M3 21h18M5 21v-8h4v8M10 21V8h4v13M15 21v-5h4v5" /></svg>
+        Leaderboard
+      </a>
+    </nav>
+
+    <main class="main">
+      <div class="container">
+        <!-- 4. TOP BANNER: points and rank (filled by js/common.js) -->
+        <section class="hero fade" id="hero"></section>
+
+        <!-- 5. PAGE TITLE + SEARCH -->
+        <div class="page-head">
+          <div>
+            <h1>Leaderboard</h1>
+            <p class="muted">The users with the most points.</p>
+          </div>
+          <label class="search">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" /><path d="M20 20l-4-4" /></svg>
+            <input id="search" type="search" placeholder="Search this page" aria-label="Search this page" />
+          </label>
+        </div>
+
+        <!-- ============ PAGE CONTENT: LEADERBOARD ============ -->
+
+        <!-- The logged-in user's own position (filled by js/leaderboard.js) -->
+        <div class="card me-card fade" id="meCard"></div>
+
+        <!-- The top 20 users -->
+        <div class="section-head"><h2>Top 20</h2></div>
+        <div class="card lb-table">
+          <div class="lb-head"><span>#</span><span>Name</span><span>Rank</span><span>Points</span></div>
+          <div id="lbList"></div>
+        </div>
+      </div>
+    </main>
+
+    <!-- 6. TOAST (small message at the bottom) -->
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <!-- JAVASCRIPT: loaded in this order (each file uses the ones above it) -->
+    <script src="js/config.js"></script>
+    <script src="js/icons.js"></script>
+    <script src="js/sample-data.js"></script>
+    <script src="js/sample-store.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/effects.js"></script>
+    <script src="js/leaderboard.js"></script>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+/*
+=================================
+* Filename : challenge.css
+* Date : 18/10/2026
+* Author : (add your name)
+* Description : Styles used only by the Challenge page (index.html)
+=================================
+*/
+
+/* ---------- 1. CHALLENGE CARD ---------- */
+.challenge-card .card-action {
+    margin-top: auto;
+}
+
+/* ---------- 2. STATUS TEXT UNDER THE BUTTON ---------- */
+.card-status {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+}
