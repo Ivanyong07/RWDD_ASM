@@ -1,0 +1,31 @@
+{
+    "submission": [
+        {
+            "id": 1,
+            "challenge": "Collect Tin",
+            "user": "Ivan",
+            "points": 20,
+            "date": "2026-10-22 09:10",
+            "status":"pending",
+            "photo": ""
+        },
+        {
+        "id": 2,
+            "challenge": "Recycle 10 Bottles",
+            "user": "Aiman",
+            "points": 30,
+            "date": "2026-10-22 09:10",
+            "status":"approved",
+            "photo": "" 
+        },
+        {
+            "id": 3,
+            "challenge": "Collect Plastic Bag",
+            "user": "Yew Cheng",
+            "points": 40,
+            "date": "2026-10-22 09:12",
+            "status": "rejected",
+            "photo": ""
+        }
+    ]
+}

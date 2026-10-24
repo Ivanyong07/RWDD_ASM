@@ -10,56 +10,153 @@
       href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/component.css" />
+    <link rel="stylesheet" href="css/effects.css" />
+    <link rel="stylesheet" href="css/reviews.css" />
     <title>Admin</title>
   </head>
   <body class="splash-on">
-    <div id="splash" aria-hidden="true"></div>
+    <div id="swap">
+      <div class="band"></div>
+      <div class="band"></div>
+      <div class="band"><h1>Fun Collectors</h1></div>
+      <div class="band"></div>
+    </div>
 
     <header class="topbar">
-      <a class="brand" href="index.html">
+      <a href="index.html" class="brand">
         <span class="logo">
-          <img id="logoPic" alt="Fun Collectors logo" onerror="this.remove()" />
+          <img src="../images/lee.jpeg" alt="Fun Collectors Logo" />
         </span>
         Fun Collectors
       </a>
 
       <div class="top-right">
-        <span class="points-pill" title="Points to spend">
-          <span id="ptsText">0</span>
-        </span>
+        <button class="icon-btn" id="bellBtn" aria-label="Notifications">
+          <img src="../images/notification.jpeg" alt="Notifications" />
+        </button>
+      </div>
 
+      <div class="user-wrap">
         <button
-          class="icon-btn"
-          id="bellBtn"
-          aria-label="Notifications"
-        ></button>
+          class="user"
+          id="userBtn"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <img src="../images/lee.jpeg" alt="Profile picture" />
+        </button>
 
-        <div class="user-wrap">
-          <button
-            class="user"
-            id="userBtn"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
-            <!-- profile picture: filled by js/common.js (the first letter shows if there is no picture) -->
-            <span class="avatar"
-              ><span id="userInitial"></span
-              ><img id="userPic" alt="Profile picture" onerror="this.remove()"
-            /></span>
-            <span class="user-name" id="userName">Loading...</span>
-          </button>
-          <div class="menu" id="userMenu" hidden>
-            <div class="menu-info">
-              <b id="menuRank"></b><span class="muted" id="menuPts"></span>
-            </div>
-            <button id="demoApprove" hidden>
-              Demo: approve my pending photos
-            </button>
-            <!-- BACKEND: the logout should also end the session -->
-            <a href="../auth/index.html">Log out</a>
-          </div>
+        <div class="menu" id="userMenu" hidden>
+          <div class="menu-info"><b id="menuRank"></b></div>
+          <a href="../auth/index.html">Log Out</a>
         </div>
       </div>
     </header>
+
+    <nav class="sidebar" aria-label="Dashboard">
+      <a href="index.html" class="active" aria-current="page">
+        <img src="../images/lee.jpeg" alt="Reviews Submission" />
+        Reviews Submission
+      </a>
+      <a href=""
+        ><img src="../images/user.jpeg" alt="Reviews Submission" />User
+        Management</a
+      >
+      <a href=""
+        ><img
+          src="../images/challenges.jpeg"
+          alt="Reviews Submission"
+        />Challenges Management</a
+      >
+      <a href=""
+        ><img src="../images/badges.jpeg" alt="Reviews Submission" />Badges
+        Management</a
+      >
+
+      <a href=""
+        ><img src="../images/reward.jpeg" alt="Reviews Submission" />Reward
+        Management</a
+      >
+      <a href=""
+        ><img
+          src="../images/leaderboard.jpeg"
+          alt="Reviews Submission"
+        />Leaderboard</a
+      >
+      <a href=""
+        ><img src="../images/profile.jpeg" alt="Reviews Submission" />Profile</a
+      >
+      <a href=""
+        ><img src="../images/logout.jpeg" alt="Reviews Submission" />Log Out</a
+      >
+    </nav>
+
+    <!-- ============ PAGE CONTENT: Review Submission ============ -->
+    <main class="main">
+      <div class="stats" id="stats"></div>
+      <div style="height: 260px">
+        <canvas id="pie_chart"></canvas>
+      </div>
+      <div class="table">
+        <section class="table-submission">
+          <table>
+            <thead>
+              <tr>
+                <th>Submission ID</th>
+                <th>Challenge Title</th>
+                <th>Username</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+
+            <tbody id="submissionBody"></tbody>
+          </table>
+        </section>
+        <dialog id="submissionDialog" class="dialog">
+          <div class="dialog-head">
+            <h2>Submission <span id="dId"></span></h2>
+            <button class="btn-close" id="dialogClose" aria-label="Close">
+              ✕
+            </button>
+          </div>
+
+          <div class="dialog-body">
+            <img id="dPhoto" alt="Submitted Photo" class="submission-photo" />
+
+            <dl class="dialog-info">
+              <dt>Challenge</dt>
+              <dd id="dChallenge"></dd>
+              <dt>User</dt>
+              <dd id="dUser"></dd>
+              <dt>Points</dt>
+              <dd id="dPoints"></dd>
+              <dt>Submitted</dt>
+              <dd id="dDate"></dd>
+              <dt>Status</dt>
+              <dd id="dStatus"></dd>
+            </dl>
+
+            <label for="dNote">Note (shown to the user if rejected)</label>
+            <textarea id="dNote" rows="2"></textarea>
+          </div>
+
+          <div class="dialog-footer">
+            <button class="btn-reject" id="dReject">Reject</button>
+            <button class="btn-approve" id="dApprove">Approve</button>
+          </div>
+        </dialog>
+      </div>
+    </main>
+
+    <div class="table-submission"></div>
+    <script src="js/effect.js"></script>
+    <script src="js/reviews.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   </body>
 </html>
