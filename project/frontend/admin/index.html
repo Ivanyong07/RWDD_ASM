@@ -6,16 +6,12 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link rel="stylesheet" href="css/admin.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/base.css" />
-    <link rel="stylesheet" href="css/layout.css" />
-    <link rel="stylesheet" href="css/component.css" />
-    <link rel="stylesheet" href="css/effects.css" />
     <link rel="stylesheet" href="css/reviews.css" />
     <title>Admin</title>
   </head>
@@ -102,8 +98,12 @@
       <div style="height: 260px">
         <canvas id="pie_chart"></canvas>
       </div>
+
+      <div style="height: 260px">
+        <canvas id="line_chart"></canvas>
+      </div>
       <div class="table">
-        <section class="table-submission">
+        <section class="table-body">
           <table>
             <thead>
               <tr>
@@ -154,8 +154,7 @@
       </div>
     </main>
 
-    <div class="table-submission"></div>
-    <script src="js/effect.js"></script>
+    <script src="js/admin.js"></script>
     <script src="js/reviews.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   </body>
