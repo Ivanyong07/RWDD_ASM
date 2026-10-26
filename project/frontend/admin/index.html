@@ -55,53 +55,86 @@
     </header>
 
     <nav class="sidebar" aria-label="Dashboard">
+      <p>Review</p>
       <a href="index.html" class="active" aria-current="page">
-        <img src="../images/lee.jpeg" alt="Reviews Submission" />
+        <img src="images/review.png" alt="Reviews Submission" />
         Reviews Submission
       </a>
       <a href=""
-        ><img src="../images/user.jpeg" alt="Reviews Submission" />User
+        ><img
+          src="images/leaderboard.png"
+          alt="Reviews Submission"
+        />Leaderboard</a
+      >
+      <br />
+      <br />
+      <p>Management</p>
+      <a href=""
+        ><img src="images/user.png" alt="Reviews Submission" />User
         Management</a
       >
       <a href=""
-        ><img
-          src="../images/challenges.jpeg"
-          alt="Reviews Submission"
-        />Challenges Management</a
+        ><img src="images/challenge.png" alt="Reviews Submission" />Challenges
+        Management</a
       >
       <a href=""
-        ><img src="../images/badges.jpeg" alt="Reviews Submission" />Badges
+        ><img src="images/badge.png" alt="Reviews Submission" />Badges
         Management</a
       >
 
       <a href=""
-        ><img src="../images/reward.jpeg" alt="Reviews Submission" />Reward
+        ><img src="images/reward.png" alt="Reviews Submission" />Reward
         Management</a
       >
+
+      <br />
+      <br />
+      <p>Account</p>
       <a href=""
-        ><img
-          src="../images/leaderboard.jpeg"
-          alt="Reviews Submission"
-        />Leaderboard</a
+        ><img src="images/profile.png" alt="Reviews Submission" />Profile</a
       >
       <a href=""
-        ><img src="../images/profile.jpeg" alt="Reviews Submission" />Profile</a
-      >
-      <a href=""
-        ><img src="../images/logout.jpeg" alt="Reviews Submission" />Log Out</a
+        ><img src="images/logout.png" alt="Reviews Submission" />Log Out</a
       >
     </nav>
 
     <!-- ============ PAGE CONTENT: Review Submission ============ -->
     <main class="main">
+      <h1>Reviews Submission Page</h1>
+      <p>This page is use to review the studnet submission</p>
+      <hr />
       <div class="stats" id="stats"></div>
-      <div style="height: 260px">
-        <canvas id="pie_chart"></canvas>
+      <div class="chart-row">
+        <div style="height: 260px" class="chart">
+          <canvas id="pie_chart"></canvas>
+        </div>
+
+        <div style="height: 260px" class="chart">
+          <canvas id="line_chart"></canvas>
+        </div>
       </div>
 
-      <div style="height: 260px">
-        <canvas id="line_chart"></canvas>
+      <div class="filters" id="filters">
+        <button class="filter" data-f="all" aria-pressed="true">All</button>
+        <button class="filter" data-f="all" aria-pressed="true">Pending</button
+        ><button class="filter" data-f="all" aria-pressed="true">
+          Approved
+        </button>
+        <button class="filter" data-f="all" aria-pressed="true">
+          Rejected
+        </button>
+
+        <label class="search">
+          <img src="images/search.png" alt="Search" />
+          <input
+            type="search"
+            id="search"
+            placeholder="Search the user"
+            aria-label="Search the user"
+          />
+        </label>
       </div>
+
       <div class="table">
         <section class="table-body">
           <table>

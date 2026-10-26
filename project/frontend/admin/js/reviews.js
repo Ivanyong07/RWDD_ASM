@@ -51,6 +51,7 @@ function getReviewCounts(){
     } else {
       counts.rejected++;
     }
+    return counts
   }, {approved: 0, pending: 0, rejected: 0});
 }
 
@@ -58,22 +59,20 @@ function getReviewCounts(){
 // the 3 card stat
 // =======================
 
-async function renderStat(){
+function renderStat(){
 
-  const statsElement = document.getElementById("stats");
-
-  const stats = await getReviewCounts();
+  const counts = getReviewCounts();
 
   const items = [
-    {label: "Completed", value: stats.completed, sub: "completed by all the student"},
-    {label: "Pending", value: stats.pending, sub: "waiting to mark"},
-    {label: "Rejected", value: stats.rejected, sub: "submission that were not acceptable"}
+    {label: "Completed", value: counts.approved, sub: "Completed by all the student"},
+    {label: "Pending", value: counts.pending, sub: "Waiting to mark"},
+    {label: "Rejected", value: counts.rejected, sub: "Submission that were not acceptable"}
   ];
 
   $("stats").innerHTML = items.map(item => `
-    <div class="card stat fade">
+    <div class="card stat">
       <span class="stat__label">${item.label}</span>
-      <b class="stat_value" data-count="${item.value}">0</b>
+      <b class="stat_value">${item.value}</b>
       <span class="stat__sub">${item.sub}</span>
     </div>
     `).join("");
@@ -82,17 +81,25 @@ async function renderStat(){
 // ============================
 // pie chart in review page
 // ===========================
+let pieChart = null;
 async function renderPieChart(){
 
-  const stats = await getReviewsPie();
+  const counts = getReviewCounts();
 
-  new Chart(document.getElementById('pie_chart'), {
-    type: "pie",
-    data: {
-      labels : ["Approve", "Pending" ,"Rejected"],
-      datasets: [{
-        data: [stats.approved, stats.pending, stats.rejected],
-        background: ["#0c9260", "#f5a623", "#d64545"]
+  const data = [counts.approved, counts.pending, counts.rejected];
+
+  if (pieChart){
+    pieChart.data.datasets[0].data = data;
+    pieChart.update();
+    return;
+  }
+
+  pieChart = new Chart($("pie_chart"), {
+    type : "pie",
+    data : {
+      labels: ["Approved", "Pending", "Rejected"],
+      datasets: [{data,
+        backgroundColor: ["#0c9260", "#f5a623", "#d64545"]
       }]
     },
     options: {responsive: true, maintainAspectRatio: false}
@@ -102,17 +109,59 @@ async function renderPieChart(){
 // ============================
 // line chart in review page
 // ===========================
-async function renderLineChart(){
-
-  const canvas = document.getElementById("line_chart");
-
-  const lalels = ["Mon", "Tue", "Wed", "Thu", "Fri"];
-  const counts = labels.map((_, index) => {
-    submission.filter(submission => {
-      const data = new Date(submission.date);
-      return !Number.isNaN(date.getTime()) && data.getDay() === index + 1;
+let lineChart = null;
+function renderLineChart() {
+  const labels = ["Mon", "Tue", "Wed", "Thu", "Fri"];
+  const counts = labels.map((_, index) =>
+    submission.filter(s => {
+      const date = new Date(String(s.date).replace(" ", "T"));
+      return !Number.isNaN(date.getTime()) && date.getDay() === index + 1;   // Mon = 1
     }).length
-  })
+  );
+
+  if (lineChart) {
+    lineChart.data.datasets[0].data = counts;
+    lineChart.update();
+    return;
+  }
+  lineChart = new Chart($("line_chart"), {
+  type: "line",
+  data: {
+    labels,
+    datasets: [{
+      data: counts,
+      borderColor: "#0c9260",
+      backgroundColor: "rgba(12, 146, 96, 0.12)",
+      fill: true,
+      tension: 0.35,
+      pointRadius: 3,                       // small dots always visible
+      pointHoverRadius: 6,                  // grows when hovered
+      pointBackgroundColor: "#0c9260",
+      pointHoverBorderColor: "#fff",
+      pointHoverBorderWidth: 2
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    interaction: { mode: "index", intersect: false },   // ← the important part
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: "#1f2a24",
+        padding: 10,
+        cornerRadius: 8,
+        displayColors: false,
+        callbacks: {
+          label: item => item.parsed.y + " submissions"   // text shown in the hover box
+        }
+      }
+    },
+    scales: {
+      y: { beginAtZero: true, ticks: { stepSize: 1 } }    // whole numbers only
+    }
+  }
+});
 }
 
 // ==================================
@@ -190,12 +239,32 @@ document.getElementById("dReject").onclick = () => {
 // Start
 // =================================
 
-let submission = [];
-let stats = [];
-async function initializeReviewPage() {
+function refreshReview(){
   renderStat();
-  submission = await getSubmissions();
+  renderPieChart();
+  renderLineChart();
   renderTable();
 }
+
+let submission = [];
+let stats = [];
+
+async function initializeReviewPage() {
+  submission = await getSubmissions();
+  refreshReview();
+}
+
+$("dApprove").onclick = () => {
+  current.status = "approved";
+  dialog.close();
+  refreshReview();
+}
+
+$("dReject").onclick = () => {
+  current.status = "rejected";
+  dialog.close();
+  refreshReview();
+}
+
 
 initializeReviewPage();
