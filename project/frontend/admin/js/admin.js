@@ -13,6 +13,7 @@
 // Config
 // =======================
 const API_BASE = "http://127.0.0.1:8000/backend/api";
+const USE_SAMPLE_DATA = true;
 
 const ENDPOINTS = {
     profile: "admin/profile.php",
@@ -51,6 +52,56 @@ async function request(file, options = {}) {
 // ========================
 
 
+
+
+async function getSubmissions(){
+  
+    if (USE_SAMPLE_DATA) {
+      const response = await fetch("sample-data/submission.json");
+
+      if (!response.ok){
+        throw new Error(`Could not load submission (${response.status}).`);
+      }
+
+      const data = await response.json();
+
+      if (!Array.isArray(data.submission)){
+        throw new Error("The JSON file must contain a submission array");
+      }
+
+      return data.submission;
+    }
+
+    if (typeof ENDPOINTS === "undefined" || !ENDPOINTS.submission){
+      throw new Error("ENPOINTS.submission is not configured.")
+    }
+
+    if (typeof request !=="function"){
+      throw new Error("The request() API function is not loaded");
+    }
+
+    return (await request(ENDPOINTS.submission)).submission;
+}
+
+
+// Leaderboard page: the top users by points, and the logged-in user's own position
+async function getLeaderboard() {
+    if (USE_SAMPLE_DATA) {
+      const response = await fetch("sample-data/leaderboard.json");
+
+      if (!response.ok){
+        throw new Error(`Could not load submission (${response.status}).`);
+      }
+
+      const data = await response.json();
+
+      return data.leaderboard;
+    }
+    const data = await request(ENDPOINTS.leaderboard);
+    return { list: data.leaderboard, me: data.me };
+}
+
+
 // name, picture, points, rank, next rank, all ranks and numbers (used by every page)
 async function getProfile() {
     return USE_SAMPLE_DATA ? sampleProfile() : request(ENDPOINTS.profile);
@@ -80,18 +131,14 @@ async function getRewards() {
     return (await request(ENDPOINTS.rewards)).rewards;
 }
 
-// Leaderboard page: the top users by points, and the logged-in user's own position
-async function getLeaderboard() {
-    if (USE_SAMPLE_DATA) return sampleLeaderboard();
-    const data = await request(ENDPOINTS.leaderboard);
-    return { list: data.leaderboard, me: data.me };
-}
 
 
 // ============================
 // Common
 // ===========================
 const $ = id => document.getElementById(id);
+
+const limit = 20;
 
 // =========================
 // Start Page Animation

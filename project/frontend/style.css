@@ -624,7 +624,7 @@ Letter
     font-weight: 700;
     font-family: Arial, Helvetica, sans-serif;
     white-space: nowrap;
-    background: -webkit-linear-gradient(#eaecea, #0c9260);
+    background: -webkit-linear-gradient(#eaecea, #02ff2c);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }

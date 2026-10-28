@@ -8,38 +8,8 @@
 */
 
 // =======================
-// Get DataTransfer
+// the 3 card stat
 // =======================
-const useSampleData = typeof USE_SAMPLE_DATA === "undefined" ? true : USE_SAMPLE_DATA;
-
-async function getSubmissions(){
-  
-    if (useSampleData) {
-      const response = await fetch("sample-data/submission.json");
-
-      if (!response.ok){
-        throw new Error(`Could not load submission (${response.status}).`);
-      }
-
-      const data = await response.json();
-
-      if (!Array.isArray(data.submission)){
-        throw new Error("The JSON file must contain a submission array");
-      }
-
-      return data.submission;
-    }
-
-    if (typeof ENDPOINTS === "undefined" || !ENDPOINTS.submission){
-      throw new Error("ENPOINTS.submission is not configured.")
-    }
-
-    if (typeof request !=="function"){
-      throw new Error("The request() API function is not loaded");
-    }
-
-    return (await request(ENDPOINTS.submission)).submission;
-}
 
 function getReviewCounts(){
   return submission.reduce((counts, submission) => {
@@ -55,11 +25,7 @@ function getReviewCounts(){
   }, {approved: 0, pending: 0, rejected: 0});
 }
 
-// =======================
-// the 3 card stat
-// =======================
-
-function renderStat(){
+function renderReviewStat(){
 
   const counts = getReviewCounts();
 
@@ -72,7 +38,7 @@ function renderStat(){
   $("stats").innerHTML = items.map(item => `
     <div class="card stat">
       <span class="stat__label">${item.label}</span>
-      <b class="stat_value">${item.value}</b>
+      <b class="stat__value">${item.value}</b>
       <span class="stat__sub">${item.sub}</span>
     </div>
     `).join("");
@@ -82,7 +48,7 @@ function renderStat(){
 // pie chart in review page
 // ===========================
 let pieChart = null;
-async function renderPieChart(){
+function renderReviewPieChart(){
 
   const counts = getReviewCounts();
 
@@ -110,7 +76,7 @@ async function renderPieChart(){
 // line chart in review page
 // ===========================
 let lineChart = null;
-function renderLineChart() {
+function renderReivewLineChart() {
   const labels = ["Mon", "Tue", "Wed", "Thu", "Fri"];
   const counts = labels.map((_, index) =>
     submission.filter(s => {
@@ -173,7 +139,7 @@ const tbody  = document.getElementById("submissionBody");
 let current = null;                       // the submission being viewed
 
 // 1. draw the table rows
-function renderTable() {
+function renderReviewTable() {
   tbody.innerHTML = submission.map(s => `
     <tr>
       <td>${s.id}</td>
@@ -240,10 +206,10 @@ document.getElementById("dReject").onclick = () => {
 // =================================
 
 function refreshReview(){
-  renderStat();
-  renderPieChart();
-  renderLineChart();
-  renderTable();
+  renderReviewStat();
+  renderReviewPieChart();
+  renderReivewLineChart();
+  renderReviewTable();
 }
 
 let submission = [];

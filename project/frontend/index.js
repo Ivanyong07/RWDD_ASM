@@ -29,8 +29,6 @@ const about_content = document.querySelector('.about-content');
 const about_description = document.querySelector('.about-description');
 const about_image = document.querySelector('.about-image');
 
-const badge_label = document.querySelector('.badge-label');
-const badge = document.querySelector('#badge-collection');
 
 const place = document.querySelector('#place');
 const place_label = document.querySelector('.place-label')
@@ -91,7 +89,6 @@ function setupScrollAnimation(){
         const rect = hero_wrapper.getBoundingClientRect();
         const aboutRect = about.getBoundingClientRect();
         const placeRect = place.getBoundingClientRect();
-        const badgeRect = badge.getBoundingClientRect();
         const statRectDescription = stat_description.getBoundingClientRect();
 
         // wrapper.offsetHeight = how tall #hero-wrapper is (250vh is 2250px)
@@ -191,11 +188,6 @@ function setupScrollAnimation(){
         // Badge
         // =======================
 
-        if (badgeRect.top < window.innerHeight * 0.7){
-            badge_label.classList.add('show');
-        } else {
-            badge_label.classList.remove('show');
-        }
 
         // ========================
         // Place
@@ -333,6 +325,22 @@ function href_login(){
 //         .filter(x => x.overflow > 1)
 //         .sort((a, b) => b.overflow - a.overflow)
 // );
+
+
+// const section = document.querySelector(".hero-scroll");
+// const hero = document.querySelector(".hero");
+
+// function update() {
+//   const rect = section.getBoundingClientRect();
+//   const distance = section.offsetHeight - innerHeight;
+//   const progress = Math.min(1, Math.max(0, -rect.top / distance));
+
+//   hero.style.setProperty("--progress", progress);
+// }
+
+// addEventListener("scroll", update, { passive: true });
+// addEventListener("resize", update);
+// update();
 
 console.log(window.devicePixelRatio, window.innerWidth, document.documentElement.getBoundingClientRect().width);
 
