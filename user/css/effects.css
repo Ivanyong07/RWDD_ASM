@@ -1,0 +1,127 @@
+/*
+=================================
+* Filename : effects.css
+* Date : 18/10/2026
+* Author : (add your name)
+* Description : The few animations: opening picture, fade-in, hover and toast
+=================================
+*/
+
+/* ---------- 1. OPENING PICTURE: strips that wipe left (made by js/effects.js) ---------- */
+#splash {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+}
+
+#splash .slice {
+    position: absolute;
+    inset: 0;
+    background: var(--green) center / cover no-repeat;
+    transition: transform 0.6s cubic-bezier(0.77, 0, 0.18, 1);
+    transition-delay: calc(var(--i) * 90ms);          /* each strip starts a little later */
+}
+
+#splash.wipe-left .slice {
+    transform: translateX(-100%);
+}
+
+.splash-brand {                                       /* shown only when there is no opening picture */
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #fff;
+    transition: opacity 0.3s;
+}
+
+#splash.wipe-left .splash-brand {
+    opacity: 0;
+}
+
+/* ---------- 2. SMALL LEAVES MOVING IN THE BACKGROUND (made by js/effects.js) ---------- */
+#leaves {
+    position: fixed;
+    inset: 0;
+    z-index: 0;                                       /* behind all the content */
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.leaf {
+    position: absolute;
+    top: -60px;
+    width: var(--size);
+    height: var(--size);
+    background: var(--tone);
+    border-radius: 0 100% 0 100%;                     /* this shape makes a leaf */
+    opacity: 0.5;
+    animation: fall var(--time) linear var(--delay) infinite;
+}
+
+/* ---------- 3. FADE IN (items rise slightly when the page opens) ---------- */
+.fade {
+    animation: fadeUp 0.5s ease backwards;
+}
+
+.grid > .fade:nth-child(2) { animation-delay: 0.05s; }
+.grid > .fade:nth-child(3) { animation-delay: 0.1s; }
+.grid > .fade:nth-child(4) { animation-delay: 0.15s; }
+.grid > .fade:nth-child(5) { animation-delay: 0.2s; }
+.grid > .fade:nth-child(6) { animation-delay: 0.25s; }
+
+/* ---------- 4. HOVER (cards lift a little, buttons change colour) ---------- */
+.lift {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.lift:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+}
+
+.btn,
+.filter,
+.sidebar a,
+.icon-btn,
+.user {
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.photo img {
+    transition: transform 0.4s ease;
+}
+
+.lift:hover .photo img {
+    transform: scale(1.05);
+}
+
+/* ---------- 5. TOAST ---------- */
+.toast {
+    transition: transform 0.3s ease;
+}
+
+/* ---------- 6. KEYFRAMES ---------- */
+@keyframes fall {
+    0%   { transform: translate(0, 0) rotate(0); }
+    50%  { transform: translate(50px, 55vh) rotate(180deg); }
+    100% { transform: translate(-30px, 115vh) rotate(360deg); }
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+}
+
+/* ---------- 7. PEOPLE WHO TURN OFF ANIMATIONS ---------- */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}

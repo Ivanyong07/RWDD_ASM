@@ -1,0 +1,41 @@
+/*
+=================================
+* Filename : rewards.css
+* Date : 18/10/2026
+* Author : (add your name)
+* Description : Styles used only by the Rewards page (rewards.html)
+=================================
+*/
+
+/* ---------- 1. BALANCE ---------- */
+.balance {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 14px;
+    color: #fff;
+    background: var(--green);
+    border-color: var(--green);
+}
+
+.balance .stat__label {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.balance b {
+    display: block;
+    font-size: 2.4rem;
+    line-height: 1.1;
+}
+
+.balance p {
+    max-width: 380px;
+    opacity: 0.9;
+}
+
+/* ---------- 2. REWARD CARD ---------- */
+.reward-card.locked .photo {
+    filter: grayscale(1);
+    opacity: 0.7;
+}

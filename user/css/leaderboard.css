@@ -1,0 +1,176 @@
+/*
+=================================
+* Filename : leaderboard.css
+* Date : 18/10/2026
+* Author : (add your name)
+* Description : Styles used only by the Leaderboard page (leaderboard.html)
+=================================
+*/
+
+/* ---------- 1. YOUR POSITION, POINTS AND RANK ---------- */
+.me-card {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+    padding: 18px;
+    color: #fff;
+    background:
+        radial-gradient(circle at 95% 0%, rgba(255, 255, 255, 0.18) 0 60px, transparent 61px),
+        linear-gradient(120deg, #0c9260, #087048);
+    border: 0;
+    border-radius: 20px;
+    box-shadow: -8px 8px 0 #0a5c3c;               /* darker green layer behind the box */
+}
+
+.me-tile {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 18px;
+    background: rgba(255, 255, 255, 0.16);
+    border-radius: 14px;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.me-tile:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.24);
+}
+
+.me-icon {
+    flex: none;
+    width: 46px;
+    height: 46px;
+    display: grid;
+    place-items: center;
+    color: #087048;
+    background: #fff;
+    border-radius: 50%;
+}
+
+.me-icon svg {
+    width: 22px;
+    height: 22px;
+}
+
+.me-label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    opacity: 0.85;
+}
+
+.me-tile b {
+    display: block;
+    font-size: 1.7rem;
+    line-height: 1.15;
+}
+
+/* ---------- 2. THE TABLE (position, name, rank, points) ---------- */
+.lb-table {
+    overflow: hidden;
+    padding: 0;
+}
+
+.lb-head,
+.lb-row {
+    display: grid;
+    grid-template-columns: 64px 1fr 140px 120px;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 22px;
+}
+
+.lb-head {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: #faf9f2;
+    border-bottom: 1px solid var(--line);
+}
+
+.lb-row {
+    border-bottom: 1px solid var(--line);
+    transition: background 0.2s;
+}
+
+.lb-row:last-child {
+    border-bottom: 0;
+}
+
+.lb-row:hover {
+    background: #faf9f2;
+}
+
+.lb-pos {
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    font-weight: 700;
+    color: var(--muted);
+    border-radius: 50%;
+}
+
+.lb-pos--1 { color: #6b4a00; background: #ffd966; }       /* gold */
+.lb-pos--2 { color: #4a525a; background: #d9dee3; }       /* silver */
+.lb-pos--3 { color: #5c3510; background: #e8b98a; }       /* bronze */
+
+.lb-user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+    font-weight: 600;
+}
+
+.lb-name {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.lb-sub {
+    display: none;                            /* the rank is shown under the name on small screens */
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--muted);
+}
+
+.lb-points {
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-align: right;
+}
+
+.lb-head span:last-child {
+    text-align: right;
+}
+
+.lb-row.is-me {                               /* the row of the logged-in user */
+    background: var(--amber-soft);
+}
+
+@media (max-width: 700px) {
+    .me-card {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .lb-head,
+    .lb-row {
+        grid-template-columns: 44px 1fr 80px;
+        padding: 12px 14px;
+    }
+
+    .lb-head span:nth-child(3),
+    .lb-row .chip {
+        display: none;
+    }
+
+    .lb-sub {
+        display: block;
+    }
+}

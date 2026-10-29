@@ -1,0 +1,480 @@
+/*
+=================================
+* Filename : components.css
+* Date : 18/10/2026
+* Author : (add your name)
+* Description : Reusable pieces: cards, chips, buttons, progress bar, stats, upload box, toast
+=================================
+*/
+
+/* ---------- 1. CARD ---------- */
+.card {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.card-title {
+    margin-bottom: 6px;
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+.card-text {
+    flex: 1;
+    margin-bottom: 14px;
+    font-size: 0.95rem;
+    color: var(--muted);
+}
+
+.card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+/* ---------- 2. PHOTO BOX (a soft placeholder until the photo is added) ---------- */
+.photo {
+    position: relative;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    margin-bottom: 16px;
+    aspect-ratio: 16 / 9;
+    background: #ece9d9;
+    border-radius: 12px;
+}
+
+.photo::before {                              /* faint sign shown when there is no photo */
+    content: "\267B\FE0E";
+    font-size: 2.2rem;
+    color: rgba(31, 42, 36, 0.18);
+}
+
+.photo img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.photo--round {
+    aspect-ratio: 1;
+    border-radius: 50%;
+}
+
+/* ---------- 3. AVATAR (the user's photo, or the first letter of the name) ---------- */
+.avatar {
+    --size: 36px;
+    position: relative;
+    flex: none;
+    width: var(--size);
+    height: var(--size);
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    font-weight: 700;
+    color: #fff;
+    background: var(--green);
+    border-radius: 50%;
+}
+
+.avatar img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ---------- 4. CHIPS AND TAGS ---------- */
+.chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    background: #f0eee0;
+    border-radius: 99px;
+}
+
+.chip svg {
+    width: 15px;
+    height: 15px;
+}
+
+.chip--green {
+    color: var(--green-dark);
+    background: var(--green-soft);
+}
+
+.chip--amber {
+    color: #8a5a00;
+    background: var(--amber-soft);
+}
+
+.tag {
+    display: inline-block;
+    padding: 4px 10px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--muted);
+    background: #f0eee0;
+    border-radius: 8px;
+}
+
+.tag--wait {
+    color: #8a5a00;
+    background: var(--amber-soft);
+}
+
+.tag--bad {
+    color: var(--red);
+    background: var(--red-soft);
+}
+
+.tag--ok {
+    color: var(--green-dark);
+    background: var(--green-soft);
+}
+
+/* ---------- 5. BUTTONS ---------- */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 11px 20px;
+    font-weight: 600;
+    color: #fff;
+    background: var(--green);
+    border: 0;
+    border-radius: 12px;
+}
+
+.btn:hover:not(:disabled) {
+    background: var(--green-dark);
+}
+
+.btn:disabled {
+    cursor: not-allowed;
+    color: #9a9c91;
+    background: #ece9d9;
+}
+
+.btn--ghost {
+    color: var(--ink);
+    background: var(--card);
+    border: 1px solid var(--line);
+}
+
+.btn--ghost:hover:not(:disabled) {
+    background: var(--bg);
+}
+
+.btn--full {
+    width: 100%;
+}
+
+/* ---------- 6. FILTER BUTTONS ---------- */
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.filter {
+    padding: 7px 16px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 99px;
+}
+
+.filter:hover {
+    background: var(--bg);
+}
+
+.filter[aria-pressed="true"] {
+    color: #fff;
+    background: var(--ink);
+    border-color: var(--ink);
+}
+
+.filter .count {                              /* the small number on a tab */
+    margin-left: 4px;
+    padding: 1px 8px;
+    font-size: 0.78rem;
+    background: rgba(31, 42, 36, 0.08);
+    border-radius: 99px;
+}
+
+.filter[aria-pressed="true"] .count {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+/* ---------- 7. PROGRESS BAR ---------- */
+.bar {
+    height: 10px;
+    margin: 12px 0 8px;
+    background: #ece9d9;
+    border-radius: 99px;
+    overflow: hidden;
+}
+
+.bar__fill {
+    height: 100%;
+    background: var(--green);
+    border-radius: 99px;
+    transition: width 0.8s ease;
+}
+
+/* ---------- 8. STAT CARDS (a label and a big number) ---------- */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.stat__label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--muted);
+}
+
+.stat__value {
+    display: block;
+    margin: 4px 0;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.stat__sub {
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+/* ---------- 9. UPLOAD PHOTO BOX (pop-up) ---------- */
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    display: grid;
+    place-items: center;
+    padding: 16px;
+    background: rgba(31, 42, 36, 0.5);
+}
+
+.modal-box {
+    width: 100%;
+    max-width: 440px;
+    padding: 26px;
+    background: var(--card);
+    border-radius: 20px;
+    box-shadow: var(--shadow-hover);
+}
+
+.dropzone {
+    position: relative;
+    display: grid;
+    place-items: center;
+    min-height: 220px;
+    margin: 16px 0;
+    overflow: hidden;
+    text-align: center;
+    color: var(--muted);
+    background: var(--bg);
+    border: 2px dashed #cfcab4;
+    border-radius: 14px;
+    cursor: pointer;
+}
+
+.dropzone:hover,
+.dropzone:focus-within {
+    border-color: var(--green);
+}
+
+.dropzone input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}
+
+.dropzone img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.dropzone.has-photo .dropzone-text {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 8px;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.55);
+}
+
+.upload-error {
+    margin-bottom: 12px;
+    font-size: 0.9rem;
+    color: var(--red);
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* ---------- 10. TOAST (small message at the bottom) ---------- */
+.toast {
+    position: fixed;
+    left: 50%;
+    bottom: 28px;
+    z-index: 70;
+    max-width: 90%;
+    padding: 12px 22px;
+    font-weight: 600;
+    text-align: center;
+    color: #fff;
+    background: var(--ink);
+    border-radius: 12px;
+    transform: translate(-50%, 140px);
+}
+
+.toast.show {
+    transform: translate(-50%, 0);
+}
+
+/* ---------- 11. TOP BANNER (points and rank, shown at the top of every page) ---------- */
+.hero {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    align-items: center;
+    gap: 28px;
+    margin: 0 0 32px;
+    padding: 28px 32px;
+    overflow: hidden;
+    color: #fff;
+    background:
+        radial-gradient(circle at 92% 12%, rgba(255, 255, 255, 0.18) 0 70px, transparent 71px),
+        radial-gradient(circle at 78% 108%, rgba(255, 255, 255, 0.12) 0 110px, transparent 111px),
+        linear-gradient(120deg, #0c9260, #087048);
+    border-radius: 20px;
+    box-shadow: -8px 8px 0 #0a5c3c;              /* darker green layer behind the banner */
+}
+
+.hero__hello {
+    font-weight: 600;
+    opacity: 0.9;
+}
+
+.hero__points {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 6px;
+}
+
+.hero__points svg {
+    flex: none;
+    width: 44px;
+    height: 44px;
+    padding: 9px;
+    color: #8a5a00;
+    background: var(--amber);
+    border-radius: 50%;
+    fill: #fff3c4;
+}
+
+.hero__points b {
+    font-size: 3rem;
+    line-height: 1;
+}
+
+.hero__points span {
+    max-width: 90px;
+    font-size: 0.9rem;
+    line-height: 1.25;
+    opacity: 0.9;
+}
+
+.hero__rank {
+    padding: 18px 20px;
+    background: rgba(255, 255, 255, 0.14);
+    border-radius: 16px;
+}
+
+.hero__rank-name {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.hero__rank-name span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.hero__rank-name svg {
+    width: 22px;
+    height: 22px;
+}
+
+.hero__rank-name small {
+    font-size: 0.85rem;
+    font-weight: 600;
+    opacity: 0.85;
+}
+
+.hero .bar {
+    background: rgba(255, 255, 255, 0.28);
+}
+
+.hero .bar__fill {
+    background: #fff;
+}
+
+.hero__sub {
+    font-size: 0.9rem;
+    opacity: 0.92;
+}
+
+@media (max-width: 760px) {
+    .hero {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        padding: 22px 20px;
+    }
+
+    .hero__points b {
+        font-size: 2.4rem;
+    }
+}
+
+@media (max-width: 760px) {
+    .stats {
+        grid-template-columns: 1fr;
+    }
+}
