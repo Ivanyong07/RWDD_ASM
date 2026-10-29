@@ -1,0 +1,30 @@
+{
+    "users":{
+        "1": {
+            "username": "Ivan Yong",
+            "password" : "dahiocacijiacj",
+            "email" : "ivanyong07@gmail.com",
+            "age": 18,
+            "tp_number": "TP090955",
+            "course": "Diploma in ICT",
+            "role": "user",
+            "total_xp": 10000,
+            "rank": "forest",
+            "points_balance": 999999,
+            "created_at": "19/10/2026 09:58"       
+        }, 
+        "2": {
+            "username": "Ling Yew Cheng",
+            "password" : "dahiocacijiacj",
+            "email" : "ivanyong07@gmail.com",
+            "age": 18,
+            "tp_number": "TP090955",
+            "course": "Diploma in ICT",
+            "role": "user",
+            "total_xp": 10000,
+            "level": "forest",
+            "points_balance": 999999,
+            "created_at": "19/10/2026 09:58"       
+        }
+    }
+}

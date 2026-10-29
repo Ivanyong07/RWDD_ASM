@@ -629,3 +629,51 @@ filter
     background: var(--ink);
     border-color: var(--ink);
 }
+
+/* 
+=============================
+table action
+============================ */
+
+.action{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+/* 
+=============================
+btn
+============================ */
+
+.btn-view{
+    border: none;
+    background-color: rgb(164, 164, 232);
+    border-radius: 20px;
+}
+
+.btn-update{
+    border: none;
+    background-color: rgb(247, 197, 19);
+    border-radius: 20px;
+}
+
+.btn-delete{
+    border: none;
+    background-color: rgb(240, 94, 94);
+    border-radius: 20px;
+}
+
+.btn-create{
+    border: none;
+    background-color: rgb(120, 223, 120);
+    border-radius: 20px;
+    width: 100px;
+}
+
+.btn-done{
+    border: none;
+    background-color: rgb(120, 223, 120);
+    border-radius: 20px;
+    width: 100px;
+}

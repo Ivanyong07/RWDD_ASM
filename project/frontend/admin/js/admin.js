@@ -98,7 +98,26 @@ async function getLeaderboard() {
       return data.leaderboard;
     }
     const data = await request(ENDPOINTS.leaderboard);
-    return { list: data.leaderboard, me: data.me };
+    return { list: data.leaderboard};
+}
+
+async function getUsers(){
+
+    if (USE_SAMPLE_DATA){
+        const response = await fetch("sample-data/users.json");
+
+        if(!response.ok){
+            throw new Error(`Could not load users (${response.status})`);
+        }
+
+        const data = await response.json();
+
+        return data.users;
+    }
+
+    const data = await request(ENDPOINTS.users);
+
+    return data.json();
 }
 
 
@@ -139,6 +158,33 @@ async function getRewards() {
 const $ = id => document.getElementById(id);
 
 const limit = 20;
+
+let query = "";
+
+function applySearch(refreshTable){
+    const box = $("search")
+
+    if (!box){
+        return;
+    }
+
+    box.addEventListener("input", () => {
+        query = box.value.trim().toLowerCase();
+        refreshTable();
+    })
+}
+
+function matches(...input){
+    return input.join("").toLowerCase().includes(query);
+}
+
+
+function applyRoles(role){
+    if (role != "admin" || role != "marker"){
+        
+    }
+
+}
 
 // =========================
 // Start Page Animation

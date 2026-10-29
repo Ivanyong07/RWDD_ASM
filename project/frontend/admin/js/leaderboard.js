@@ -7,6 +7,10 @@
 =================================
 */
 
+// ========================
+// rank intro
+// =========================
+
 const track = $("track");
 const items = [...track.querySelectorAll(".item")];
 let index = 2;
@@ -28,11 +32,16 @@ $("prev").onclick = () => {index--; show()};
 $("next").onclick = () => {index++; show()};
 items.forEach((item, i) => item.onclick = () => {index = i; show();});
 
+// =============================
+// leaderboard Table
+// ===========================
+
 let leaderboard = [];
 
 function renderLeaderboard(){
 
     return $("leaderboardBody").innerHTML = Object.entries(leaderboard)
+    .filter(([id, person]) => matches(person.name, person.rank))
     .sort((a, b) => b[1].points - a[1].points) // if b - a is (+) remain b else remain a
     .map(([id, person]) => `
             <tr>
@@ -43,9 +52,13 @@ function renderLeaderboard(){
             </tr>`).join("");
 }
 
+
+
 function refreshLeaderboard(){
     renderLeaderboard();
 }
+
+applySearch(refreshLeaderboard);
 
 async function initializeLeaderboardPage(){
     leaderboard = await getLeaderboard();

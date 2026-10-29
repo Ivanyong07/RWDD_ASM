@@ -105,6 +105,217 @@
       <h1>Users Managment</h1>
       <p>This page is use create, update, delete, and view all the users</p>
       <hr />
+      <div class="user-header">
+        <label class="search">
+          <img src="images/search.png" alt="Search" />
+          <input
+            type="search"
+            id="search"
+            placeholder="Search the user"
+            aria-label="Search the user"
+          />
+        </label>
+        <button class="btn-create">Create</button>
+      </div>
+
+      <dialog id="createDialog">
+        <div class="dialog-head">
+          <h2>User <span id="dId"></span></h2>
+          <button class="btn-close" id="dialogUpdateClose" aria-label="Close">
+            ✕
+          </button>
+        </div>
+
+        <div class="dialog-body">
+          <dl class="dialog-info">
+            <dt>User ID</dt>
+            <input type="text" readonly id="createUserId" />
+
+            <dt>Username</dt>
+            <input
+              type="text"
+              id="createUsername"
+              required
+              placeholder="Ivan"
+            />
+
+            <dt>Password</dt>
+            <input
+              type="password"
+              id="createPassword"
+              required
+              placeholder="********"
+            />
+
+            <dt>Email</dt>
+            <input
+              type="email"
+              id="createEmail"
+              required
+              placeholder="ivanyong@gmail.com"
+            />
+
+            <dt>Age</dt>
+            <input type="number" id="createAge" required placeholder="18" />
+
+            <dt>TP Number</dt>
+            <input
+              type="text"
+              id="createTpNumber"
+              required
+              placeholder="TP090955"
+            />
+
+            <dt>Course</dt>
+            <input
+              type="text"
+              id="createCourse"
+              required
+              placeholder="Diploma in Business"
+            />
+
+            <dt>Role</dt>
+            <input type="text" id="createRole" required placeholder="User" />
+
+            <dt>Total XP</dt>
+            <input
+              type="number"
+              id="createTotalXp"
+              value="0"
+              placeholder="default: 0"
+            />
+
+            <dt>Rank</dt>
+            <input
+              type="text"
+              id="createRank"
+              value="null"
+              placeholder="default: none"
+            />
+
+            <dt>Points Balance</dt>
+            <input
+              type="number"
+              id="createPointsBalance"
+              placeholder="default: 0"
+            />
+
+            <dt>Created At</dt>
+            <input type="text" readonly id="createCreatedAt" />
+          </dl>
+        </div>
+      </dialog>
+
+      <div class="table">
+        <section class="table-body">
+          <table>
+            <thead>
+              <tr>
+                <th>User ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>TP Number</th>
+                <th>Role</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+
+            <tbody id="usersBody"></tbody>
+          </table>
+        </section>
+
+        <dialog id="viewDialog">
+          <div class="dialog-head">
+            <h2>User <span id="dId"></span></h2>
+            <button class="btn-close" id="dialogViewClose" aria-label="Close">
+              ✕
+            </button>
+          </div>
+          <img src="" alt="" />
+          <div class="dialog-body">
+            <dl class="dialog-info">
+              <dt>User ID</dt>
+              <dd id="dUserID"></dd>
+              <dt>User ID</dt>
+              <dd id="dUsername"></dd>
+              <dt>Username</dt>
+              <dd id="dPassword"></dd>
+              <dt>Email</dt>
+              <dd id="dEmail"></dd>
+              <dt>Age</dt>
+              <dd id="dAge"></dd>
+              <dt>TP Number</dt>
+              <dd id="dTpNumber"></dd>
+
+              <dt>Course</dt>
+              <dd id="dCourse"></dd>
+
+              <dt>Role</dt>
+              <dd id="dRole"></dd>
+
+              <dt>Total XP</dt>
+              <dd id="dTotalXp"></dd>
+
+              <dt>Rank</dt>
+              <dd id="dRank"></dd>
+
+              <dt>Points Balance</dt>
+              <dd id="dPointsBalance"></dd>
+
+              <dt>Created At</dt>
+              <dd id="dCreatedAt"></dd>
+            </dl>
+          </div>
+          <button class="btn-done">Done</button>
+        </dialog>
+
+        <dialog id="updateDialog">
+          <div class="dialog-head">
+            <h2>User <span id="dId"></span></h2>
+            <button class="btn-close" id="dialogUpdateClose" aria-label="Close">
+              ✕
+            </button>
+          </div>
+
+          <div class="dialog-body">
+            <dl class="dialog-info">
+              <dt>User ID</dt>
+              <input type="text" readonly id="updateUserId" />
+
+              <dt>Password</dt>
+              <input type="text" readonly id="updatePassword" />
+
+              <dt>Email</dt>
+              <input type="email" id="updateEmail" />
+
+              <dt>Age</dt>
+
+              <input type="number" id="updateAge" />
+
+              <dt>TP Number</dt>
+              <input type="text" id="updateTpNumber" />
+
+              <dt>Course</dt>
+              <input type="text" id="updateCourse" />
+
+              <dt>Role</dt>
+              <input type="text" id="updateRole" />
+
+              <dt>Total XP</dt>
+              <input type="number" id="updateTotalXp" />
+
+              <dt>Rank</dt>
+              <input type="text" id="updateRank" />
+
+              <dt>Points Balance</dt>
+              <input type="number" id="updatePointsBalance" />
+
+              <dt>Created At</dt>
+              <input type="text" readonly id="updateCreatedAt" />
+            </dl>
+          </div>
+        </dialog>
+      </div>
     </main>
     <script src="js/admin.js"></script>
     <script src="js/users.js"></script>

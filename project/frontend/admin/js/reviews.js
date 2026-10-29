@@ -134,8 +134,8 @@ function renderReivewLineChart() {
 // Table Submmision
 // ================================
 
-const dialog = document.getElementById("submissionDialog");
-const tbody  = document.getElementById("submissionBody");
+const dialog = $("submissionDialog");
+const tbody  = $("submissionBody");
 let current = null;                       // the submission being viewed
 
 // 1. draw the table rows
@@ -155,48 +155,43 @@ function openDialog(id) {
   current = submission.find(s => s.id === Number(id));
   if (!current) return;
 
-  document.getElementById("dId").textContent = "#" + current.id;
-  document.getElementById("dChallenge").textContent = current.challenge;
-  document.getElementById("dUser").textContent = current.user;
-  document.getElementById("dPoints").textContent = current.points;
-  document.getElementById("dDate").textContent = current.date;
-  document.getElementById("dStatus").textContent = current.status;
-  document.getElementById("dNote").value = "";
+  $("dId").textContent = "#" + current.id;
+  $("dChallenge").textContent = current.challenge;
+  $("dUser").textContent = current.user;
+  $("dPoints").textContent = current.points;
+  $("dDate").textContent = current.date;
+  $("dStatus").textContent = current.status;
+  $("dNote").value = "";
 
-  const img = document.getElementById("dPhoto");
+  const img = $("dPhoto");
   img.src = current.photo;
   img.hidden = !current.photo;            // hide if there is no photo
 
   // only pending submissions can be approved or rejected
   const canReview = current.status === "pending";
-  document.getElementById("dApprove").hidden = !canReview;
-  document.getElementById("dReject").hidden = !canReview;
+  $("dApprove").hidden = !canReview;
+  $("dReject").hidden = !canReview;
 
   dialog.showModal();                     // this opens it
 }
 
-// 3. events
 tbody.addEventListener("click", event => {
   const button = event.target.closest("[data-view]");
   if (button) openDialog(button.dataset.view);
 });
 
-document.getElementById("dialogClose").onclick = () => dialog.close();
+$("dialogClose").onclick = () => dialog.close();
 
-// click on the dark backdrop to close
-dialog.addEventListener("click", event => {
-  if (event.target === dialog) dialog.close();
-});
 
-document.getElementById("dApprove").onclick = () => {
+$("dApprove").onclick = () => {
   current.status = "approved";            // later: call the backend instead
   dialog.close();
   renderTable();
 };
 
-document.getElementById("dReject").onclick = () => {
+$("dReject").onclick = () => {
   current.status = "rejected";
-  current.note = document.getElementById("dNote").value;
+  current.note = $("dNote").value;
   dialog.close();
   renderTable();
 };
