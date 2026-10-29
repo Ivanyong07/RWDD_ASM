@@ -7,7 +7,7 @@
 =================================
 */
 
-let users = [];
+let users = null;
 let current = null;
 const updateDialog = $("updateDialog");
 const viewDialog = $("viewDialog");
@@ -16,31 +16,37 @@ const tbody = $("usersBody");
 
 function openViewDialog(id){
 
-    current = users.find(s => id === Number(id));
+    console.log("View Dialog Open");
+    current = Object.entries(users).find(([userId, user]) => {
+        return Number(userId) === Number(id)
+    })?.[1];
 
     if(!current){
         return;
     }
 
-    $("dUserId").textContent = id;
-    $("dUsername").textContent = current.username;
-    $("dPassword").textContent = current.password;
-    $("dEmail").textContent = current.email;
-    $("dAge").textContent = current.age;
-    $("dTpNumber").textContent = current.tp_number;
-    $("dCourse").textContent = current.course;
-    $("dRole").textContent = current.role;
-    $("dTotalXp").textContent = current.total_xp;
-    $("dRank").textContent = current.rank;
-    $("dPointsBalance").textContent = current.points_balance;
-    $("dCreatedAt").textContent = current.created_at;
+    console.log(current ? current: "Not Found Users Data");
+
+    $("viewUserId").textContent = id;
+    $("viewUsername").textContent = current.username;
+    $("viewPassword").textContent = current.password;
+    $("viewEmail").textContent = current.email;
+    $("viewAge").textContent = current.age;
+    $("viewTpNumber").textContent = current.tp_number;
+    $("viewCourse").textContent = current.course;
+    $("viewRole").textContent = current.role;
+    $("viewTotalXp").textContent = current.total_xp;
+    $("viewRank").textContent = current.rank;
+    $("viewPointsBalance").textContent = current.points_balance;
+    $("viewCreatedAt").textContent = current.created_at;
 
 
-    dialog.showModal();
+    viewDialog.showModal();
 
 }
 
-$("dialogViewClose").onclick = () => dialog.closest();
+$("dialogViewClose").onclick = () => viewDialog.close();
+$("btn-done").onclick = () => viewDialog.close();
 
 function openUpdateDialog(id){
 
@@ -53,14 +59,14 @@ function openCreateDialog(){
 }
 
 tbody.addEventListener("click", event => {
-    const viewBtn = event.target.closest("[data-view");
+    const viewBtn = event.target.closest("[data-view]");
 
     if (viewBtn) openViewDialog(viewBtn.dataset.view);
 })
 
 function renderUsersTable(){
     return $("usersBody").innerHTML = Object.entries(users)
-    .filter(([id, person]) => matches(person.name, person.tp_number))
+    .filter(([id, person]) => matches(person.username, person.tp_number))
     .map(([id, person]) => `
         <tr>
             <td>${id}</td>
@@ -70,8 +76,8 @@ function renderUsersTable(){
             <td>${person.role}</td>
             <td class="action">
                 <button class="btn-view" data-view="${id}"><img src="images/view.png" alt="View"/></button>
-                <button class="btn-update" data-view="${id}""><img src="images/update.png" alt="Update"/></button>
-                <button class="btn-delete" data-view="${id}""><img src="images/delete.png" alt="Delete"/></button>
+                <button class="btn-update" data-update="${id}""><img src="images/update.png" alt="Update"/></button>
+                <button class="btn-delete" data-delete="${id}""><img src="images/delete.png" alt="Delete"/></button>
             </td>
         </tr>`).join("");
 }
@@ -84,6 +90,7 @@ applySearch(refreshUsersTable);
 
 async function initializeUsersPage(){
     users = await getUsers();
+    console.log(users ? users : "User not found");
     refreshUsersTable();
 }
 
