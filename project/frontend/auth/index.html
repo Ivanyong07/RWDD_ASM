@@ -3,96 +3,142 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Fun Collectors | Login & Register</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
-  <link rel="stylesheet" href="style.css" />
   <body>
+    <!-- ========== Intro animation overlay ========== -->
     <div id="swap">
       <div class="band"></div>
       <div class="band"></div>
-      <div class="band"><h1>Fun Collectors</h1></div>
+      <div class="band"><h1>funcollector</h1></div>
       <div class="band"></div>
     </div>
 
+    <!-- ========== Auth page ========== -->
     <div class="auth-page">
-      <div class="wall">
-        <div id="header">
-          <h1>Welcome to APU Fun Collectors</h1>
-        </div>
-        <p id="description">Join challenge and win the price</p>
-      </div>
-
-      <div id="auth-section">
-        <div id="swap-page"><a href="">Login</a><a href="">Register</a></div>
-        <div id="login">
-          <form action="../../backend/api/Login.php" method="POST">
-            <label>Email:</label>
-            <input
-              type="text"
-              name="email"
-              required
-              placeholder="ivan@gmail.com"
-            />
-
-            <label>Password</label>
-            <input
-              type="password"
-              name="password"
-              required
-              placeholder="********"
-            />
-
-            <input type="submit" name="login" />
-          </form>
+      <div class="auth-card">
+        <!-- Green welcome banner -->
+        <div class="wall">
+          <div class="logo-tile">&#x267B;</div>
+          <div id="header">
+            <h1>Welcome to APU Fun Collectors</h1>
+          </div>
+          <p id="description">Join challenge and win the price</p>
         </div>
 
-        <div id="register">
-          <form action="../../backend/api/Register.php" method="post">
-            <label>Username:</label>
-            <input
-              type="text"
-              name="username"
-              required
-              placeholder="e.g Ivan"
-            />
+        <div id="auth-section">
+          <!-- Message box (filled by showMessage() in index.js) -->
+          <div id="auth-message" class="auth-message" role="alert" hidden></div>
 
-            <label>Email:</label>
-            <input
-              type="email"
-              name="email"
-              required
-              placeholder="e.g ivan@gmail.com"
-            />
+          <!-- ========== Login form ========== -->
+          <div id="login">
+            <form action="../../backend/api/Login.php" method="POST">
+              <div class="field">
+                <label for="login-email">Email:</label>
+                <input
+                  id="login-email"
+                  type="email"
+                  name="email"
+                  required
+                  placeholder="ivan@gmail.com"
+                />
+              </div>
 
-            <label>Password:</label>
-            <input
-              type="text"
-              name="password"
-              required
-              placeholder="e.g 12345678"
-            />
+              <div class="field">
+                <label for="login-password">Password</label>
+                <input
+                  id="login-password"
+                  type="password"
+                  name="password"
+                  required
+                  placeholder="********"
+                />
+              </div>
 
-            <label>Age:</label>
-            <input type="number" name="age" required placeholder="e.g 19" />
+              <input type="submit" name="login" value="Login" />
+            </form>
+          </div>
 
-            <label>TP Number:</label>
-            <input
-              type="text"
-              name="tp_number"
-              required
-              placeholder="e.g TP12345"
-            />
+          <!-- ========== Register form ========== -->
+          <div id="register">
+            <form action="../../backend/api/Register.php" method="post">
+              <div class="field">
+                <label for="reg-username">Username:</label>
+                <input
+                  id="reg-username"
+                  type="text"
+                  name="username"
+                  required
+                  placeholder="e.g Ivan"
+                />
+              </div>
 
-            <label>Course:</label>
-            <input
-              type="text"
-              name="course"
-              required
-              placeholder="e.g Diploma in Information Communication Technology"
-            />
+              <div class="field">
+                <label for="reg-email">Email:</label>
+                <input
+                  id="reg-email"
+                  type="email"
+                  name="email"
+                  required
+                  placeholder="e.g ivan@gmail.com"
+                />
+              </div>
 
-            <input type="submit" name="login" />
-          </form>
+              <div class="field">
+                <label for="reg-password">Password:</label>
+                <input
+                  id="reg-password"
+                  type="password"
+                  name="password"
+                  required
+                  placeholder="e.g 12345678"
+                />
+              </div>
+
+              <div class="row">
+                <div class="field">
+                  <label for="reg-age">Age:</label>
+                  <input
+                    id="reg-age"
+                    type="number"
+                    name="age"
+                    required
+                    placeholder="e.g 19"
+                  />
+                </div>
+                <div class="field">
+                  <label for="reg-tp">TP Number:</label>
+                  <input
+                    id="reg-tp"
+                    type="text"
+                    name="tp_number"
+                    required
+                    placeholder="e.g TP12345"
+                  />
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="reg-course">Course:</label>
+                <input
+                  id="reg-course"
+                  type="text"
+                  name="course"
+                  required
+                  placeholder="e.g Diploma in Information Communication Technology"
+                />
+              </div>
+
+              <input type="submit" name="register" value="Create account" />
+            </form>
+          </div>
+
+          <!-- Tabs: Login / Register -->
+          <div id="swap-page">
+            <a href="#login" data-target="login" class="active">Login</a>
+            <a href="#register" data-target="register">Register</a>
+          </div>
         </div>
       </div>
     </div>
