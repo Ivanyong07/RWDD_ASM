@@ -104,6 +104,179 @@
       <h1>Leaderboard Page</h1>
       <p>This page is use to show the rank and leaderboard</p>
       <hr />
+
+      <div class="header">
+        <label class="search">
+          <img src="images/search.png" alt="Search" />
+          <input
+            type="search"
+            id="search"
+            placeholder="Search the user"
+            aria-label="Search the user"
+          />
+        </label>
+        <button class="btn-create">Create</button>
+      </div>
+
+      <dialog id="createDialogChallenge">
+        <div class="dialog-head">
+          <h2>User <span id="dId"></span></h2>
+          <button class="btn-close" id="dialogCreateClose" aria-label="Close">
+            ✕
+          </button>
+        </div>
+
+        <div class="dialog-body">
+          <dl class="dialog-info">
+            <dt>Challenge ID</dt>
+            <input type="text" readonly id="createChallenge" />
+
+            <dt>Title</dt>
+            <input
+              type="text"
+              id="createChallenge"
+              required
+              placeholder="Collect Tin"
+            />
+
+            <dt>Description</dt>
+            <textarea
+              name=""
+              id="createDescription"
+              placeholder="This Challenge..."
+            ></textarea>
+
+            <dt>Category</dt>
+            <select name="" id="createCategory">
+              <option value="beginner">Beginner</option>
+              <option value="intermediate">Intermediate</option>
+              <option value="advanced">Advanced</option>
+            </select>
+
+            <dt>Points Reward</dt>
+            <input
+              type="number"
+              id="createPointsReward"
+              required
+              placeholder="180"
+            />
+
+            <dt>Deadline</dt>
+            <input
+              type="datetime"
+              id="createTpNumber"
+              required
+              placeholder="TP090955"
+            />
+
+            <dt>Centre ID</dt>
+            <select id="createCentreId">
+              <!-- <option value=""></option> fetch from centre table -->
+            </select>
+
+            <dt>Created By</dt>
+            <input type="text" id="createRole" required placeholder="Admin" />
+          </dl>
+        </div>
+      </dialog>
+
+      <div class="table">
+        <section class="table-body">
+          <table>
+            <thead>
+              <tr>
+                <th>Challenge ID</th>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Deadline</th>
+                <th>Created By</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+          </table>
+        </section>
+      </div>
+
+      <dialog id="viewDialogChallenge">
+        <div class="dialog-head">
+          <h2>Challenge<span id="dId"></span></h2>
+          <button class="btn-close" id="dialogViewClose" aria-label="Close">
+            ✕
+          </button>
+        </div>
+        <img src="" alt="" id="viewChallenge" />
+        <div class="dialog-body">
+          <dl class="dialog-info">
+            <dt>Challenge ID</dt>
+            <dd id="challengeUserId"></dd>
+
+            <dt>Title</dt>
+            <dd id="challengeTitle"></dd>
+
+            <dt>Description</dt>
+            <dd id="challengeDescription"></dd>
+
+            <dt>Category</dt>
+            <dd id="challengeCategory"></dd>
+
+            <dt>Points Reward</dt>
+            <dd id="challengePointsReward"></dd>
+
+            <dt>Xp Reward</dt>
+            <dd id="challengeXpReward"></dd>
+
+            <dt>Deadline</dt>
+            <dd id="challengeDeadline"></dd>
+
+            <dt>Centre ID</dt>
+            <dd id="challengeCentreId"></dd>
+
+            <dt>Created At</dt>
+            <dd id="challengeCreateAt"></dd>
+          </dl>
+        </div>
+        <button class="btn-done" id="btn-done">Done</button>
+      </dialog>
+
+      <dialog id="updateDialogChallenge">
+        <div class="dialog-head">
+          <h2>User <span id="dId"></span></h2>
+          <button class="btn-close" id="dialogUpdateClose" aria-label="Close">
+            ✕
+          </button>
+        </div>
+
+        <div class="dialog-body">
+          <dl class="dialog-info">
+            <dt>Challenge ID</dt>
+            <input type="text" readonly id="updateChallengeId" />
+
+            <dt>Title</dt>
+            <input type="text" readonly id="updateTitle" />
+
+            <dt>Desctiption</dt>
+            <textarea name="" id="updateDescription"></textarea>
+
+            <dt>Points Reward</dt>
+            <input type="email" id="updatepointsReward" />
+
+            <dt>Xp Reward</dt>
+            <input type="number" id="updateXpReward" />
+
+            <dt>Deadline</dt>
+            <input type="datetime" id="updateDeadline" />
+
+            <dt>Centre ID</dt>
+            <select id="updateCenreId">
+              <!-- <option value=""></option> fetch from centre table-->
+            </select>
+
+            <dt>Created By</dt>
+            <input type="text" id="updateCreatedBy" readonly />
+          </dl>
+        </div>
+        <button class="btn-done" id="btnSaveUpdate">Save</button>
+      </dialog>
     </main>
     <script src="js/admin.js"></script>
     <script src="js/challenges.js"></script>

@@ -106,6 +106,54 @@
         This page is used to create, update, delete, and view all the badges
       </p>
       <hr />
+      <div class="header">
+        <label class="search">
+          <img src="images/search.png" alt="Search" />
+          <input
+            type="search"
+            id="search"
+            placeholder="Search the user"
+            aria-label="Search the user"
+          />
+        </label>
+        <button class="btn-create">Create</button>
+      </div>
+
+      <dialog id="createBadgesDialog">
+        <div class="dialog-head">
+          <h2>User <span id="dId"></span></h2>
+          <button
+            class="btn-close"
+            id="dialogCreateBadgesClose"
+            aria-label="Close"
+          >
+            ✕
+          </button>
+        </div>
+
+        <div class="dialog-body">
+          <dl class="dialog-info">
+            <dt>Achievement ID</dt>
+            <input type="text" readonly id="createAchivementId" />
+
+            <dt>Name</dt>
+            <input
+              type="text"
+              id="createName"
+              required
+              placeholder="Beginner Tin"
+            />
+
+            <dt>Badge Image</dt>
+            <img src="" alt="" id="createImage" />
+
+            <dt>Requirement Value</dt>
+            <input type="number" id="createAge" required placeholder="18" />
+          </dl>
+        </div>
+      </dialog>
+
+      <div class="achievement-card"></div>
     </main>
     <script src="js/admin.js"></script>
     <script src="js/badges.js"></script>

@@ -187,6 +187,30 @@ function applyRoles(role){
 }
 
 // =========================
+// CRUD
+// =========================
+
+async function createItem(ENDPOINTS, data, action){
+    return (await request(ENDPOINTS + action, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({id: Number(id)})
+    }));
+}
+
+async function updateItem(id, ENDPOINTS, data){
+    return await request(ENDPOINTS + "?id=" + id, {
+        method: "PUT",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(data)
+    });
+}
+
+async function deleteItem(ENDPOINTS, id){
+    return request(ENDPOINTS + "?id=" + id, {method: "DELETE"});
+}
+
+// =========================
 // Start Page Animation
 // =========================
 const band = document.querySelectorAll('.band');

@@ -107,6 +107,60 @@
         This page is use to create, update, delete, and view all the rewards
       </p>
       <hr />
+      <div class="header">
+        <label class="search">
+          <img src="images/search.png" alt="Search" />
+          <input
+            type="search"
+            id="search"
+            placeholder="Search the user"
+            aria-label="Search the user"
+          />
+        </label>
+        <button class="btn-create">Create</button>
+      </div>
+
+      <dialog id="createRewardDialog">
+        <div class="dialog-head">
+          <h2>Reward <span id="dId"></span></h2>
+          <button
+            class="btn-close"
+            id="dialogCreateRewardClose"
+            aria-label="Close"
+          >
+            ✕
+          </button>
+        </div>
+
+        <div class="dialog-body">
+          <dl class="dialog-info">
+            <dt>Reward ID</dt>
+            <input type="text" readonly id="createRewardId" />
+
+            <dt>Name</dt>
+            <input type="text" id="createName" required placeholder="Phone" />
+
+            <dt>Description</dt>
+            <textarea id="createDescription"></textarea>
+
+            <dt>Points Cost</dt>
+            <input
+              type="number"
+              id="createPointsCost"
+              required
+              placeholder="18"
+            />
+
+            <dt>Stock</dt>
+            <input type="number" id="createStock" required placeholder="18" />
+
+            <dt>Image</dt>
+            <img src="" alt="" id="createImage" />
+          </dl>
+        </div>
+      </dialog>
+
+      <div class="achievement-card"></div>
     </main>
     <script src="js/admin.js"></script>
     <script src="js/rewards.js"></script>
