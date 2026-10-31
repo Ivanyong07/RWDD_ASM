@@ -11,13 +11,25 @@ class User
     private string $course;
     private string $role;
     private int $total_xp;
-    private int $level;
+    private string $rank;
     private int $points_balance;
     private ?string $created_at;
 
 
-    public function __construct(string $username, string $password, string $email, int $age, string $tp_number, string $course, int $level, int $points_balance, int $total_xp, string $role = "user", ?int $userId = null, ?string $created_at = null)
-    {
+    public function __construct(
+        string $username,
+        string $password,
+        string $email,
+        int $age,
+        string $tp_number,
+        string $course,
+        string $rank = "seed",
+        int $points_balance = 0,
+        int $total_xp = 0,
+        string $role = "user",
+        ?int $userId = null,
+        ?string $created_at = null
+    ) {
 
         $this->username = $username;
         $this->password = $password;
@@ -26,7 +38,7 @@ class User
         $this->tp_number = $tp_number;
         $this->course = $course;
         $this->role = $role;
-        $this->level = $level;
+        $this->rank = $rank;
         $this->points_balance = $points_balance;
         $this->total_xp = $total_xp;
         $this->userId = $userId;
@@ -117,14 +129,14 @@ class User
         $this->role = $role;
     }
 
-    public function getLevel(): int
+    public function getRank(): string
     {
-        return $this->level;
+        return $this->rank;
     }
 
-    public function setLevel(int $level): void
+    public function setRank(string $rank): void
     {
-        $this->level = $level;
+        $this->rank = $rank;
     }
 
     public function getTotalXp(): int
@@ -147,12 +159,12 @@ class User
         $this->points_balance = $points_balance;
     }
 
-    public function getCreatedAt(): ?int
+    public function getCreatedAt(): ?string
     {
         return $this->created_at;
     }
 
-    public function setCreatedAt(string $created_at)
+    public function setCreatedAt(string $created_at): void
     {
         $this->created_at = $created_at;
     }
