@@ -1,0 +1,187 @@
+<?php
+require_once "../../backend/auth/admin_check.php";
+?>
+
+
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link rel="stylesheet" href="css/admin.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="css/reviews.css" />
+  <title>Admin</title>
+</head>
+
+<body class="splash-on">
+  <div id="swap">
+    <div class="band"></div>
+    <div class="band"></div>
+    <div class="band">
+      <h1>Fun Collectors</h1>
+    </div>
+    <div class="band"></div>
+  </div>
+
+  <header class="topbar">
+    <a href="index.html" class="brand">
+      <span class="logo">
+        <img src="../images/lee.jpeg" alt="Fun Collectors Logo" />
+      </span>
+      Fun Collectors
+    </a>
+
+    <div class="top-right">
+      <button class="icon-btn" id="bellBtn" aria-label="Notifications">
+        <img src="../images/notification.jpeg" alt="Notifications" />
+      </button>
+    </div>
+
+    <div class="user-wrap">
+      <button
+        class="user"
+        id="userBtn"
+        aria-haspopup="true"
+        aria-expanded="false">
+        <img src="../images/lee.jpeg" alt="Profile picture" />
+      </button>
+
+      <div class="menu" id="userMenu" hidden>
+        <div class="menu-info"><b id="menuRank"></b></div>
+        <a href="../auth/index.html">Log Out</a>
+      </div>
+    </div>
+  </header>
+
+  <nav class="sidebar" aria-label="Dashboard">
+    <p>Review</p>
+    <a href="index.html" class="active" aria-current="page">
+      <img src="images/review.png" alt="Reviews Submission" />
+      Reviews Submission
+    </a>
+    <a href="leaderboard.html"><img
+        src="images/leaderboard.png"
+        alt="Reviews Submission" />Leaderboard</a>
+    <a href="history.html"><img src="images/history.png" alt="Reviews Submission" />History</a>
+    <br />
+    <br />
+    <p>Management</p>
+    <a href="users.html"><img src="images/user.png" alt="Reviews Submission" />User
+      Management</a>
+    <a href="challenges.html"><img src="images/challenge.png" alt="Reviews Submission" />Challenges
+      Management</a>
+    <a href="badges.html"><img src="images/badge.png" alt="Reviews Submission" />Badges
+      Management</a>
+
+    <a href="rewards.html"><img src="images/reward.png" alt="Reviews Submission" />Reward
+      Management</a>
+
+    <br />
+    <br />
+    <p>Account</p>
+    <a href="profile.html"><img src="images/profile.png" alt="Reviews Submission" />Profile</a>
+    <a href="../auth/index.html"><img src="images/logout.png" alt="Reviews Submission" />Log Out</a>
+  </nav>
+
+  <!-- ============ PAGE CONTENT: Review Submission ============ -->
+  <main class="main">
+    <h1>Reviews Submission Page</h1>
+    <p>This page is use to review the studnet submission</p>
+    <hr />
+    <div class="stats" id="stats"></div>
+    <div class="chart-row">
+      <div style="height: 260px" class="chart">
+        <canvas id="pie_chart"></canvas>
+      </div>
+
+      <div style="height: 260px" class="chart">
+        <canvas id="line_chart"></canvas>
+      </div>
+    </div>
+
+    <div class="filters" id="filters">
+      <button class="filter" data-f="all" aria-pressed="true">All</button>
+      <button class="filter" data-f="all" aria-pressed="true">Pending</button><button class="filter" data-f="all" aria-pressed="true">
+        Approved
+      </button>
+      <button class="filter" data-f="all" aria-pressed="true">
+        Rejected
+      </button>
+
+      <label class="search">
+        <img src="images/search.png" alt="Search" />
+        <input
+          type="search"
+          id="search"
+          placeholder="Search the user"
+          aria-label="Search the user" />
+      </label>
+    </div>
+
+    <div class="table">
+      <section class="table-body">
+        <table>
+          <thead>
+            <tr>
+              <th>Submission ID</th>
+              <th>Challenge Title</th>
+              <th>Username</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+
+          <tbody id="submissionBody"></tbody>
+        </table>
+      </section>
+      <dialog id="submissionDialog" class="dialog">
+        <div class="dialog-head">
+          <h2>Submission <span id="dId"></span></h2>
+          <button class="btn-close" id="dialogClose" aria-label="Close">
+            ✕
+          </button>
+        </div>
+
+        <div class="dialog-body">
+          <img id="dPhoto" alt="Submitted Photo" class="submission-photo" />
+
+          <dl class="dialog-info">
+            <dt>Challenge</dt>
+            <dd id="dChallenge"></dd>
+            <dt>User</dt>
+            <dd id="dUser"></dd>
+            <dt>Points</dt>
+            <dd id="dPoints"></dd>
+            <dt>Submitted</dt>
+            <dd id="dDate"></dd>
+            <dt>Status</dt>
+            <dd id="dStatus"></dd>
+          </dl>
+
+          <label for="dNote">Note (shown to the user if rejected)</label>
+          <textarea id="dNote" rows="2"></textarea>
+        </div>
+
+        <div class="dialog-footer">
+          <button class="btn-reject" id="dReject">Reject</button>
+          <button class="btn-approve" id="dApprove">Approve</button>
+        </div>
+      </dialog>
+    </div>
+  </main>
+
+  <script src="js/admin.js"></script>
+  <script src="js/reviews.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+</body>
+
+</html>

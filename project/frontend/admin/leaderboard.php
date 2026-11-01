@@ -1,0 +1,165 @@
+<?php
+require_once "../../backend/auth/admin_check.php";
+?>
+
+
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link rel="stylesheet" href="css/admin.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="css/leaderboard.css" />
+  <title>History</title>
+</head>
+
+<body>
+  <div id="swap">
+    <div class="band"></div>
+    <div class="band"></div>
+    <div class="band">
+      <h1>Fun Collectors</h1>
+    </div>
+    <div class="band"></div>
+  </div>
+
+  <header class="topbar">
+    <a href="index.html" class="brand">
+      <span class="logo">
+        <img src="../images/lee.jpeg" alt="Fun Collectors Logo" />
+      </span>
+      Fun Collectors
+    </a>
+
+    <div class="top-right">
+      <button class="icon-btn" id="bellBtn" aria-label="Notifications">
+        <img src="../images/notification.jpeg" alt="Notifications" />
+      </button>
+    </div>
+
+    <div class="user-wrap">
+      <button
+        class="user"
+        id="userBtn"
+        aria-haspopup="true"
+        aria-expanded="false">
+        <img src="../images/lee.jpeg" alt="Profile picture" />
+      </button>
+
+      <div class="menu" id="userMenu" hidden>
+        <div class="menu-info"><b id="menuRank"></b></div>
+        <a href="../auth/index.html">Log Out</a>
+      </div>
+    </div>
+  </header>
+
+  <nav class="sidebar" aria-label="Dashboard">
+    <p>Review</p>
+    <a href="index.html">
+      <img src="images/review.png" alt="Reviews Submission" />
+      Reviews Submission
+    </a>
+    <a href="leaderboard.html" class="active" aria-current="page"><img
+        src="images/leaderboard.png"
+        alt="Reviews Submission" />Leaderboard</a>
+    <a href="history.html"><img src="images/history.png" alt="Reviews Submission" />History</a>
+    <br />
+    <br />
+    <p>Management</p>
+    <a href="users.html"><img src="images/user.png" alt="Reviews Submission" />User
+      Management</a>
+    <a href="challenges.html"><img src="images/challenge.png" alt="Reviews Submission" />Challenges
+      Management</a>
+    <a href="badges.html"><img src="images/badge.png" alt="Reviews Submission" />Badges
+      Management</a>
+
+    <a href="rewards.html"><img src="images/reward.png" alt="Reviews Submission" />Reward
+      Management</a>
+
+    <br />
+    <br />
+    <p>Account</p>
+    <a href="profile.html"><img src="images/profile.png" alt="Reviews Submission" />Profile</a>
+    <a href="../auth/index.html"><img src="images/logout.png" alt="Reviews Submission" />Log Out</a>
+  </nav>
+
+  <!-- ============ PAGE CONTENT: leaderboard Submission ============ -->
+  <main class="main">
+    <h1>Leaderboard Page</h1>
+    <p>This page is use to show the rank and leaderboard</p>
+    <hr />
+    <div class="rank">
+      <div class="rank-body">
+        <button id="prev" aria-label="Previous">&lt;</button>
+
+        <div class="track" id="track">
+          <div class="item">
+            <img src="../images/lee.jpeg" alt="Seed" />
+            <p>Seed</p>
+            <p>0-99</p>
+          </div>
+          <div class="item">
+            <img src="../images/lee.jpeg" alt="Sprout" />
+            <p>Sprout</p>
+            <p>100-499</p>
+          </div>
+          <div class="item">
+            <img src="../images/lee.jpeg" alt="Sapling" />
+            <p>Sapling</p>
+            <p>500-999</p>
+          </div>
+          <div class="item">
+            <img src="../images/lee.jpeg" alt="Tree" />
+            <p>Tree</p>
+            <p>1000-1499</p>
+          </div>
+          <div class="item">
+            <img src="../images/lee.jpeg" alt="Forest" />
+            <p>Forest</p>
+            <p>1500+</p>
+          </div>
+        </div>
+
+        <button id="next" aria-label="Next">&gt;</button>
+      </div>
+    </div>
+    <br />
+    <label class="search">
+      <img src="images/search.png" alt="Search" />
+      <input
+        type="search"
+        id="search"
+        placeholder="Search the user"
+        aria-label="Search the user" />
+    </label>
+    <div class="table">
+      <section class="table-body">
+        <table>
+          <thead>
+            <th>#</th>
+            <th>Name</th>
+            <th>Rank</th>
+            <th>Points</th>
+          </thead>
+
+          <tbody id="leaderboardBody"></tbody>
+        </table>
+      </section>
+    </div>
+  </main>
+
+  <script src="js/admin.js"></script>
+  <script src="js/leaderboard.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+</body>
+
+</html>

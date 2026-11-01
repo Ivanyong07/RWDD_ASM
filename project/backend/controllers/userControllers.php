@@ -17,7 +17,7 @@ class UserControllers
     }
 
     // Create
-    public function createUser(User $user)
+    public function createUser(Users $user)
     {
 
         $username = $user->getUsername();
@@ -26,7 +26,7 @@ class UserControllers
         $age = $user->getAge();
         $tp_number = $user->getTpNumber();
         $course = $user->getCourse();
-        $role = $user->getRole();
+        $role = "user";
 
         $stmt = mysqli_prepare($this->conn, "INSERT INTO users(username, email, password, age, tp_number, course, role) VALUES (?,?,?,?,?,?,?)");
         mysqli_stmt_bind_param($stmt, "sssisss", $username, $email, $password, $age, $tp_number, $course, $role);
@@ -37,7 +37,7 @@ class UserControllers
     // Read all
     public function getAllUser()
     {
-        $result = mysqli_query($this->conn, "SELECT id, username, password, email, age, tp_number, course, created_at FROM users");
+        $result = mysqli_query($this->conn, "SELECT id, username, password, email, age, tp_number, course, role, total_xp, rank, points_balance, created_at FROM users");
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
 
@@ -76,6 +76,31 @@ class UserControllers
         mysqli_stmt_bind_param($stmt, "s", $email);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
+        return mysqli_fetch_assoc($result);
+    }
+
+    public function login(string $email, string $password)
+    {
+        $user = $this->getByEmail($email);
+
+        if (!$user) {
+            return false;
+        }
+
+        if (!password_verify($password, $user["password"])) {
+            return false;
+        }
+
+        return $user;
+    }
+
+    public function checkExistingUser(string $email, string $username, string $password, string $tp_number)
+    {
+        $stmt = mysqli_prepare($this->conn, "SELECT username, password, email, tp_number FROM users WHERE email = ? OR tp_number = ? OR password = ? OR username = ?");
+        mysqli_stmt_bind_param($stmt, "ssss", $email, $username, $password, $tp_number);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+
         return mysqli_fetch_assoc($result);
     }
 }

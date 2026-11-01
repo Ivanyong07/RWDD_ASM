@@ -19,18 +19,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $error = "Please fill in both line";
     } else {
         $controller = new UserControllers($conn);
-        $user = $controller->getByEmail($email);
 
-        if ($user && password_verify($password, $user["password"])) {
+        $user = $controller->login($email, $password);
+
+        if ($user) {
             session_regenerate_id(true);
+
             $_SESSION["user_id"] = $user["id"];
             $_SESSION["role"] = $user["role"];
-            echo "Login Successful";
 
-            if ($user["role"] == "admin") {
-                header("Location: ../../frontend/admin/index.html");
+            if ($user["role"] === "admin") {
+                header("Location: ../../frontend/admin/index.php");
             } else {
-                header("Location: ../../frontend/user/index.html");
+                header("Location: ../../frontend/user/index.php");
             }
             exit;
         } else {

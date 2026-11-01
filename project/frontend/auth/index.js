@@ -65,6 +65,16 @@ function hideMessage() {
   box.textContent = "";
 }
 
+const params = new URLSearchParams(window.location.search);
+const error = params.get("error");
+
+if(error){
+  const errorMessage = document.getElementById("errorMessage");
+
+  errorMessage.textContent = error;
+  errorMessage.style.display = "block";
+}
+
 /* ==============================
    Read messages from the URL (for PHP redirects)
    Example: index.html?form=register&error=Email+already+exists

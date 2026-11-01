@@ -37,19 +37,36 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     } elseif ($course === "") {
         $error = "Please enter a course";
     } else {
-        $user = new User($username, $password, $email, (int)$age, $tp_number, $course);
+
         $controller = new UserControllers($conn);
-        $newId = $controller->createUser($user);
+        $existingUser = $controller->checkExistingUser($email, $username, $password, $tp_number);
 
-        session_regenerate_id(true);
-        $_SESSION["user_id"] = $newId;
-        $_SESSION["role"] = "user";
+        if ($existingUser) {
+            if ($existingUser["email"] === $email) {
+                $error = "This email is already registered";
+            } elseif ($existingUser["username"] === $username) {
+                $error = "This username is aleady registered";
+            } elseif ($existingUser["password"] === $password) {
+                $error = "This password is already registered";
+            } elseif ($existingUser["tp_number"] === $tp_number) {
+                $error = "This Tp Number is already registered";
+            }
+        } else {
+            $user = new Users($username, $password, $email, (int)$age, $tp_number, $course, "seed", 0, 0, "user");
 
-        header("Location: /RSWW/project/frontend/auth/index.html");
-        exit;
+            $newId = $controller->createUser($user);
+
+            session_regenerate_id(true);
+            $_SESSION["user_id"] = $newId;
+            $_SESSION["role"] = "user";
+
+            header("Location: /RSWW/project/frontend/user/index.php");
+            exit;
+        }
     }
 }
 
 if ($error) {
-    echo $error;
+    header("Location: ../../frontend/auth/index.html?error=" . urlencode($error));
+    exit;
 }

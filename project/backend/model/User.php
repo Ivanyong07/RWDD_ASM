@@ -1,6 +1,6 @@
 <?php
 
-class User
+class Users
 {
     private ?int $userId = null;
     private string $username;

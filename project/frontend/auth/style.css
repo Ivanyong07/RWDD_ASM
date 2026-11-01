@@ -269,6 +269,16 @@ input[type="submit"] {
   transition: transform 0.1s, box-shadow 0.1s, background 0.2s;
 }
 
+.error-message {
+  display: none;
+  color: #dc2626;
+  background-color: #fee2e2;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
 input[type="submit"]:hover  { background: #0aa06a; }
 input[type="submit"]:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--green-dark); }
 
