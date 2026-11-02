@@ -1,11 +1,10 @@
-<!-- =================================
-* Filename : ChallengeControllers.php
-* Date : 16/10/2026
-* Author : Ivan Yong
-* Description : For delete, login, get all list of users, and upate challenge
-================================= -->
-
 <?php
+// =================================
+// * Filename : ChallengeControllers.php
+// * Date : 16/10/2026
+// * Author : Ivan Yong
+// * Description : For delete, login, get all list of users, and upate challenge
+// ================================= 
 
 require_once __DIR__ . "/../model/Challenge.php";
 
@@ -67,5 +66,11 @@ class ChallengeController
         mysqli_stmt_execute($stmt);
 
         return mysqli_stmt_affected_rows($stmt);
+    }
+
+    public function getSpecificUserChallenge(int $id)
+    {
+
+        $stmt = mysqli_prepare($this->conn, "SELECT ");
     }
 }

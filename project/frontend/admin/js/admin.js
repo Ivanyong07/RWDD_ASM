@@ -1,6 +1,6 @@
 /*
 =================================
-* Filename : reviews.js
+* Filename : admin.js
 * Date : 18/10/2026
 * Author : ivan yong
 * Description : This file include all the commone function that we need including config, data fetching, sample data fetching, api
@@ -12,12 +12,12 @@
 // =======================
 // Config
 // =======================
-const API_BASE = "http://127.0.0.1:8000/backend/api";
-const USE_SAMPLE_DATA = true;
+const API_BASE = "../../backend/api";
+const USE_SAMPLE_DATA = false;
 
 const ENDPOINTS = {
     profile: "admin/profile.php",
-    challenges: "admin/challenges.php",
+    challenge: "admin/challenge.php",
     submission: "admin/submission.php",
     history: "admin/history.php",
     badges: "admin/badges.php",
@@ -39,8 +39,19 @@ const PHOTO_TYPES = [
 // ==============================
 
 async function request(file, options = {}) {
+
     const response = await fetch(API_BASE + "/" + file, options);
-    const data = await response.json().catch(() => ({}));
+    const text = await response.text();
+
+    let data;
+
+    try{
+        data = JSON.parse(text);
+    } catch {
+        throw new Error(`Not JSON (HTTP ${response.status}): ${text.slice(0, 200)}`);
+    }
+
+    console.log(data ? data : "Data Wrong");
 
     if (response.status === 401) window.location.href = LOGIN_PAGE;
     if (!response.ok) throw new Error(data.error || "Something went wrong");
@@ -128,25 +139,21 @@ async function getProfile() {
 
 // Rank page: the challenges and what the user already sent for each
 async function getChallenges() {
-    if (USE_SAMPLE_DATA) return sampleChallenges();
-    return (await request(ENDPOINTS.challenges)).challenges;
+    return (await request(ENDPOINTS.challenge)).data;
 }
 
 // History page: points earned and spent, photos waiting or rejected
 async function getHistory() {
-    if (USE_SAMPLE_DATA) return sampleHistory();
     return (await request(ENDPOINTS.history)).history;
 }
 
 // Badges page: every badge, with earned = true or false
 async function getBadges() {
-    if (USE_SAMPLE_DATA) return sampleBadges();
     return (await request(ENDPOINTS.badges)).badges;
 }
 
 // Rewards page
 async function getRewards() {
-    if (USE_SAMPLE_DATA) return sampleRewards();
     return (await request(ENDPOINTS.rewards)).rewards;
 }
 
@@ -204,10 +211,6 @@ async function updateItem(id, ENDPOINTS, data){
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(data)
     });
-}
-
-async function deleteItem(ENDPOINTS, id){
-    return request(ENDPOINTS + "?id=" + id, {method: "DELETE"});
 }
 
 // =========================

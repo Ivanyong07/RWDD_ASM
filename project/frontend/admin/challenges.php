@@ -103,7 +103,7 @@ require_once "../../backend/auth/admin_check.php";
           placeholder="Search the user"
           aria-label="Search the user" />
       </label>
-      <button class="btn-create">Create</button>
+      <button class="btn-create" id="btnCreateChallenge">Create</button>
     </div>
 
     <dialog id="createDialogChallenge">
@@ -116,50 +116,60 @@ require_once "../../backend/auth/admin_check.php";
 
       <div class="dialog-body">
         <dl class="dialog-info">
-          <dt>Challenge ID</dt>
-          <input type="text" readonly id="createChallenge" />
 
-          <dt>Title</dt>
-          <input
-            type="text"
-            id="createChallenge"
-            required
-            placeholder="Collect Tin" />
+          <form action="../../backend/api/admin/challenge.php" method="POST">
 
-          <dt>Description</dt>
-          <textarea
-            name=""
-            id="createDescription"
-            placeholder="This Challenge..."></textarea>
+            <dt>Title</dt>
+            <input
+              type="text"
+              id="createTitle"
+              name="title"
+              required
+              placeholder="Collect Tin" />
 
-          <dt>Category</dt>
-          <select name="" id="createCategory">
-            <option value="beginner">Beginner</option>
-            <option value="intermediate">Intermediate</option>
-            <option value="advanced">Advanced</option>
-          </select>
+            <dt>Description</dt>
+            <textarea
+              name="description"
+              id="createDescription"
+              placeholder="This Challenge..."></textarea>
 
-          <dt>Points Reward</dt>
-          <input
-            type="number"
-            id="createPointsReward"
-            required
-            placeholder="180" />
+            <dt>Category</dt>
+            <select name="category" id="createCategory">
+              <option value="beginner">Beginner</option>
+              <option value="intermediate">Intermediate</option>
+              <option value="advanced">Advanced</option>
+            </select>
 
-          <dt>Deadline</dt>
-          <input
-            type="datetime"
-            id="createTpNumber"
-            required
-            placeholder="TP090955" />
+            <dt>Points Reward</dt>
+            <input
+              type="number"
+              id="createPointsReward"
+              name="points_reward"
+              required
+              placeholder="180" />
 
-          <dt>Centre ID</dt>
-          <select id="createCentreId">
-            <!-- <option value=""></option> fetch from centre table -->
-          </select>
+            <dt>Xp Reward</dt>
+            <input
+              type="number"
+              id="createXpReward"
+              name="xp_reward"
+              required
+              placeholder="180" />
 
-          <dt>Created By</dt>
-          <input type="text" id="createRole" required placeholder="Admin" />
+            <dt>Deadline</dt>
+            <input
+              type="datetime-local"
+              id="createDeadline"
+              name="deadline"
+              required
+              placeholder="Choose a date and time" />
+
+            <dt>Centre ID</dt>
+            <select id="createCentreId" name="centre_id">
+            </select>
+
+            <button type="submit">Create Challenge</button>
+          </form>
         </dl>
       </div>
     </dialog>
@@ -177,7 +187,9 @@ require_once "../../backend/auth/admin_check.php";
               <th>Action</th>
             </tr>
           </thead>
+          <tbody id="challengeBody"></tbody>
         </table>
+
       </section>
     </div>
 
@@ -192,34 +204,34 @@ require_once "../../backend/auth/admin_check.php";
       <div class="dialog-body">
         <dl class="dialog-info">
           <dt>Challenge ID</dt>
-          <dd id="challengeUserId"></dd>
+          <dd id="challengeId"></dd>
 
           <dt>Title</dt>
-          <dd id="challengeTitle"></dd>
+          <dd id="title"></dd>
 
           <dt>Description</dt>
-          <dd id="challengeDescription"></dd>
+          <dd id="description"></dd>
 
           <dt>Category</dt>
-          <dd id="challengeCategory"></dd>
+          <dd id="category"></dd>
 
           <dt>Points Reward</dt>
-          <dd id="challengePointsReward"></dd>
+          <dd id="pointsReward"></dd>
 
           <dt>Xp Reward</dt>
-          <dd id="challengeXpReward"></dd>
+          <dd id="xpReward"></dd>
 
           <dt>Deadline</dt>
-          <dd id="challengeDeadline"></dd>
+          <dd id="deadline"></dd>
 
           <dt>Centre ID</dt>
-          <dd id="challengeCentreId"></dd>
+          <dd id="centreId"></dd>
 
           <dt>Created At</dt>
-          <dd id="challengeCreateAt"></dd>
+          <dd id="createAt"></dd>
         </dl>
       </div>
-      <button class="btn-done" id="btn-done">Done</button>
+      <button class="btn-done" id="dialogViewDone">Done</button>
     </dialog>
 
     <dialog id="updateDialogChallenge">
@@ -232,34 +244,44 @@ require_once "../../backend/auth/admin_check.php";
 
       <div class="dialog-body">
         <dl class="dialog-info">
-          <dt>Challenge ID</dt>
-          <input type="text" readonly id="updateChallengeId" />
+          <form action="../../backend/api/admin/challenge.php" method="POST">
 
-          <dt>Title</dt>
-          <input type="text" readonly id="updateTitle" />
+            <input type="hidden" name="_method" value="PUT">
 
-          <dt>Desctiption</dt>
-          <textarea name="" id="updateDescription"></textarea>
+            <dt>Challenge ID</dt>
+            <input type="text" id="updateChallengeId" name="challenge_id" readonly />
 
-          <dt>Points Reward</dt>
-          <input type="email" id="updatepointsReward" />
+            <dt>Title</dt>
+            <input type="text" id="updateTitle" name="title" required />
 
-          <dt>Xp Reward</dt>
-          <input type="number" id="updateXpReward" />
+            <dt>Description</dt>
+            <textarea id="updateDescription" name="description"></textarea>
 
-          <dt>Deadline</dt>
-          <input type="datetime" id="updateDeadline" />
+            <dt>Category</dt>
+            <select id="updateCategory" name="category">
+              <option value="beginner">Beginner</option>
+              <option value="intermediate">Intermediate</option>
+              <option value="advanced">Advanced</option>
+            </select>
 
-          <dt>Centre ID</dt>
-          <select id="updateCenreId">
-            <!-- <option value=""></option> fetch from centre table-->
-          </select>
+            <dt>Points Reward</dt>
+            <input type="number" id="updatePointsReward" name="points_reward" required />
 
-          <dt>Created By</dt>
-          <input type="text" id="updateCreatedBy" readonly />
+            <dt>XP Reward</dt>
+            <input type="number" id="updateXpReward" name="xp_reward" required />
+
+            <dt>Deadline</dt>
+            <input type="datetime-local" id="updateDeadline" name="deadline" required />
+
+            <dt>Centre ID</dt>
+            <select id="updateCentreId" name="centre_id">
+            </select>
+
+            <button type="submit">Save Changes</button>
+          </form>
         </dl>
+
       </div>
-      <button class="btn-done" id="btnSaveUpdate">Save</button>
     </dialog>
   </main>
   <script src="js/admin.js"></script>
