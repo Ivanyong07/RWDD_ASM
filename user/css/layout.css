@@ -320,6 +320,9 @@
 
 /* ---------- 5. PHONE ONLY (up to 640px) ---------- */
 @media (max-width: 640px) {
+        .sidebar a {
+        font-size: 0.62rem;
+    }
     .topbar {
         padding-left: 14px;
         padding-right: 14px;
