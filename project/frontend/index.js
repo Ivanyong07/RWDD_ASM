@@ -35,12 +35,14 @@ const place_label = document.querySelector('.place-label')
 const place_content_h2 = document.querySelector('.place-content h2');
 const place_description = document.querySelector('.place-description');
 
-const stats = document.querySelectorAll('#stat b');
+const stats = document.querySelectorAll('#stat-section b');
 const stat_description = document.getElementById('stat-description');
 const student_joined_count = document.getElementById('student-joined-count');
 
 const step = document.querySelector('#step');
 const step_label = document.querySelector('#step-label');
+
+const badge = document.getElementById('badge-collection');
 
 let shrinkProgress = 0;
 
@@ -90,6 +92,7 @@ function setupScrollAnimation(){
         const aboutRect = about.getBoundingClientRect();
         const placeRect = place.getBoundingClientRect();
         const statRectDescription = stat_description.getBoundingClientRect();
+        const badgeRect = badge.getBoundingClientRect();
 
         // wrapper.offsetHeight = how tall #hero-wrapper is (250vh is 2250px)
         // window.innerHeight = how tall your screen is (900px), the actuall scroll size
@@ -137,7 +140,7 @@ function setupScrollAnimation(){
         const handP = 1 - shrinkProgress;
 
         home_page.style.clipPath = `circle(${radius}px at ${cx}px ${cy}px)`;
-        header.classList.toggle('show-color', shrinkProgress >= 0.99);
+        header.classList.toggle('black-header', shrinkProgress >= 0.99);
 
         letter_btn.forEach(b => b.classList.toggle('show', shrinkProgress >= 0.99));
 
@@ -187,6 +190,8 @@ function setupScrollAnimation(){
         // ========================
         // Badge
         // =======================
+        header.classList.toggle('white-header', badgeRect.top <= header.offsetHeight);
+
 
 
         // ========================
