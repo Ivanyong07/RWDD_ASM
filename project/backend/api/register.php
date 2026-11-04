@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $error = "This Tp Number is already registered";
             }
         } else {
-            $user = new Users($username, $password, $email, (int)$age, $tp_number, $course, "seed", 0, 0, "user");
+            $user = new User($username, $password, $email, (int)$age, $tp_number, $course, "seed", 0, 0, "user");
 
             $newId = $controller->createUser($user);
 

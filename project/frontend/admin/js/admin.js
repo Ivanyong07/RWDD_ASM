@@ -16,6 +16,7 @@ const API_BASE = "../../backend/api";
 const USE_SAMPLE_DATA = false;
 
 const ENDPOINTS = {
+    users: "admin/users.php",
     profile: "admin/profile.php",
     challenge: "admin/challenge.php",
     submission: "admin/submission.php",
@@ -128,7 +129,7 @@ async function getUsers(){
 
     const data = await request(ENDPOINTS.users);
 
-    return data.json();
+    return data.data;
 }
 
 
@@ -185,13 +186,13 @@ function matches(...input){
     return input.join("").toLowerCase().includes(query);
 }
 
-
 function applyRoles(role){
     if (role != "admin" || role != "marker"){
         
     }
-
 }
+
+const esc = text => String(text ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
 // =========================
 // CRUD

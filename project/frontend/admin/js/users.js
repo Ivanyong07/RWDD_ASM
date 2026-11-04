@@ -7,116 +7,43 @@
 =================================
 */
 
-let users = null;
-let current = null;
+let users = [];
+
 const updateDialog = $("updateDialog");
 const viewDialog = $("viewDialog");
 const createDialog = $("createDialog");
 const tbody = $("usersBody");
-const username = $("updateUsername");
-const password = $("updatePassword");
-const email = $("updateEmail");
-const age = $("updateAge");
-const tp_number = $("updateTpNumber");
-const course = $("updateCourse");
-const role = $("updateRole");
-const total_xp = $("updateTotalXp");
-const rank = $("updateRank");
-const points_balance = $("updatePointsBalance");
-const created_at = $("updateCreatedAt");
 
-function openViewDialog(id){
+const findUser = id => users.find(user => Number(user.id) === Number(id));
 
-    console.log("View Dialog Open");
-    current = Object.entries(users).find(([userId, user]) => {
-        return Number(userId) === Number(id)
-    })?.[1];
+const params = new URLSearchParams(window.location.search);
+const success = params.get("success");
+const error = params.get("error");
 
-    if(!current){
-        return;
+if(success){
+    const success_message = {
+        created: "User created successfully!",
+        updated: "User updated successfully!",
+        deleted: "User deleted successfully!"
+    };
+
+    if (success_message[success]){
+        alert(success_message[success]);
     }
-
-    console.log(current ? current: "Not Found Users Data");
-
-    $("viewUserId").textContent = id;
-    $("viewUsername").textContent = current.username;
-    $("viewPassword").textContent = current.password;
-    $("viewEmail").textContent = current.email;
-    $("viewAge").textContent = current.age;
-    $("viewTpNumber").textContent = current.tp_number;
-    $("viewCourse").textContent = current.course;
-    $("viewRole").textContent = current.role;
-    $("viewTotalXp").textContent = current.total_xp;
-    $("viewRank").textContent = current.rank;
-    $("viewPointsBalance").textContent = current.points_balance;
-    $("viewCreatedAt").textContent = current.created_at;
-
-
-    viewDialog.showModal();
-
 }
 
-function openUpdateDialog(id){
+if (error){
 
+    const error_message ={
+        create_failed: "User created failed",
+        update_failed: "User updated failed",
+        delete_failed: "User deleted failed"
+    };
 
-    console.log("Update Dialog Open");
-
-    current = Object.entries(users).find(([userId, user]) => {
-        return Number(userId) === Number(id)
-    })?.[1];
-
-    username.value = current.username;
-    password.value = current.password;
-    email.value = current.email;
-    age.value = current.age;
-    tp_number.value = current.tp_number;
-    course.value = current.course;
-    role.value = current.role;
-    total_xp.value = current.total_xp;
-    rank.value = current.rank;
-    points_balance.value = current.points_balance;
-    created_at.value = current.created_at;
-
-    updateDialog.showModal();
+    if(error_message[error]){
+        alert(error_message[error]);
+    }
 }
-
-function openCreateDialog(){
-
-    console.log("Create Dialog Open");
-
-    createDialog.showModal();
-}
-
-// $("btnSaveUpdate").onclick = () => {
-//     const user = users[currentId];
-
-//     user.email = email.value;
-//     user.age = Number(age.value);
-//     user.tp_number = tp_number.value;
-//     user.course = course.value;
-//     user.role = role.value;
-//     user.total_xp = Number(total_xp.value);
-//     user.rank = rank.value;
-//     user.points_balance = Number(points_balance.value);
-
-//     updateDialog.close();
-//     refreshUsersTable();
-// };
-
-
-$("dialogUpdateClose").onclick = () => updateDialog.close();
-$("dialogViewClose").onclick = () => viewDialog.close();
-$("btn-done").onclick = () => viewDialog.close();
-
-tbody.addEventListener("click", event => {
-    const viewBtn = event.target.closest("[data-view]");
-    const updateBtn = event.target.closest("[data-update]");
-    const createBtn = event.target.closest("[data-create]");
-
-    if (viewBtn) openViewDialog(viewBtn.dataset.view);
-    if (updateBtn) openUpdateDialog(updateBtn.dataset.update);
-    if (createBtn) openCreateDialog(createBtn.datase.create);
-});
 
 
 // ==========================
@@ -124,33 +51,138 @@ tbody.addEventListener("click", event => {
 // ===========================
 
 function renderUsersTable(){
-    return $("usersBody").innerHTML = Object.entries(users)
-    .filter(([id, person]) => matches(person.username, person.tp_number))
-    .map(([id, person]) => `
+    const rows = users
+        .filter(person => matches(person.username, person.email, person.tp_number))
+        .map(person =>`
         <tr>
-            <td>${id}</td>
-            <td>${person.username}</td>
-            <td>${person.email}</td>
-            <td>${person.tp_number}</td>
-            <td>${person.role}</td>
+            <td>${esc(person.id)}</td>
+            <td>${esc(person.username)}</td>
+            <td>${esc(person.email)}</td>
+            <td>${esc(person.tp_number)}</td>
+            <td>${esc(person.role)}</td>
             <td class="action">
-                <button class="btn-view" data-view="${id}"><img src="images/view.png" alt="View"/></button>
-                <button class="btn-update" data-update="${id}""><img src="images/update.png" alt="Update"/></button>
-                <button class="btn-delete" data-delete="${id}""><img src="images/delete.png" alt="Delete"/></button>
+                <button class="btn-view" data-view="${person.id}"><img src="images/view.png" alt="View"/></button>
+                <button class="btn-update" data-update="${person.id}""><img src="images/update.png" alt="Update"/></button>
+                <button class="btn-delete" data-delete="${person.id}""><img src="images/delete.png" alt="Delete"/></button>
             </td>
-        </tr>`).join("");
+        </tr>`);
+
+    tbody.innerHTML = rows.length ? rows.join("") : '<tr><td colSpan="6">No users found</td></tr>';
 }
 
 function refreshUsersTable(){
     renderUsersTable();
 }
 
+// ===========================
+// read
+// =================================
+function openViewDialog(id){
+
+    console.log("View Dialog Open");
+    const user = findUser(id);
+
+    if(!user){
+        return;
+    }
+
+    $("viewUserId").textContent = user.id;
+    $("viewUsername").textContent = user.username;
+    $("viewPassword").textContent = user.password;
+    $("viewEmail").textContent = user.email;
+    $("viewAge").textContent = user.age;
+    $("viewTpNumber").textContent = user.tp_number;
+    $("viewCourse").textContent = user.course;
+    $("viewRole").textContent = user.role;
+    $("viewTotalXp").textContent = user.total_xp;
+    $("viewRank").textContent = user.rank;
+    $("viewPointsBalance").textContent = user.points_balance;
+    $("viewCreatedAt").textContent = user.created_at;
+
+    viewDialog.showModal();
+
+}
+
+// ==========================
+// Update user
+// ==========================
+
+function openUpdateDialog(id){
+
+
+    console.log("Update Dialog Open");
+    const user = findUser(id);
+
+    if(!user){
+        return;
+    }
+
+    $("updateUserId").value = user.id;
+    $("updateUsername").value = user.username;
+    $("updateEmail").value = user.email;
+    $("updateAge").value = user.age;
+    $("updateTpNumber").value = user.tp_number;
+    $("updateCourse").value = user.course;
+    $("updateRole").value = user.role;
+    $("updateTotalXp").value = user.total_xp;
+    $("updateRank").value = user.rank;
+    $("updatePointsBalance").value = user.points_balance;
+    $("updateCreatedAt").value = user.created_at;
+ 
+    updateDialog.showModal();
+}
+
+// ====================
+// Delete user
+// ===================
+
+function deleteUser(id){
+    const user = findUser(id);
+
+    if (!user) return;
+
+    if (!confirm(`Delete user "${user.username}"?`)) return;
+
+    $("deleteUserId").value = user.id;
+    $("deleteForm").submit();
+}
+
+// ================================
+// // all button function
+// =================================
+
+tbody.addEventListener("click", event => {
+    const viewBtn = event.target.closest("[data-view]");
+    const updateBtn = event.target.closest("[data-update]");
+    const deleteBtn = event.target.closest("[data-delete]");
+
+    if (viewBtn) openViewDialog(viewBtn.dataset.view);
+    if (updateBtn) openUpdateDialog(updateBtn.dataset.update);
+    if (deleteBtn) deleteUser(deleteBtn.dataset.delete);
+});
+
+$("btnCreate").onclick = () => createDialog.showModal();
+$("dialogCreateClose").onclick = () => createDialog.close();
+$("dialogViewClose").onclick = () => viewDialog.close();
+$("btn-done").onclick = () => viewDialog.close();
+$("dialogUpdateClose").onclick = () => updateDialog.close();
+
+
+// ===================
+// start
+// ==================
+
 applySearch(refreshUsersTable);
 
 async function initializeUsersPage(){
-    users = await getUsers();
-    console.log(users ? users : "User not found");
-    refreshUsersTable();
+
+    try {
+        users = await getUsers();
+        refreshUsersTable();
+    } catch (error) {
+        console.error(error);
+        tbody.innerHTML = `<tr><td colspan="6">Could not load users: ${esc(error.message)}</td></tr>`;
+    }   
 }
 
 initializeUsersPage();

@@ -53,7 +53,6 @@ switch ($method) {
 
     case "PUT":
 
-        $challenge_id = $_POST["challenge_id"];
         $title = $_POST["title"];
         $description = $_POST["description"];
         $category = $_POST["category"];
@@ -62,8 +61,8 @@ switch ($method) {
         $deadline = $_POST["deadline"];
         $centre_id = $_POST["centre_id"];
 
-        $challenge = new Challenge($title, $description, $category, $points_reward, $xp_reward, $deadline, $centre_id, $created_by);
-        $controllers->createChallenge($challenge);
+        $challenge = new Challenge($title, $description, $category, $points_reward, $xp_reward, $deadline, $created_by);
+        $controllers->updateChallenge($id, $challenge);
 
         break;
 
@@ -73,7 +72,7 @@ switch ($method) {
             http_response_code(400);
 
             echo json_encode([
-                "sucess" => false,
+                "success" => false,
                 "error" => "Invalid challenge ID"
             ]);
         }

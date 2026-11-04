@@ -1,11 +1,10 @@
-<!-- =================================
-* Filename : UserControllers.php
-* Date : 16/10/2026
-* Author : Ivan Yong
-* Description : For delete, login, get all list of users, and upate user
-================================= -->
-
 <?php
+// =================================
+// * Filename : UserControllers.php
+// * Date : 16/10/2026
+// * Author : Ivan Yong
+// * Description : For delete, login, get all list of users, and upate user
+// =================================
 require_once __DIR__  . "/../model/User.php";
 class UserControllers
 {
@@ -17,9 +16,8 @@ class UserControllers
     }
 
     // Create
-    public function createUser(Users $user)
+    public function createUser(User $user)
     {
-
         $username = $user->getUsername();
         $password = password_hash($user->getPassword(), PASSWORD_DEFAULT);
         $email = $user->getEmail();
@@ -31,7 +29,7 @@ class UserControllers
         $stmt = mysqli_prepare($this->conn, "INSERT INTO users(username, email, password, age, tp_number, course, role) VALUES (?,?,?,?,?,?,?)");
         mysqli_stmt_bind_param($stmt, "sssisss", $username, $email, $password, $age, $tp_number, $course, $role);
         mysqli_stmt_execute($stmt);
-        return mysqli_insert_id($this->conn);
+        return mysqli_insert_id($this->conn); // return id (e.g. 5)
     }
 
     // Read all
@@ -52,12 +50,45 @@ class UserControllers
     }
 
     // Update
-    public function updateUser($id, $username, $email, $age, $tp_number, $course)
+    public function updateUser(int $id, User $user)
     {
-        $stmt = mysqli_prepare($this->conn, "UPDATE users SET username = ?, email = ?, age = ?, tp_number = ?, course = ? WHERE id = ?");
-        mysqli_stmt_bind_param($stmt, "ssissi", $username, $email, $age, $tp_number, $course, $id);
-        mysqli_stmt_execute($stmt);
+        $username       = $user->getUsername();
+        $email          = $user->getEmail();
+        $age            = $user->getAge();
+        $tp_number      = $user->getTpNumber();
+        $course         = $user->getCourse();
+        $role           = $user->getRole();
+        $total_xp       = $user->getTotalXp();
+        $rank           = $user->getRank();
+        $points_balance = $user->getPointsBalance();
+
+        $stmt = mysqli_prepare(
+            $this->conn,
+            "UPDATE users SET username = ?, email = ?, age = ?, tp_number = ?, course = ?,
+                          role = ?, total_xp = ?, `rank` = ?, points_balance = ?
+         WHERE id = ?"
+        );
+        mysqli_stmt_bind_param(
+            $stmt,
+            "ssisssisii",
+            $username,
+            $email,
+            $age,
+            $tp_number,
+            $course,
+            $role,
+            $total_xp,
+            $rank,
+            $points_balance,
+            $id
+        );
+
+        if (!mysqli_stmt_execute($stmt)) {
+            return false;
+        }
+
         return mysqli_stmt_affected_rows($stmt);
+        // 0 is no value change, 1 is changes, false is sql error
     }
 
     // Detele
@@ -65,7 +96,10 @@ class UserControllers
     {
         $stmt = mysqli_prepare($this->conn, "DELETE FROM users WHERE id = ?");
         mysqli_stmt_bind_param($stmt, "i", $id);
-        mysqli_stmt_execute($stmt);
+
+        if (!mysqli_stmt_execute($stmt)) {
+            return false;
+        }
         return mysqli_stmt_affected_rows($stmt);
     }
 
