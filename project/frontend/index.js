@@ -32,7 +32,7 @@ const about_image = document.querySelector('.about-image');
 
 const place = document.querySelector('#place');
 const place_label = document.querySelector('.place-label')
-const place_content_h2 = document.querySelector('.place-content h2');
+const place_content_h2 = document.querySelectorAll('.place-content h2');
 const place_description = document.querySelector('.place-description');
 
 const stats = document.querySelectorAll('#stat-section b');
@@ -201,11 +201,11 @@ function setupScrollAnimation(){
 
         if (placeRect.top < window.innerHeight * 0.7){
             place_label.classList.add('show');
-            place_content_h2.classList.add('show');
+            place_content_h2.forEach(h => h.classList.add('show'));
             place_description.classList.add('show');
         } else {
             place_label.classList.remove('show');
-            place_content_h2.classList.remove('show');
+            place_content_h2.forEach(h => h.classList.remove('show'));
             place_description.classList.remove('show');
         }
         
@@ -298,6 +298,34 @@ const stat_observer = new IntersectionObserver(entries => {
 }, { threshold: 0.5 });
 
 stats.forEach(c => stat_observer.observe(c));
+
+
+// =========================
+// badge page
+// =========================
+const badges = [
+  { name: "Fun Tin",     src: "images/lee.jpeg" },
+  { name: "Early Bird",  src: "" },
+  { name: "Team Player", src: "" },
+  { name: "Streak",      src: "" },
+  { name: "Explorer",    src: "" },
+  { name: "Night Owl",   src: "" },
+];
+
+const wall = document.querySelector(".badge-wall");
+wall.innerHTML = "";
+
+badges.forEach(b => {
+  const el = document.createElement("div");
+  el.className = "badge";
+  el.tabIndex = 0;
+  el.innerHTML = `
+    <img src="${b.src}" alt="${b.name}" />
+    <hr />
+    <p>${b.name}</p>`;
+  wall.appendChild(el);
+});
+
 
 // =========================
 // Login

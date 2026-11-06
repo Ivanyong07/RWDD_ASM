@@ -1,0 +1,224 @@
+<!doctype html>
+<!--
+=================================
+* Filename : profile.html
+* Date : 18/10/2026
+* Author : (add your name)
+* Description : The Profile page: cover, numbers, overview and badges
+=================================
+-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Fun Collectors | Profile</title>
+
+    <!-- FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- CSS: shared files first, then the file of this page (each file uses the ones above it) -->
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/effects.css" />
+    <link rel="stylesheet" href="css/profile.css" />
+</head>
+
+<body class="splash-on">
+    <!-- 1. OPENING PICTURE (filled by js/effects.js, then wipes left) -->
+    <div id="splash" aria-hidden="true"></div>
+
+    <!-- BACKGROUND: small leaves moving slowly behind the page (made by js/effects.js) -->
+    <div id="leaves" aria-hidden="true"></div>
+
+    <!-- 2. TOP BAR: logo, points, notifications, user (same in every page) -->
+    <header class="topbar">
+        <a class="brand" href="index.html">
+            <span class="logo">
+                <svg viewBox="0 0 24 24">
+                    <path d="M21 12a9 9 0 0 1-15.5 6.2M3 12A9 9 0 0 1 18.5 5.8" />
+                    <path d="M18.5 2v4h-4M5.5 22v-4h4" />
+                </svg>
+                <!-- website logo: blank for now. Write the file name in LOGO_PICTURE (js/config.js) -->
+                <img id="logoPic" alt="Fun Collectors logo" onerror="this.remove()" />
+            </span>
+            Fun Collectors
+        </a>
+
+        <div class="top-right">
+            <span class="points-pill" title="Points to spend">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 3l2.7 5.6 6.1.8-4.5 4.3 1.1 6.1L12 16.9 6.6 19.8l1.1-6.1L3.2 9.4l6.1-.8z" />
+                </svg>
+                <span id="ptsText">0</span>
+            </span>
+
+            <button class="icon-btn" id="bellBtn" aria-label="Notifications">
+                <svg viewBox="0 0 24 24">
+                    <path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4zM10 21h4" />
+                </svg>
+            </button>
+
+            <div class="user-wrap">
+                <button class="user" id="userBtn" aria-haspopup="true" aria-expanded="false">
+                    <!-- profile picture: filled by js/common.js (the first letter shows if there is no picture) -->
+                    <span class="avatar"><span id="userInitial"></span><img id="userPic" alt="Profile picture" onerror="this.remove()" /></span>
+                    <span class="user-name" id="userName">Loading...</span>
+                    <svg viewBox="0 0 24 24">
+                        <path d="M6 9l6 6 6-6" />
+                    </svg>
+                </button>
+                <div class="menu" id="userMenu" hidden>
+                    <div class="menu-info"><b id="menuRank"></b><span class="muted" id="menuPts"></span></div>
+                    <button id="demoApprove" hidden>Demo: approve my pending photos</button>
+                    <button id="demoReject" hidden>Demo: reject my pending photos</button>
+                    <a href="profile.html">My profile</a>
+                    <!-- BACKEND: the logout should also end the session -->
+                    <a href="../auth/index.html">Log out</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 3. MENU: sidebar on a computer, bar at the bottom on a tablet or phone (same in every page) -->
+    <nav class="sidebar" aria-label="Dashboard">
+        <a href="index.html">
+            <svg viewBox="0 0 24 24">
+                <path d="M5 21V4M5 4h11l-2 4 2 4H5" />
+            </svg>
+            Challenge
+        </a>
+        <a href="history.html">
+            <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M12 7v5l3 2" />
+            </svg>
+            History
+        </a>
+        <a href="badges.html">
+            <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="9" r="6" />
+                <path d="M8.5 14L7 22l5-3 5 3-1.5-8" />
+            </svg>
+            Badges
+        </a>
+        <a href="rewards.html">
+            <svg viewBox="0 0 24 24">
+                <rect x="3" y="8" width="18" height="4" rx="1" />
+                <path d="M12 8v13M5 12v9h14v-9M12 8C10 4 6 5 7 8c.5 1.5 3 1 5 0zm0 0c2-4 6-3 5 0-.5 1.5-3 1-5 0z" />
+            </svg>
+            Rewards
+        </a>
+        <a href="leaderboard.html">
+            <svg viewBox="0 0 24 24">
+                <path d="M3 21h18M5 21v-8h4v8M10 21V8h4v13M15 21v-5h4v5" />
+            </svg>
+            Leaderboard
+        </a>
+        <a href="profile.html">
+            <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="8" r="4" />
+                <path d="M4 21c0-4 4-7 8-7s8 3 8 7" />
+            </svg>
+            Profile
+        </a>
+    </nav>
+
+    <main class="main">
+        <div class="container">
+            <!-- 4. TOP BANNER: points and rank (filled by js/common.js) -->
+            <section class="hero fade" id="hero"></section>
+
+            <!-- 5. PAGE TITLE + SEARCH -->
+            <div class="page-head">
+                <div>
+                    <h1>Profile</h1>
+                    <p class="muted">Your details, activity and badges.</p>
+                </div>
+                <label class="search">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="11" cy="11" r="7" />
+                        <path d="M20 20l-4-4" />
+                    </svg>
+                    <input id="search" type="search" placeholder="Search this page" aria-label="Search this page" />
+                </label>
+            </div>
+
+            <!-- ============ PAGE CONTENT: PROFILE ============ -->
+
+            <!-- Profile card: cover, picture, numbers and tabs (filled by js/profile.js) -->
+            <section class="card profile-card fade">
+                <div class="cover" id="cover"></div>
+
+                <div class="profile-body">
+                    <div class="stat-group" id="statsLeft"></div>
+
+                    <div class="who">
+                        <div class="avatar-xl" id="profileAvatar"></div>
+                        <h2 id="profileName"></h2>
+                        <div id="profileRole"></div>
+                    </div>
+
+                    <div class="stat-group stat-group--right" id="statsRight"></div>
+                </div>
+
+                <div class="profile-tabs" role="tablist" aria-label="Profile sections">
+                    <button class="ptab" role="tab" data-tab="overview" aria-selected="true">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="8" r="4" />
+                            <path d="M4 21c0-4 4-7 8-7s8 3 8 7" />
+                        </svg>
+                        Overview
+                    </button>
+                    <button class="ptab" role="tab" data-tab="badges" aria-selected="false">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="9" r="6" />
+                            <path d="M8.5 14L7 22l5-3 5 3-1.5-8" />
+                        </svg>
+                        Badges
+                    </button>
+                </div>
+            </section>
+
+            <!-- TAB 1: OVERVIEW -->
+            <section id="tab-overview">
+                <div class="two-col">
+                    <div class="card">
+                        <h2>About</h2>
+                        <dl class="about" id="aboutList"></dl>
+                    </div>
+                    <div class="card">
+                        <h2>Recent activity</h2>
+                        <div id="activityList"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 2: BADGES -->
+            <section id="tab-badges" hidden>
+                <div class="section-head">
+                    <h2>Badges <span class="count-chip" id="badgeCount"></span></h2>
+                </div>
+                <div class="badge-grid" id="badgeGrid"></div>
+            </section>
+        </div>
+    </main>
+
+    <!-- 6. TOAST (small message at the bottom) -->
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <!-- JAVASCRIPT: loaded in this order (each file uses the ones above it) -->
+    <script src="js/config.js"></script>
+    <script src="js/icons.js"></script>
+    <script src="js/sample-data.js"></script>
+    <script src="js/sample-store.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/effects.js"></script>
+    <script src="js/profile.js"></script>
+</body>
+
+</html>
