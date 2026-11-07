@@ -45,6 +45,10 @@ if (error){
     }
 }
 
+if (params.toString()) {
+    history.replaceState(null, "", window.location.pathname);   // so a refresh doesn't show the message again
+}
+
 
 // ==========================
 // show Table

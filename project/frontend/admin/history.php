@@ -31,7 +31,7 @@ require_once "../../backend/auth/admin_check.php";
   </div>
 
   <header class="topbar">
-    <a href="index.html" class="brand">
+    <a href="index.php" class="brand">
       <span class="logo">
         <img src="../images/lee.jpeg" alt="Fun Collectors Logo" />
       </span>
@@ -62,32 +62,32 @@ require_once "../../backend/auth/admin_check.php";
 
   <nav class="sidebar" aria-label="Dashboard">
     <p>Review</p>
-    <a href="index.html">
+    <a href="index.php">
       <img src="images/review.png" alt="Reviews Submission" />
       Reviews Submission
     </a>
-    <a href="leaderboard.html"><img
+    <a href="leaderboard.php"><img
         src="images/leaderboard.png"
         alt="Reviews Submission" />Leaderboard</a>
-    <a href="history.html" class="active" aria-current="page"><img src="images/history.png" alt="Reviews Submission" />History</a>
+    <a href="history.php" class="active" aria-current="page"><img src="images/history.png" alt="Reviews Submission" />History</a>
     <br />
     <br />
     <p>Management</p>
-    <a href="users.html"><img src="images/user.png" alt="Reviews Submission" />User
+    <a href="users.php"><img src="images/user.png" alt="Reviews Submission" />User
       Management</a>
-    <a href="challenges.html"><img src="images/challenge.png" alt="Reviews Submission" />Challenges
+    <a href="challenges.php"><img src="images/challenge.png" alt="Reviews Submission" />Challenges
       Management</a>
-    <a href="badges.html"><img src="images/badge.png" alt="Reviews Submission" />Badges
+    <a href="badges.php"><img src="images/badge.png" alt="Reviews Submission" />Badges
       Management</a>
 
-    <a href="rewards.html"><img src="images/reward.png" alt="Reviews Submission" />Reward
+    <a href="rewards.php"><img src="images/reward.png" alt="Reviews Submission" />Reward
       Management</a>
 
     <br />
     <br />
     <p>Account</p>
-    <a href="profile.html"><img src="images/profile.png" alt="Reviews Submission" />Profile</a>
-    <a href="../auth/index.html"><img src="images/logout.png" alt="Reviews Submission" />Log Out</a>
+    <a href="profile.php"><img src="images/profile.png" alt="Reviews Submission" />Profile</a>
+    <a href="../auth/index.php"><img src="images/logout.png" alt="Reviews Submission" />Log Out</a>
   </nav>
   <!-- ============ PAGE CONTENT: leaderboard Submission ============ -->
   <main class="main">

@@ -21,7 +21,7 @@ const ENDPOINTS = {
     challenge: "admin/challenge.php",
     submission: "admin/submission.php",
     history: "admin/history.php",
-    badges: "admin/badges.php",
+    badges: "admin/achievement.php",
     rewards: "admin/rewards.php",
     redeem: "admin/redeem.php",
     leaderboard: "admin/leaderboard.php"
@@ -149,8 +149,8 @@ async function getHistory() {
 }
 
 // Badges page: every badge, with earned = true or false
-async function getBadges() {
-    return (await request(ENDPOINTS.badges)).badges;
+async function getAchievement() {
+    return (await request(ENDPOINTS.badges)).data;
 }
 
 // Rewards page

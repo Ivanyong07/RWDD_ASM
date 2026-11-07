@@ -3,21 +3,23 @@
 class Achievement
 {
     private ?int $achievementId;
-    private string $badge_name;
-    private string $badge_image;
+    private string $achievement_name;
+    private string $achievement_description;
+    private string $achievement_image;
     private int $requirement_value;
 
     public function __construct(
-        string $badge_name,
-        string $badge_image,
+        string $achievement_name,
+        string $achievement_description,
+        string $achievement_image,
         int $requirement_value,
         ?int $achievementId = null
     ) {
-
-        $this->setBadgeName($badge_name);
-        $this->setBadgeImage($badge_image);
+        $this->setAchievementName($achievement_name);
+        $this->setAchievementImage($achievement_image);
         $this->setRequirementValue($requirement_value);
         $this->setAchievementId($achievementId);
+        $this->setAchievementDescription($achievement_description);
     }
 
     public function getAchievementId(): ?int
@@ -30,27 +32,27 @@ class Achievement
         $this->achievementId = $achievementId;
     }
 
-    public function getBadgeName(): string
+    public function getAchievementName(): string
     {
-        return $this->badge_name;
+        return $this->achievement_name;
     }
 
-    public function setBadgeName(string $badge_name): void
+    public function setAchievementName(string $achievement_name): void
     {
-        if (trim($badge_name) === "") {
+        if (trim($achievement_name) === "") {
             throw new InvalidArgumentException("badge name cannot be empty");
         }
-        $this->badge_name = $badge_name;
+        $this->achievement_name = $achievement_name;
     }
 
-    public function getBadgeImage(): string
+    public function getAchievementImage(): string
     {
-        return $this->badge_image;
+        return $this->achievement_image;
     }
 
-    public function setBadgeImage(string $badge_image): void
+    public function setAchievementImage(string $achievement_image): void
     {
-        $this->badge_image = $badge_image;
+        $this->achievement_image = $achievement_image;
     }
 
     public function getRequirementValue(): int
@@ -64,5 +66,15 @@ class Achievement
             throw new InvalidArgumentException("requirement value cannot be negative");
         }
         $this->requirement_value = $requirement_value;
+    }
+
+    public function getAchievementDescription(): string
+    {
+        return $this->achievement_description;
+    }
+
+    public function setAchievementDescription(string $achievement_description): void
+    {
+        $this->achievement_description = $achievement_description;
     }
 }

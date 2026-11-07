@@ -2,7 +2,7 @@
 
 require_once __DIR__ . "/../../config/Database.php";
 require_once __DIR__ . "/../../controllers/UserControllers.php";
-require_once __DIR__ . "/../../model/User.php";
+require_once __DIR__ . "/../../model/Users.php";
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -38,7 +38,7 @@ switch ($method) {
         $tp_number = $_POST["tp_number"];
         $course = $_POST["course"];
 
-        $user = new User($username, $password, $email, $age, $tp_number, $course, "seed", 0, 0, "user");
+        $user = new Users($username, $password, $email, $age, $tp_number, $course, "seed", 0, 0, "user");
 
         $result = $controllers->createUser($user);
 
@@ -62,7 +62,7 @@ switch ($method) {
             exit;
         }
 
-        $user = new User(
+        $user = new Users(
             $_POST["username"],
             "",
             $_POST["email"],

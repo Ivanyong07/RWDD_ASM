@@ -1,6 +1,6 @@
 <?php
 
-class User
+class Users
 {
     private ?int $userId = null;
     private string $username;
@@ -11,8 +11,9 @@ class User
     private string $course;
     private string $role;
     private int $total_xp;
-    private string $rank;
+    private string $rank_id;
     private int $points_balance;
+    private ?string $profile_picture;
     private ?string $created_at;
 
 
@@ -23,12 +24,13 @@ class User
         int $age,
         string $tp_number,
         string $course,
-        string $rank = "seed",
+        string $rank_id = "1",
         int $points_balance = 0,
         int $total_xp = 0,
         string $role = "user",
         ?int $userId = null,
-        ?string $created_at = null
+        ?string $created_at = null,
+        ?string $profile_picture = null
     ) {
 
         $this->username = $username;
@@ -38,11 +40,12 @@ class User
         $this->tp_number = $tp_number;
         $this->course = $course;
         $this->role = $role;
-        $this->rank = $rank;
+        $this->rank_id = $rank_id;
         $this->points_balance = $points_balance;
         $this->total_xp = $total_xp;
         $this->userId = $userId;
         $this->created_at = $created_at;
+        $this->profile_picture = $profile_picture;
     }
 
     public function getUserId(): ?int
@@ -129,14 +132,14 @@ class User
         $this->role = $role;
     }
 
-    public function getRank(): string
+    public function getRankId(): string
     {
-        return $this->rank;
+        return $this->rank_id;
     }
 
-    public function setRank(string $rank): void
+    public function setRank(string $rank_id): void
     {
-        $this->rank = $rank;
+        $this->rank_id = $rank_id;
     }
 
     public function getTotalXp(): int
@@ -167,5 +170,15 @@ class User
     public function setCreatedAt(string $created_at): void
     {
         $this->created_at = $created_at;
+    }
+
+    public function getProfilePicture(): ?string
+    {
+        return $this->profile_picture;
+    }
+
+    public function setProfilePicture(string $profile_picture): void
+    {
+        $this->profile_picture = $profile_picture;
     }
 }

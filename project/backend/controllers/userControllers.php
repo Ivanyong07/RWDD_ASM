@@ -5,7 +5,7 @@
 // * Author : Ivan Yong
 // * Description : For delete, login, get all list of users, and upate user
 // =================================
-require_once __DIR__  . "/../model/User.php";
+require_once __DIR__  . "/../model/Users.php";
 class UserControllers
 {
     private $conn;
@@ -16,7 +16,7 @@ class UserControllers
     }
 
     // Create
-    public function createUser(User $user)
+    public function createUser(Users $user)
     {
         $username = $user->getUsername();
         $password = password_hash($user->getPassword(), PASSWORD_DEFAULT);
@@ -28,29 +28,31 @@ class UserControllers
 
         $stmt = mysqli_prepare($this->conn, "INSERT INTO users(username, email, password, age, tp_number, course, role) VALUES (?,?,?,?,?,?,?)");
         mysqli_stmt_bind_param($stmt, "sssisss", $username, $email, $password, $age, $tp_number, $course, $role);
-        mysqli_stmt_execute($stmt);
+        if (!mysqli_stmt_execute($stmt)) {
+            return false;
+        }
         return mysqli_insert_id($this->conn); // return id (e.g. 5)
     }
 
     // Read all
     public function getAllUser()
     {
-        $result = mysqli_query($this->conn, "SELECT id, username, password, email, age, tp_number, course, role, total_xp, rank, points_balance, created_at FROM users");
+        $result = mysqli_query($this->conn, "SELECT user_id, username, password, email, age, tp_number, course, role, total_xp, rank_id, points_balance, created_at FROM users");
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
 
     //Read one
-    public function getUserById(int $id)
+    public function getUserById(int $user_id)
     {
-        $stmt = mysqli_prepare($this->conn, "SELECT id, username, password, email, age, tp_number, course, created_at FROM users WHERE id = ?");
-        mysqli_stmt_bind_param($stmt, "i", $id);
+        $stmt = mysqli_prepare($this->conn, "SELECT user_id, username, password, email, age, tp_number, course, created_at FROM users WHERE user_id = ?");
+        mysqli_stmt_bind_param($stmt, "i", $user_id);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
         return mysqli_fetch_assoc($result);
     }
 
     // Update
-    public function updateUser(int $id, User $user)
+    public function updateUser(int $user_id, Users $user)
     {
         $username       = $user->getUsername();
         $email          = $user->getEmail();
@@ -59,18 +61,18 @@ class UserControllers
         $course         = $user->getCourse();
         $role           = $user->getRole();
         $total_xp       = $user->getTotalXp();
-        $rank           = $user->getRank();
+        $rank           = $user->getRankId();
         $points_balance = $user->getPointsBalance();
 
         $stmt = mysqli_prepare(
             $this->conn,
             "UPDATE users SET username = ?, email = ?, age = ?, tp_number = ?, course = ?,
-                          role = ?, total_xp = ?, `rank` = ?, points_balance = ?
-         WHERE id = ?"
+                          role = ?, total_xp = ?, rank_id = ?, points_balance = ?
+         WHERE user_id = ?"
         );
         mysqli_stmt_bind_param(
             $stmt,
-            "ssisssisii",
+            "ssisssiiii",
             $username,
             $email,
             $age,
@@ -80,7 +82,7 @@ class UserControllers
             $total_xp,
             $rank,
             $points_balance,
-            $id
+            $user_id
         );
 
         if (!mysqli_stmt_execute($stmt)) {
@@ -92,10 +94,10 @@ class UserControllers
     }
 
     // Detele
-    public function deleteUser(int $id)
+    public function deleteUser(int $user_id)
     {
-        $stmt = mysqli_prepare($this->conn, "DELETE FROM users WHERE id = ?");
-        mysqli_stmt_bind_param($stmt, "i", $id);
+        $stmt = mysqli_prepare($this->conn, "DELETE FROM users WHERE user_id = ?");
+        mysqli_stmt_bind_param($stmt, "i", $user_id);
 
         if (!mysqli_stmt_execute($stmt)) {
             return false;
@@ -106,7 +108,7 @@ class UserControllers
     // Get User Email
     public function getByEmail(string $email)
     {
-        $stmt = mysqli_prepare($this->conn, "SELECT id, role, password FROM users WHERE email = ?");
+        $stmt = mysqli_prepare($this->conn, "SELECT user_id, role, password FROM users WHERE email = ?");
         mysqli_stmt_bind_param($stmt, "s", $email);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
@@ -128,10 +130,10 @@ class UserControllers
         return $user;
     }
 
-    public function checkExistingUser(string $email, string $username, string $password, string $tp_number)
+    public function checkExistingUser(string $email, string $username, string $tp_number)
     {
-        $stmt = mysqli_prepare($this->conn, "SELECT username, password, email, tp_number FROM users WHERE email = ? OR tp_number = ? OR password = ? OR username = ?");
-        mysqli_stmt_bind_param($stmt, "ssss", $email, $username, $password, $tp_number);
+        $stmt = mysqli_prepare($this->conn, "SELECT username, email, tp_number FROM users WHERE email = ? OR username = ? OR tp_number = ?");
+        mysqli_stmt_bind_param($stmt, "sss", $email, $username, $tp_number);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
 

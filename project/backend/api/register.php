@@ -5,7 +5,7 @@ session_start();
 require_once __DIR__ . "/../config/Database.php";
 require_once __DIR__ . "/../controllers/UserControllers.php";
 require_once __DIR__ . "/../validation/DataValidation.php";
-require_once __DIR__ . "/../model/User.php";
+require_once __DIR__ . "/../model/Users.php";
 
 $error = "";
 
@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     } else {
 
         $controller = new UserControllers($conn);
-        $existingUser = $controller->checkExistingUser($email, $username, $password, $tp_number);
+        $existingUser = $controller->checkExistingUser($email, $username, $tp_number);
 
         if ($existingUser) {
             if ($existingUser["email"] === $email) {
@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $error = "This Tp Number is already registered";
             }
         } else {
-            $user = new User($username, $password, $email, (int)$age, $tp_number, $course, "seed", 0, 0, "user");
+            $user = new Users($username, $password, $email, (int)$age, $tp_number, $course, "seed", 0, 0, "user");
 
             $newId = $controller->createUser($user);
 
