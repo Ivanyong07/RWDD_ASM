@@ -13,7 +13,7 @@ const updateDialog = $("updateDialog");
 const viewDialog = $("viewDialog");
 const createDialog = $("createDialog");
 
-const findAchievement = id => achievements.find(achievement => Number(achievement.id) === Number(id));
+const findAchievement = id => achievements.find(achievement => Number(achievement.achievement_id) === Number(id));
 
 const params = new URLSearchParams(window.location.search);
 const success = params.get("success");
@@ -34,10 +34,10 @@ if (success){
 
 if (error){
 
-    const error_message ={
-        create_failed: "User created failed",
-        update_failed: "User updated failed",
-        delete_failed: "User deleted failed"
+    const error_message = {
+        create_failed: "Achievement created failed",
+        update_failed: "Achievement updated failed",
+        delete_failed: "Achievement deleted failed"
     };
 
     if(error_message[error]){
@@ -50,6 +50,8 @@ if (params.toString()) {
 }
 
 function openCreateAchievementDialog(){
+
+    console.log("Create Dialog Click");
     createDialog.showModal();
 }
 
@@ -57,6 +59,8 @@ function openCreateAchievementDialog(){
 // update
 // =================================
 function openUpdateAchievementDialog(id){
+
+    console.log("Update Dialog Click");
     const achievement = findAchievement(id);
  
     if (!achievement){
@@ -75,6 +79,7 @@ function openUpdateAchievementDialog(id){
 // delete
 // =================================
 function openDeleteAchievementDialog(id){
+
     const achievement = findAchievement(id);
 
     if (!achievement){
@@ -96,27 +101,27 @@ function renderAchievement(){
     const cards = achievements
         .filter(item => matches(item.achievement_name, item.achievement_description))
         .map(item => `
-            <article class="badge-card">
+            <article class="achievement-card">
  
-                <div class="badge-media">
-                    <div class="badge-thumb" style="--h:${hue(item.achievement_name)}">
+                <div class="achievement-media">
+                    <div class="achievement-thumb" style="--h:${hue(item.achievement_name)}">
                         ${esc(String(item.achievement_name)[0] ?? "?")}
-                        ${item.achievement_image ? `<img src="images/badges/${esc(item.achievement_image)}" alt="" onerror="this.remove()">` : ""}
+                        ${item.achievement_image ? `<img src="images/achievement/${esc(item.achievement_image)}" alt="" onerror="this.remove()">` : ""}
                     </div>
                 </div>
  
-                <div class="badge-head">
-                    <div class="badge-title">
+                <div class="achievement-head">
+                    <div class="achievement-title">
                         <h3>${esc(item.achievement_name)}</h3>
                         <p>${esc(item.achievement_description)}</p>
                     </div>
                 </div>
  
-                <dl class="badge-facts">
+                <dl class="achievement-facts">
                     <div><dt>Requirement</dt><dd>${esc(item.requirement_value)}</dd></div>
                 </dl>
  
-                <div class="badge-foot">
+                <div class="achievement-foot">
                     <button onclick="openUpdateAchievementDialog(${Number(item.achievement_id)})">Edit</button>
                     <button class="del" onclick="openDeleteAchievementDialog(${Number(item.achievement_id)})">Delete</button>
                 </div>
@@ -131,6 +136,8 @@ function renderAchievement(){
 // =================================
 
 $("btnCreate").onclick = () => openCreateAchievementDialog();
+$("dialogCreateClose").onclick = () => createDialog.close();
+$("dialogUpdateClose").onclick = () => updateDialog.close();
 
 function refreshAchievement(){
     renderAchievement();

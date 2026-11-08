@@ -1,5 +1,6 @@
 <?php
-require_once "../../backend/auth/admin_check.php";
+require_once __DIR__ . "../../backend/security/admin_check.php";
+require_once __DIR__ . "/../../backend/config/csrf.php";
 ?>
 
 <!doctype html>
@@ -115,38 +116,42 @@ require_once "../../backend/auth/admin_check.php";
     <div id="achievement"></div>
 
     <!-- Create -->
-    <dialog id="createBadgesDialog">
+    <dialog id="createDialog">
       <div class="dialog-head">
-        <h2>User <span id="dId"></span></h2>
+        <h2>Create Achievement</h2>
         <button
           class="btn-close"
-          id="dialogCreateBadgesClose"
+          id="dialogCreateClose"
           aria-label="Close">
           ✕
         </button>
       </div>
 
       <div class="dialog-body">
-        <dl class="dialog-info">
+        <form action="../../backend/api/admin/achievement.php" method="POST" enctype="multipart/form-data">
+          <dl class="dialog-info">
 
-          <form action="../../backend/api/admin/achievement.php" method="POST">
+
             <dt>Achievement Name</dt>
-            <input
-              type="text"
-              id="createName"
-              required
-              placeholder="Beginner Tin" />
+            <dd><input
+                type="text"
+                id="createName"
+                name="achievement_name"
+                required
+                placeholder="Beginner Tin" /></dd>
 
             <dt>Achievement Description</dt>
-            <textarea name="" id="createDescription"></textarea>
+            <dd><textarea name="achievement_description" id="createDescription"></textarea></dd>
 
             <dt>Achievement Image</dt>
-            <img src="" alt="" id="createImage" />
+            <dd><input type="file" id="createImage" name="achievement_image"
+                accept="image/png,image/jpeg,image/webp" /> </dd>
 
             <dt>Requirement Value</dt>
-            <input type="number" id="createAge" required placeholder="18" />
-          </form>
-        </dl>
+            <dd><input type="number" id="createAge" required placeholder="1" min="1" name="requirement_value" /></dd>
+            <button class="btn-done" type="submit">Create</button>
+          </dl>
+        </form>
       </div>
     </dialog>
 
@@ -157,7 +162,7 @@ require_once "../../backend/auth/admin_check.php";
         <button class="btn-close" id="dialogUpdateClose" type="button" aria-label="Close">✕</button>
       </div>
 
-      <form action="../../backend/api/admin/achievement.php" method="POST">
+      <form action="../../backend/api/admin/achievement.php" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="_method" value="PUT" />
         <input type="hidden" name="id" id="updateAchievementId" />
 
@@ -165,16 +170,16 @@ require_once "../../backend/auth/admin_check.php";
           <dl class="dialog-info">
 
             <dt><label for="updateAchievementName">Achievement Name</label></dt>
-            <dd><input type="text" id="achievement_image" name="achievement_name" /></dd>
+            <dd><input type="text" id="updateAchievementName" name="achievement_name" require /></dd>
 
             <dt><label for="updateAchievementDescription">Achievement Description</label></dt>
-            <dd><input type="email" id="achievement_image" name="achievement_description" /></dd>
+            <dd><input type="text" id="updateAchievementDescription" name="achievement_description" require /></dd>
 
             <dt><label for="updateAchievementImage">Achievement Image</label></dt>
-            <dd><input type="number" id="achievement_image" name="achievement_image" /></dd>
+            <dd><input type="file" id="updateAchievementImage" name="achievement_image" accept="image/png, image/jpeg, image/webp" /></dd>
 
             <dt><label for="updateRequirementValue">Requirement Value</label></dt>
-            <dd><input type="number" id="requirement_value" name="requirement_value" /></dd>
+            <dd><input type="number" id="updateRequirementValue" name="requirement_value" min="1" require /></dd>
           </dl>
         </div>
         <button class="btn-done" type="submit">Save</button>
@@ -182,7 +187,7 @@ require_once "../../backend/auth/admin_check.php";
     </dialog>
 
     <!-- hidden form for delete -->
-    <form action="../../backend/api/admin/achievement.php" method="POST">
+    <form action="../../backend/api/admin/achievement.php" method="POST" id="deleteForm">
       <input type="hidden" name="_method" value="DELETE">
       <input type="hidden" name="id" id="deleteAchievementId">
     </form>

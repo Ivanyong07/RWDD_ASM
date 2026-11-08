@@ -1,5 +1,5 @@
 <?php
-require_once "../../backend/auth/admin_check.php";
+require_once "../../backend/security/admin_check.php";
 ?>
 
 
