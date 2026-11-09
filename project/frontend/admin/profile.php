@@ -89,12 +89,65 @@ require_once "../../backend/security/admin_check.php";
     <a href="profile.php" class="active" aria-current="page"><img src="images/profile.png" alt="Reviews Submission" />Profile</a>
     <a href="../auth/index.html"><img src="images/logout.png" alt="Reviews Submission" />Log Out</a>
   </nav>
-  <!-- ============ PAGE CONTENT: leaderboard Submission ============ -->
+  <!-- ============ PAGE CONTENT: profile page ============ -->
   <main class="main">
     <h1>Profile</h1>
     <p>This page is use to see own profile</p>
     <hr />
+
+    <section class="card profile-card fade">
+      <div class="cover" id="cover"></div>
+
+      <div class="profile-body">
+        <div class="stat-group" id="statsLeft"></div>
+
+        <div class="who">
+          <div class="avatar-xl" id="profileAvatar"></div>
+          <h2 id="profileName"></h2>
+          <div id="profileRole"></div>
+        </div>
+
+        <div class="stat-group stat-group--right" id="statsRight"></div>
+      </div>
+
+      <div class="profile-tabs" role="tablist" aria-label="Profile sections">
+        <button class="ptab" role="tab" data-tab="overview" aria-selected="true">
+          <img src="images/profile.png" alt="Overview">
+          Overview
+        </button>
+        <button class="ptab" role="tab" data-tab="badges" aria-selected="false">
+          <img src="images/badge.png" alt="Achievement">
+          Badges
+        </button>
+      </div>
+    </section>
+
+    <!-- TAB 1: OVERVIEW -->
+    <section id="tab-overview">
+      <div class="two-col">
+        <div class="card">
+          <h2>About</h2>
+          <dl class="about" id="aboutList"></dl>
+        </div>
+        <div class="card">
+          <h2>Recent activity</h2>
+          <div id="activityList"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: BADGES -->
+    <section id="tab-badges" hidden>
+      <div class="section-head">
+        <h2>Badges <span class="count-chip" id="badgeCount"></span></h2>
+      </div>
+      <div class="badge-grid" id="badgeGrid"></div>
+    </section>
+    </div>
   </main>
+
+  <!-- 6. TOAST (small message at the bottom) -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script src="js/admin.js"></script>
   <script src="js/profile.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>

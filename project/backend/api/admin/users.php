@@ -69,8 +69,7 @@ switch ($method) {
             (int)$_POST["age"],
             $_POST["tp_number"],
             $_POST["course"],
-            $_POST["rank"],
-            (int)$_POST["total_xp"],
+            $_POST["rank_id"],
             (int)$_POST["points_balance"],
             $_POST["role"]
         );

@@ -37,7 +37,7 @@ class UserControllers
     // Read all
     public function getAllUser()
     {
-        $result = mysqli_query($this->conn, "SELECT user_id, username, password, email, age, tp_number, course, role, total_xp, rank_id, points_balance, created_at FROM users");
+        $result = mysqli_query($this->conn, "SELECT user_id, username, password, email, age, tp_number, course, role, rank_id, points_balance, created_at FROM users");
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
 
@@ -60,27 +60,25 @@ class UserControllers
         $tp_number      = $user->getTpNumber();
         $course         = $user->getCourse();
         $role           = $user->getRole();
-        $total_xp       = $user->getTotalXp();
-        $rank           = $user->getRankId();
+        $rank_id           = $user->getRankId();
         $points_balance = $user->getPointsBalance();
 
         $stmt = mysqli_prepare(
             $this->conn,
             "UPDATE users SET username = ?, email = ?, age = ?, tp_number = ?, course = ?,
-                          role = ?, total_xp = ?, rank_id = ?, points_balance = ?
+                          role = ?, rank_id = ?, points_balance = ?
          WHERE user_id = ?"
         );
         mysqli_stmt_bind_param(
             $stmt,
-            "ssisssiiii",
+            "ssisssiii",
             $username,
             $email,
             $age,
             $tp_number,
             $course,
             $role,
-            $total_xp,
-            $rank,
+            $rank_id,
             $points_balance,
             $user_id
         );
@@ -130,13 +128,25 @@ class UserControllers
         return $user;
     }
 
-    public function checkExistingUser(string $email, string $username, string $tp_number)
+    public function checkExistingUser(string $email, string $tp_number)
     {
-        $stmt = mysqli_prepare($this->conn, "SELECT username, email, tp_number FROM users WHERE email = ? OR username = ? OR tp_number = ?");
-        mysqli_stmt_bind_param($stmt, "sss", $email, $username, $tp_number);
+        $stmt = mysqli_prepare($this->conn, "SELECT email, tp_number FROM users WHERE email = ? OR tp_number = ?");
+        mysqli_stmt_bind_param($stmt, "ss", $email, $tp_number);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
 
         return mysqli_fetch_assoc($result);
+    }
+
+    public function updateProfile(int $user_id, string $username, string $email, string $tp_number, string $course)
+    {
+        $stmt = mysqli_prepare($this->conn, "UPDATE users SET username = ?, email = ?, age = ?, tp_numer = ?, course = ? WHERE user_id = ?");
+        mysqli_stmt_bind_param($stmt, "ssissi", $username, $email, $age, $tp_number, $course, $user_id);
+
+        if (!mysqli_stmt_execute($stmt)) {
+            return false;
+        }
+
+        return mysqli_stmt_affected_rows($stmt);
     }
 }

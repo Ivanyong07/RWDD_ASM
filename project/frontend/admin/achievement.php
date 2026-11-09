@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . "../../backend/security/admin_check.php";
-require_once __DIR__ . "/../../backend/config/csrf.php";
+require_once __DIR__ . "/../../backend/security/admin_check.php";
+require_once __DIR__ . "/../../backend/security/csrf.php";
 ?>
 
 <!doctype html>

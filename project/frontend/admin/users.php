@@ -233,9 +233,6 @@ require_once "../../backend/security/admin_check.php";
           <dt>Role</dt>
           <dd id="viewRole"></dd>
 
-          <dt>Total XP</dt>
-          <dd id="viewTotalXp"></dd>
-
           <dt>Rank</dt>
           <dd id="viewRank"></dd>
 
@@ -287,9 +284,6 @@ require_once "../../backend/security/admin_check.php";
                 <option value="admin">Admin</option>
               </select>
             </dd>
-
-            <dt><label for="updateTotalXp">Total XP</label></dt>
-            <dd><input type="number" id="updateTotalXp" name="total_xp" /></dd>
 
             <dt><label for="updateRank">Rank</label></dt>
             <dd><input type="text" id="updateRank" name="rank" /></dd>

@@ -98,7 +98,6 @@ function openViewDialog(id){
     $("viewTpNumber").textContent = user.tp_number;
     $("viewCourse").textContent = user.course;
     $("viewRole").textContent = user.role;
-    $("viewTotalXp").textContent = user.total_xp;
     $("viewRank").textContent = user.rank;
     $("viewPointsBalance").textContent = user.points_balance;
     $("viewCreatedAt").textContent = user.created_at;
@@ -128,7 +127,6 @@ function openUpdateDialog(id){
     $("updateTpNumber").value = user.tp_number;
     $("updateCourse").value = user.course;
     $("updateRole").value = user.role;
-    $("updateTotalXp").value = user.total_xp;
     $("updateRank").value = user.rank;
     $("updatePointsBalance").value = user.points_balance;
     $("updateCreatedAt").value = user.created_at;

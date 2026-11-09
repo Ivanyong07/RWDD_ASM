@@ -10,7 +10,6 @@ class Users
     private string $tp_number;
     private string $course;
     private string $role;
-    private int $total_xp;
     private string $rank_id;
     private int $points_balance;
     private ?string $profile_picture;
@@ -42,7 +41,6 @@ class Users
         $this->role = $role;
         $this->rank_id = $rank_id;
         $this->points_balance = $points_balance;
-        $this->total_xp = $total_xp;
         $this->userId = $userId;
         $this->created_at = $created_at;
         $this->profile_picture = $profile_picture;
@@ -140,16 +138,6 @@ class Users
     public function setRank(string $rank_id): void
     {
         $this->rank_id = $rank_id;
-    }
-
-    public function getTotalXp(): int
-    {
-        return $this->total_xp;
-    }
-
-    public function setTotalXp(int $total_xp): void
-    {
-        $this->total_xp = $total_xp;
     }
 
     public function getPointsBalance(): int

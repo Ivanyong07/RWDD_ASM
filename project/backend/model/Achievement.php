@@ -5,14 +5,14 @@ class Achievement
     private ?int $achievementId;
     private string $achievement_name;
     private string $achievement_description;
-    private string $achievement_image;
+    private ?string $achievement_image;
     private int $requirement_value;
 
     public function __construct(
         string $achievement_name,
         string $achievement_description,
-        string $achievement_image,
         int $requirement_value,
+        ?string $achievement_image = null,
         ?int $achievementId = null
     ) {
         $this->setAchievementName($achievement_name);
@@ -45,12 +45,12 @@ class Achievement
         $this->achievement_name = $achievement_name;
     }
 
-    public function getAchievementImage(): string
+    public function getAchievementImage(): ?string
     {
         return $this->achievement_image;
     }
 
-    public function setAchievementImage(string $achievement_image): void
+    public function setAchievementImage(?string $achievement_image): void
     {
         $this->achievement_image = $achievement_image;
     }
