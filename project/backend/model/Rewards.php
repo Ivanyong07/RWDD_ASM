@@ -2,51 +2,51 @@
 
 class Rewards
 {
-    private ?int $rewardId;
-    private string $name;
+    private ?int $reward_id;
+    private string $reward_item;
     private string $description;
     private int $points_cost;
     private int $stock;
     private string $image;
 
     public function __construct(
-        string $name,
+        string $reward_item,
         string $description,
         int $points_cost,
-        int $stock = 0,
-        string $image = "",
-        ?int $rewardId = null
+        int $stock,
+        ?string $image = null,
+        ?int $reward_id = null
     ) {
 
-        $this->setName($name);
+        $this->setRewardItem($reward_item);
         $this->setDescription($description);
         $this->setPointsCost($points_cost);
         $this->setStock($stock);
         $this->setImage($image);
-        $this->setRewardId($rewardId);
+        $this->setRewardId($reward_id);
     }
 
     public function getRewardId(): ?int
     {
-        return $this->rewardId;
+        return $this->reward_id;
     }
 
-    public function setRewardId(?int $rewardId): void
+    public function setRewardId(?int $reward_id): void
     {
-        $this->rewardId = $rewardId;
+        $this->reward_id = $reward_id;
     }
 
-    public function getName(): string
+    public function getRewardItem(): string
     {
-        return $this->name;
+        return $this->reward_item;
     }
 
-    public function setName(string $name): void
+    public function setRewardItem(string $reward_item): void
     {
-        if (trim($name) === "") {
-            throw new InvalidArgumentException("name cannot be empty");
+        if (trim($reward_item) === "") {
+            throw new InvalidArgumentException("reward item cannot be empty");
         }
-        $this->name = $name;
+        $this->reward_item = $reward_item;
     }
 
     public function getDescription(): string
@@ -85,12 +85,12 @@ class Rewards
         $this->stock = $stock;
     }
 
-    public function getImage(): string
+    public function getImage(): ?string
     {
         return $this->image;
     }
 
-    public function setImage(string $image): void
+    public function setImage(?string $image): void
     {
         $this->image = $image;
     }

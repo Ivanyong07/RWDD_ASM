@@ -2,29 +2,29 @@
 
 class Rank
 {
-    private ?int $rankId;
+    private ?int $rank_id;
     private string $rank_name;
     private int $xp_require;
 
     public function __construct(
         string $rank_name,
         int $xp_require = 0,
-        ?int $rankId = null
+        ?int $rank_id = null
     ) {
 
         $this->setRankName($rank_name);
         $this->setXpRequire($xp_require);
-        $this->setRankId($rankId);
+        $this->setRankId($rank_id);
     }
 
     public function getRankId(): ?int
     {
-        return $this->rankId;
+        return $this->rank_id;
     }
 
-    public function setRankId(?int $rankId): void
+    public function setRankId(?int $rank_id): void
     {
-        $this->rankId = $rankId;
+        $this->rank_id = $rank_id;
     }
 
     public function getRankName(): string

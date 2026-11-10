@@ -97,6 +97,9 @@ require_once "../../backend/security/admin_check.php";
       This page is use to create, update, delete, and view all the rewards
     </p>
     <hr />
+
+    <div class="message"></div>
+
     <div class="header">
       <label class="search">
         <img src="images/search.png" alt="Search" />
@@ -109,7 +112,10 @@ require_once "../../backend/security/admin_check.php";
       <button class="btn-create">Create</button>
     </div>
 
-    <dialog id="createRewardDialog">
+    <div id="rewards"></div>
+
+    <!-- Create -->
+    <dialog id="createDialog">
       <div class="dialog-head">
         <h2>Reward <span id="dId"></span></h2>
         <button
@@ -122,33 +128,69 @@ require_once "../../backend/security/admin_check.php";
 
       <div class="dialog-body">
         <dl class="dialog-info">
-          <dt>Reward ID</dt>
-          <input type="text" readonly id="createRewardId" />
 
-          <dt>Name</dt>
-          <input type="text" id="createName" required placeholder="Phone" />
+          <dt>Reward Item</dt>
+          <dd><input type="text" id="createRewardItem" required placeholder="Phone" name="reward_item" /></dd>
 
           <dt>Description</dt>
-          <textarea id="createDescription"></textarea>
+          <dd><textarea id="createDescription" name="description"></textarea></dd>
 
           <dt>Points Cost</dt>
-          <input
-            type="number"
-            id="createPointsCost"
-            required
-            placeholder="18" />
+          <dd><input
+              type="number"
+              id="createPointsCost"
+              required
+              placeholder="18"
+              name="points_cost" /></dd>
 
           <dt>Stock</dt>
-          <input type="number" id="createStock" required placeholder="18" />
+          <dd><input type="number" id="createStock" required placeholder="18" name="stock" /></dd>
 
           <dt>Image</dt>
-          <img src="" alt="" id="createImage" />
+          <dd><input type="file" id="createImage" name="image" accept="image/png, image/jpeg, image/webp"></dd>
         </dl>
       </div>
     </dialog>
 
-    <!-- Card -->
-    <div class="ach-card"></div>
+    <!-- Update -->
+    <dialog id="updateDialog">
+      <div class="dialog-head">
+        <h2>Update Reward</h2>
+        <button class="btn-close" id="dialogUpdateClose" type="button" aria-label="Close">✕</button>
+      </div>
+
+      <form action="../../backend/api/admin/rewards.php" method="POST">
+        <input type="hidden" name="_method" value="PUT">
+        <input type="hidden" name="id" id="updateRewardId">
+
+        <div class="dialog-boyd">
+          <dl class="dialog-info">
+
+            <dt><label for="updateRewardItem">Reward Item</label></dt>
+            <dd><input type="text" id="updateRewardItem" name="reward_item" require></dd>
+
+            <dt><label for="updateDescription">Description</label></dt>
+            <dd><textarea name="description" id="updateDescription" require placeholder="Describe something..."></textarea></dd>
+
+            <dt><label for="updatePointsCost">Points Cost</label></dt>
+            <dd><input type="number" name="points_cost" min="1" require placeholder="1"></dd>
+
+            <dt><label for="updateStock">Stock</label></dt>
+            <dd><input type="number" min="1" require placeholder="1"></dd>
+
+            <dt><label for="updateImage"></label></dt>
+            <dd><input type="file" id="updateImage" name="image" accept="image/png, image/jpeg, image/webp"></dd>
+          </dl>
+        </div>
+      </form>
+    </dialog>
+
+    <!-- hidden form for delete -->
+    <form action="../../backend/api/admin/rewards.php" method="POST" id="deleteForm">
+      <input type="hidden" name="_method" value="DELETE">
+      <input type="hidden" name="id" id="deleteRewardId">
+    </form>
+
   </main>
   <script src="js/admin.js"></script>
   <script src="js/rewards.js"></script>

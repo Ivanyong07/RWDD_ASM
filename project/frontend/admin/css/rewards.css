@@ -1,0 +1,187 @@
+
+.reward-grid {
+    --a-line: #e4e0cf;
+    --a-line-strong: #cfcab6;
+    --a-ink: #1f2a24;
+    --a-muted: #76786c;
+    --a-track: #ece9dc;
+    --a-ground: #f5f3e9;
+    --a-green: #0c9260;
+    --a-amber: #d99a1c;
+    --a-red: #c93c3c;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 14px;
+}
+
+.reward-card:hover{
+    border-color: var(--ink);
+}
+
+.reward-card.is-off .reward-thumb{
+    opacity: 0.5s;
+}
+
+.reward-media{
+    display: flex;
+    justify-content: center;
+    padding: 22px 16px 6px;
+}
+
+.reward-thumb {
+    position: relative;
+    flex: none;
+    width: 120px;
+    height: 120px;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    font-size: 44px;
+    font-weight: 700;
+    color: hsl(var(--h) 55% 28%);
+    background: hsl(var(--h) 45% 90%);
+    border-radius: 16px;
+}
+ 
+.reward-thumb img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.reward-head {
+      display: flex;
+      gap: 14px;
+      padding: 12px 16px 14px;
+}
+
+.reward-title {
+      min-width: 0;
+}
+.reward-title h3 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--a-ink);
+}
+.reward-title p {
+    margin: 2px 0 0;
+    font-size: 13px;
+    color: var(--a-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.reward-state {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    height: 20px;
+    font-size: 12px;
+    color: var(--a-muted);
+    white-space: nowrap;
+}
+.reward-state::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--a-green);
+}
+.reward-state.off::before {
+    background: var(--a-line-strong);
+}
+
+/* three facts */
+.reward-facts {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 0 16px;
+    padding: 12px 0;
+    border-top: 1px solid var(--a-line);
+}
+.reward-facts dt {
+    font-size: 12px;
+    color: var(--a-muted);
+}
+.reward-facts dd {
+    margin: 2px 0 0;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    color: var(--a-ink);
+}
+.reward-facts .dim {
+    color: var(--a-muted);
+    font-weight: 500;
+}
+.reward-facts .bad {
+    color: var(--a-red);
+}
+
+.reward-meter {
+    height: 4px;
+    margin-top: 6px;
+    overflow: hidden;
+    background: var(--a-track);
+    border-radius: 2px;
+}
+.reward-meter i {
+    display: block;
+    height: 100%;
+    background: var(--a-green);
+}
+.reward-meter.low i {
+    background: var(--a-amber);
+}
+.reward-meter.out i {
+    background: var(--a-red);
+}
+
+/* buttons */
+.reward-foot {
+    display: flex;
+    gap: 2px;
+    margin-top: auto;
+    padding: 6px 10px;
+    border-top: 1px solid var(--a-line);
+}
+.reward-foot button {
+    padding: 5px 10px;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--a-muted);
+    background: none;
+    border: 0;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.reward-foot button:hover {
+    color: var(--a-ink);
+    background: var(--a-ground);
+}
+.reward-foot button:focus-visible {
+    outline: 2px solid var(--a-green);
+}
+.reward-foot .del {
+    margin-left: auto;
+}
+.reward-foot .del:hover {
+    color: var(--a-red);
+    background: #fbeaea;
+}
+
+.reward-empty {
+    grid-column: 1 / -1;
+    padding: 28px;
+    text-align: center;
+    color: var(--a-muted);
+    border: 1px dashed var(--a-line-strong);
+    border-radius: 12px;
+}

@@ -16,7 +16,7 @@ $id = filter_input(INPUT_POST, "id", FILTER_VALIDATE_INT);
 
 $imageFolder = __DIR__ . "/../../../frontend/images/challenges";
 
-$imagePath = "images/challenge";
+$imagePath = "images/challenges";
 
 switch ($method) {
 

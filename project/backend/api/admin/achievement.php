@@ -15,9 +15,9 @@ $controllers = new AchievementControllers($conn);
 $id = filter_input(INPUT_POST, "id", FILTER_VALIDATE_INT);
 
 // where the pictures are saved on the computer, and the path that is saved in the database
-$imageFolder = __DIR__ . "/../../../frontend/images/achievement/";
+$imageFolder = __DIR__ . "/../../../frontend/images/achievements/";
 
-$imagePath = "images/achievement/";
+$imagePath = "images/achievements/";
 
 switch ($method) {
 

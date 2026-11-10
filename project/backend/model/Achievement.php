@@ -2,7 +2,7 @@
 
 class Achievement
 {
-    private ?int $achievementId;
+    private ?int $achievement_id;
     private string $achievement_name;
     private string $achievement_description;
     private ?string $achievement_image;
@@ -24,12 +24,12 @@ class Achievement
 
     public function getAchievementId(): ?int
     {
-        return $this->achievementId;
+        return $this->achievement_id;
     }
 
-    public function setAchievementId(?int $achievementId): void
+    public function setAchievementId(?int $achievement_id): void
     {
-        $this->achievementId = $achievementId;
+        $this->achievement_id = $achievement_id;
     }
 
     public function getAchievementName(): string

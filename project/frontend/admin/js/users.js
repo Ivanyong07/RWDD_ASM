@@ -14,7 +14,7 @@ const viewDialog = $("viewDialog");
 const createDialog = $("createDialog");
 const tbody = $("usersBody");
 
-const findUser = id => users.find(user => Number(user.id) === Number(id));
+const findUser = id => users.find(user => Number(user.user_id) === Number(id));
 
 const params = new URLSearchParams(window.location.search);
 const success = params.get("success");
@@ -59,15 +59,15 @@ function renderUsersTable(){
         .filter(person => matches(person.username, person.email, person.tp_number))
         .map(person =>`
         <tr>
-            <td>${esc(person.id)}</td>
+            <td>${esc(person.user_id)}</td>
             <td>${esc(person.username)}</td>
             <td>${esc(person.email)}</td>
             <td>${esc(person.tp_number)}</td>
             <td>${esc(person.role)}</td>
             <td class="action">
-                <button class="btn-view" data-view="${person.id}"><img src="images/view.png" alt="View"/></button>
-                <button class="btn-update" data-update="${person.id}""><img src="images/update.png" alt="Update"/></button>
-                <button class="btn-delete" data-delete="${person.id}""><img src="images/delete.png" alt="Delete"/></button>
+                <button class="btn-view" data-view="${person.user_id}"><img src="images/view.png" alt="View"/></button>
+                <button class="btn-update" data-update="${person.user_id}""><img src="images/update.png" alt="Update"/></button>
+                <button class="btn-delete" data-delete="${person.user_id}""><img src="images/delete.png" alt="Delete"/></button>
             </td>
         </tr>`);
 
@@ -90,7 +90,7 @@ function openViewDialog(id){
         return;
     }
 
-    $("viewUserId").textContent = user.id;
+    $("viewUserId").textContent = user.user_id;
     $("viewUsername").textContent = user.username;
     $("viewPassword").textContent = user.password;
     $("viewEmail").textContent = user.email;
@@ -120,7 +120,7 @@ function openUpdateDialog(id){
         return;
     }
 
-    $("updateUserId").value = user.id;
+    $("updateUserId").value = user.user_id;
     $("updateUsername").value = user.username;
     $("updateEmail").value = user.email;
     $("updateAge").value = user.age;
@@ -145,7 +145,7 @@ function deleteUser(id){
 
     if (!confirm(`Delete user "${user.username}"?`)) return;
 
-    $("deleteUserId").value = user.id;
+    $("deleteUserId").value = user.user_id;
     $("deleteForm").submit();
 }
 
