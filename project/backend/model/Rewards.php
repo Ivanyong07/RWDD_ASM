@@ -7,7 +7,7 @@ class Rewards
     private string $description;
     private int $points_cost;
     private int $stock;
-    private string $image;
+    private ?string $image;
 
     public function __construct(
         string $reward_item,

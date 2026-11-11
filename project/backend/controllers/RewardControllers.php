@@ -25,7 +25,7 @@ class RewardControllers
         $stock = $reward->getStock();
         $image = $reward->getImage();
 
-        $stmt = mysqli_prepare($this->conn, "INSERT INTO rewards(reward_item, description, points_cost, stock, image) value (?,?,?,?)");
+        $stmt = mysqli_prepare($this->conn, "INSERT INTO rewards(reward_item, description, points_cost, stock, image) value (?,?,?,?,?)");
         mysqli_stmt_bind_param($stmt, "ssiis", $reward_item, $description, $points_cost, $stock, $image);
 
         if (!mysqli_stmt_execute($stmt)) {
@@ -43,7 +43,7 @@ class RewardControllers
 
     public function getRewardId(int $reward_id)
     {
-        $stmt = mysqli_prepare($this->conn, "SELECT reward_id, reward_item, description, points_cost, stock, image FROM reward WHERE reward_id = ?");
+        $stmt = mysqli_prepare($this->conn, "SELECT reward_id, reward_item, description, points_cost, stock, image FROM rewards WHERE reward_id = ?");
         mysqli_stmt_bind_param($stmt, "i", $reward_id);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
@@ -67,7 +67,7 @@ class RewardControllers
         return mysqli_stmt_execute($stmt);
     }
 
-    public function deleteReward(int $rewar_id)
+    public function deleteReward(int $reward_id)
     {
         $stmt = mysqli_prepare($this->conn, "DELETE FROM rewards WHERE reward_id = ?");
         mysqli_stmt_bind_param($stmt, "i", $reward_id);

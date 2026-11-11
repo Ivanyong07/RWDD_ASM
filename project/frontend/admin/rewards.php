@@ -98,7 +98,7 @@ require_once "../../backend/security/admin_check.php";
     </p>
     <hr />
 
-    <div class="message"></div>
+    <div class="message" id="message"></div>
 
     <div class="header">
       <label class="search">
@@ -109,47 +109,39 @@ require_once "../../backend/security/admin_check.php";
           placeholder="Search the user"
           aria-label="Search the user" />
       </label>
-      <button class="btn-create">Create</button>
+      <button class="btn-create" id="btnCreate">Create</button>
     </div>
 
-    <div id="rewards"></div>
+    <div id="rewards" class="reward-grid"></div>
 
     <!-- Create -->
     <dialog id="createDialog">
       <div class="dialog-head">
-        <h2>Reward <span id="dId"></span></h2>
-        <button
-          class="btn-close"
-          id="dialogCreateRewardClose"
-          aria-label="Close">
-          ✕
-        </button>
+        <h2>Create Reward</h2>
+        <button class="btn-close" id="dialogCreateClose" type="button" aria-label="Close">✕</button>
       </div>
 
-      <div class="dialog-body">
-        <dl class="dialog-info">
+      <form action="../../backend/api/admin/rewards.php" method="POST" enctype="multipart/form-data">
+        <div class="dialog-body">
+          <dl class="dialog-info">
+            <dt>Reward Item</dt>
+            <dd><input type="text" id="createRewardItem" name="reward_item" required placeholder="Bottle" /></dd>
 
-          <dt>Reward Item</dt>
-          <dd><input type="text" id="createRewardItem" required placeholder="Phone" name="reward_item" /></dd>
+            <dt>Description</dt>
+            <dd><textarea id="createDescription" name="description" required></textarea></dd>
 
-          <dt>Description</dt>
-          <dd><textarea id="createDescription" name="description"></textarea></dd>
+            <dt>Points Cost</dt>
+            <dd><input type="number" id="createPointsCost" name="points_cost" min="1" required placeholder="150" /></dd>
 
-          <dt>Points Cost</dt>
-          <dd><input
-              type="number"
-              id="createPointsCost"
-              required
-              placeholder="18"
-              name="points_cost" /></dd>
+            <dt>Stock</dt>
+            <dd><input type="number" id="createStock" name="stock" min="0" required placeholder="10" /></dd>
 
-          <dt>Stock</dt>
-          <dd><input type="number" id="createStock" required placeholder="18" name="stock" /></dd>
-
-          <dt>Image</dt>
-          <dd><input type="file" id="createImage" name="image" accept="image/png, image/jpeg, image/webp"></dd>
-        </dl>
-      </div>
+            <dt>Image</dt>
+            <dd><input type="file" id="createImage" name="image" accept="image/png,image/jpeg,image/webp" /></dd>
+          </dl>
+        </div>
+        <button class="btn-done" type="submit">Create</button>
+      </form>
     </dialog>
 
     <!-- Update -->
@@ -159,29 +151,30 @@ require_once "../../backend/security/admin_check.php";
         <button class="btn-close" id="dialogUpdateClose" type="button" aria-label="Close">✕</button>
       </div>
 
-      <form action="../../backend/api/admin/rewards.php" method="POST">
+      <form action="../../backend/api/admin/rewards.php" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="_method" value="PUT">
         <input type="hidden" name="id" id="updateRewardId">
+        <input type="hidden" name="old_image" id="updateOldImage">
 
-        <div class="dialog-boyd">
+        <div class="dialog-body">
           <dl class="dialog-info">
-
             <dt><label for="updateRewardItem">Reward Item</label></dt>
-            <dd><input type="text" id="updateRewardItem" name="reward_item" require></dd>
+            <dd><input type="text" id="updateRewardItem" name="reward_item" required></dd>
 
             <dt><label for="updateDescription">Description</label></dt>
-            <dd><textarea name="description" id="updateDescription" require placeholder="Describe something..."></textarea></dd>
+            <dd><textarea id="updateDescription" name="description" required></textarea></dd>
 
             <dt><label for="updatePointsCost">Points Cost</label></dt>
-            <dd><input type="number" name="points_cost" min="1" require placeholder="1"></dd>
+            <dd><input type="number" id="updatePointsCost" name="points_cost" min="1" required></dd>
 
             <dt><label for="updateStock">Stock</label></dt>
-            <dd><input type="number" min="1" require placeholder="1"></dd>
+            <dd><input type="number" id="updateStock" name="stock" min="0" required></dd>
 
-            <dt><label for="updateImage"></label></dt>
-            <dd><input type="file" id="updateImage" name="image" accept="image/png, image/jpeg, image/webp"></dd>
+            <dt><label for="updateImage">Image</label></dt>
+            <dd><input type="file" id="updateImage" name="image" accept="image/png,image/jpeg,image/webp"></dd>
           </dl>
         </div>
+        <button class="btn-done" type="submit">Save</button>
       </form>
     </dialog>
 

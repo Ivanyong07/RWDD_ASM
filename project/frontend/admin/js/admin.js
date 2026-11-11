@@ -155,7 +155,7 @@ async function getAchievement() {
 
 // Rewards page
 async function getRewards() {
-    return (await request(ENDPOINTS.rewards)).rewards;
+    return (await request(ENDPOINTS.rewards)).data;
 }
 
 
