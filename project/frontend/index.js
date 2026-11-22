@@ -78,7 +78,7 @@ function setupMenu(){
             header.classList.remove('menu-open');
             menu_btn.setAttribute('aria-expanded', false);
         })
-    })
+    });
 }
 
 // =========================

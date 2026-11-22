@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Start Page -->
+    <section id="start-page" class="start-page">
+      <h1>Bryan Yeoh</h1>
+      <h1 id="number">0</h1>
+    </section>
+
+    <!-- Swap Page -->
+    <div id="swap">
+      <div class="band"></div>
+      <div class="band"></div>
+      <div class="band"><h1>Bryan Yeoh</h1></div>
+      <div class="band"></div>
+    </div>
+
+    <!-- Profile -->
+    <section class="profile" id="profile">
+      <!-- =====================================================
+       HERO PORTRAIT (hover reveal)
+       Two photos are stacked. The top one is only visible
+       inside a morphing blob shape that follows the mouse.
+       ===================================================== -->
+      <div class="reveal" id="reveal">
+        <!-- Layer 1: the normal photo (always visible) -->
+        <div class="layer layer--base"></div>
+
+        <!-- Layer 2: the photo that appears inside the blob.
+         The clip-path is set inline (not in the CSS file) so the
+         #blobClip reference always resolves correctly. -->
+        <div class="layer layer--top" style="clip-path: url(#blobClip)"></div>
+      </div>
+
+      <!-- =====================================================
+       BLOB SHAPE (invisible helper)
+       The path outline is generated and animated by script.js.
+       ===================================================== -->
+      <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+        <clipPath id="blobClip" clipPathUnits="userSpaceOnUse">
+          <path id="blob" d="" transform="scale(0)" />
+        </clipPath>
+      </svg>
+    </section>
+
+    <!-- Skills (language, education, programming language)-->
+    <section class="skills" id="skills">
+      <div><h1>Programming Language</h1></div>
+      <p>Python</p>
+      <p>Java</p>
+      <p>Java Script</p>
+      <p>PHP</p>
+      <p>HTML</p>
+      <p>CSS</p>
+
+      <div><h1>Framework</h1></div>
+      <p>FastAPI</p>
+      <p>Django</p>
+      <p>React.js</p>
+      <p>Tailwind CSS</p>
+      <p>Spring Boot (learning)</p>
+
+      <div><h1>Machine Learning && AI Automachine</h1></div>
+      <p>Linear Regression</p>
+      <p>n8n</p>
+
+      <div><h1>Communication Language</h1></div>
+      <p>Chinese</p>
+      <p>English</p>
+      <p>Malay</p>
+      <p>Japanense (learning)</p>
+    </section>
+
+    <!-- Project -->
+    <section id="project" class="project">
+      <div>
+        <h1>Ticketing System</h1>
+        <p>Allow user to purchase ticket and doing CRUD management in admin</p>
+      </div>
+      <div>
+        <h1>AI-powered-Resume-Analyzer</h1>
+        <p>
+          An AI-powered resume analyzer that evaluates uploaded resumes using
+          AI, identifies areas for improvement, and provides personalized
+          recommendations and suggestions to strengthen the resume.
+        </p>
+      </div>
+
+      <div>
+        <h1>Customer Relational Management</h1>
+        <p>Using</p>
+      </div>
+
+      <div>
+        <h1>TradeMind AI</h1>
+        <p>Using</p>
+      </div>
+
+      <div>
+        <h1>Ace Mind AI</h1>
+        <p>Using</p>
+      </div>
+
+      <div>
+        <h1>Counseling Management System</h1>
+        <p>Using</p>
+      </div>
+
+      <div>
+        <h1>TuneAI</h1>
+        <p>Using</p>
+      </div>
+
+      <div>
+        <h1>CheckDoc</h1>
+        <p>Using</p>
+      </div>
+
+      <div>
+        <h1>Market Pilot</h1>
+        <p>Using</p>
+      </div>
+    </section>
+
+    <!-- Work Experience -->
+    <section id="work-experience" class="work-experience"></section>
+
+    <!-- Competition -->
+    <section>
+      <div>
+        <p>UM Hackathon 2026</p>
+      </div>
+
+      <div>
+        <p>Hoobit Hackthon 2026</p>
+      </div>
+
+      <div><p>Next Byte Hackthon 2026</p></div>
+
+      <div><p>Averis X Monash Hackathon 2026</p></div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p><a href="">GitHub</a></p>
+      <p><a href="">Linkedin</a>></p>
+      <p><a href="">Email</a></p>
+      <p><a href="">Instagram</a></p>
+      <div class="copyright">
+        <p>&copy; 2026 Ivan Yong Pak Theng</p>
+      </div>
+    </footer>
+    <script src="index.js"></script>
+  </body>
+</html>

@@ -1,5 +1,5 @@
 <?php
-require_once "../../backend/auth/user_check.php";
+require_once "../../backend/security/user_check.php";
 ?>
 
 <!doctype html>
