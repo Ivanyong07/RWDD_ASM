@@ -13,6 +13,8 @@ function requireAdmin(string $redirectUrl)
     }
 }
 
+
+
 function saveImage(string $field, string $folder, string $path)
 {
     // check is the file is uploaded

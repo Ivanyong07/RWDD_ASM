@@ -23,6 +23,7 @@ switch ($method) {
 
     case "GET":
 
+
         header("Content-Type: application/json");
 
         $result = $controllers->getAllAchievement();
