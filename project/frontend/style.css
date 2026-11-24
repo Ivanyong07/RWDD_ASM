@@ -7,29 +7,27 @@
 =================================
 */
 :root{
-    --green: #0c9260;
-    --ligh-green:rgb(11, 66, 11);
-    --background-color: #f5f3e9;
-    /* badge wall */
-    --accent: #081809;      /* hover border + label */
-    --muted: #a8b8ad;       /* subtitle */
-    --surface: #0c0c0c;     /* tile background */
-    --line: #060606;        /* tile borders */
+    --dark-green: rgb(14, 120, 4);        /* brand green: buttons, links, accents */
+    --deep-green: rgb(11, 66, 11);        /* headings */
+    --white-green: rgb(234, 236, 234);
+    --background-color: rgb(244, 239, 230);
+    --card: #ffffff;                      /* cards, FAQ items, timeline box */
+    --letter: rgb(0, 0, 0);               /* main text */
+    --description: rgb(117, 119, 118);    /* secondary text */
+    --line: rgb(6, 6, 6);
+    --border: rgba(11, 66, 11, 0.12);     /* soft borders */
+    --hover: rgb(171, 171, 171);
+
 }
-
-
 
 html, body{
     margin: 0;
-    color: rgb(0, 0, 0);
+    color: var(--dark-green);
     overflow-x: clip;
     background-color: var(--background-color);
+    font-family: 'Inter', sans-serif;
 }
 
-html.no-scroll,
-body.no-scroll{
-    overflow: hidden;
-}
 
 
 html{
@@ -46,17 +44,7 @@ html{
     animation: fadeIn 1s ease-in;
     z-index: 2000;
     position: relative;
-    background-color: #f5f5f5;
-}
-
-@keyframes fadeIn {
-    from{
-        opacity: 0;
-        transform: translateY(-10%);
-    } to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    background-color: var(--background-color);
 }
 
 /* Tablet (768px to 1024px) */
@@ -93,16 +81,10 @@ HEADER
 
     padding: 0 40px;
     box-sizing: border-box;
-    color: black;
+    color: var(--letter);
     background-color: var(--background-color);
     transition: color .4s ease;
-    font-family: Arial, Helvetica, sans-serif;
 }
-
-#header.black-header{
-    background: var(--background-color);
-}
-
 
 #header h3{
     margin: 0;
@@ -131,15 +113,15 @@ HEADER
 
 #login{
     border: none;
-    background: linear-gradient(rgb(155, 232, 182), rgb(4, 237, 136));
-    color: #151414;
+    background: linear-gradient(var(--white-green), var(--dark-green));
+    color: var(--letter);
     padding: 5px 10px;
     font-size: 15px;
     width: 80px;
     border-radius: 10px;
     margin: 5px;
     position: relative;
-    box-shadow: 5px 5px 5px #0c9260;
+     box-shadow: 4px 4px 0 var(--deep-green);
     transition: all 0.3s ease;
 }
 
@@ -218,7 +200,7 @@ HEADER
         justify-content: flex-start;
         gap: 0;
         background: var(--background-color);
-        color: #04140d;
+        color: var(--letter);
         text-shadow: none;
         padding: 0 24px;
         font-size: 16px;
@@ -296,10 +278,7 @@ Letter
     font-size: clamp(2.5rem, 8vw, 7rem);
     line-height: 1.1;
     font-weight: 700;
-
-    font-family: Arial, Helvetica, sans-serif;
-
-    background: -webkit-linear-gradient(#eaecea, #077632);
+    background: -webkit-linear-gradient(var(--dark-green), var(--white-green));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -307,16 +286,14 @@ Letter
 #letter p {
     margin: 0;
 
-    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-size: clamp(1rem, 2vw, 0.5rem);
     line-height: 1.5;
-
-    font-family: Arial, Helvetica, sans-serif;
 }
 
 #letter .letter-tagline {
     font-size: clamp(1rem, 1.6vw, 1.5rem);
     font-weight: 400;
-    color: rgb(91, 95, 91);
+    color: var(--description);
 }
 
 .letter-buttons {
@@ -342,16 +319,13 @@ Letter
 
     color: #077632;
     text-decoration: none;
-
-    font-family: Arial, Helvetica, sans-serif;
     font-size: clamp(0.95rem, 1.5vw, 1.125rem);
 
     transition: opacity .6s ease, background .3s ease, color .3s ease;
 }
 
 .letter-btn:hover {
-    background: #0c9260;
-    color: white;
+    background: var(--hover);
 }
 
 #slot {
@@ -401,7 +375,7 @@ small note
     padding: 0 40px;
     margin-top: 60px;
     font-size: 15px;
-    color: #555;
+    color: var(--description);
 }
 
 #collect-recycle-impact  p{
@@ -612,7 +586,6 @@ ABOUT-US
     line-height: 1.7;
     font-size: 17px;
     color: rgb(91, 95, 91);
-    font-family: Arial, Helvetica, sans-serif;
 }
 
 .about-button {
@@ -775,13 +748,6 @@ Three r
     object-fit: cover;
 }
 
- .r-media::after{ /* create one more layer */
-    content: "";
-    position: absolute;
-     inset: 0; /* shorcut of top: 0; right: 0; bottom: 0; left: 0; */
-    background: linear-gradient(to top, rgba(4,20,13,.7), rgba(4,20,13,0) 60%);
-}
-
 .three-r-title{
     height: 100px;
     background-color: #a3a3d1;
@@ -804,7 +770,6 @@ Three r
     font-size: 1em;
     line-height: 1.6;
     color: rgb(91, 95, 91);
-    font-family: Arial, Helvetica, sans-serif;
 }
 
 @keyframes fadeUp {
@@ -966,7 +931,6 @@ stats
 }
 
 #stat-content h1{
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: clamp(2rem, 4vw, 3.2rem);
     line-height: 1.1;
     margin: 0;
@@ -1097,7 +1061,7 @@ BADGE COLLECTION WALL
 
 .badge-subtitle{
     margin: 0 0 40px;
-    color: var(--muted);
+    color: var(--description);
 }
 
 .badge{
@@ -1178,7 +1142,6 @@ green center
     font-weight: 600;
     clip-path: inset(100% 0 0 0);
     font: 13px;
-    font-family: Arial, Helvetica, sans-serif;
 }
 
 
@@ -1191,11 +1154,11 @@ green center
     font-size: clamp(3rem, 6vw, 6rem);
     line-height: 0.95;
     margin: 20px 0;
-    color: rgb(11, 66, 11);
+    color: var(--dark-green);
 }
 
 .place-content span{
-    color: #0c9260;
+    color: var(--dark-green);
 }
 
 
@@ -1205,7 +1168,6 @@ green center
     line-height: 1.7;
     font-size: 17px;
     color: rgb(123, 123, 123);
-    font-family: Arial, Helvetica, sans-serif;
 }
 
 
@@ -1338,7 +1300,6 @@ timeline
 .tl-date {
     padding-top: 0.1rem;
     text-align: right;
-    font-family: Arial, Helvetica, sans-serif;
     font-size: 0.95rem;
     font-weight: 600;
     color: var(--green);
@@ -1378,7 +1339,6 @@ timeline
 
 .tl-content h3 {
     margin: 0 0 0.4rem;
-    font-family: Arial, Helvetica, sans-serif;
     font-size: 1.3rem;
     color: rgb(11, 66, 11);
 }
@@ -1386,7 +1346,6 @@ timeline
 .tl-content p {
     margin: 0;
     max-width: 50ch;
-    font-family: Arial, Helvetica, sans-serif;
     font-size: 1rem;
     line-height: 1.6;
     color: rgb(91, 95, 91);
@@ -1461,7 +1420,6 @@ faq
 ========================== */
 #faq {
     padding: 120px 8%;
-    font-family: Arial, Helvetica, sans-serif;
 }
 
 .faq-heading {
@@ -1585,44 +1543,41 @@ register-section
 ========================== */
 
 #register-section {
-  display: flex;
-  justify-content: center;
-  padding: 4rem 1.5rem;
+    display: flex;
+    justify-content: center;
+    padding: 4rem 1.5rem;
 }
 
 #register-container {
-  --accent: #5cb25c;
-  --bg: #fafafa;
-
-  position: relative;
-  overflow: hidden;              /* keeps the glow inside the card */
-  width: min(100%, 1200px);      /* wider: was 800px */
-  padding: 4.5rem 2rem;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.25rem;
-  color: #0f0f0f;
-  background: var(--bg);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 28px;
-  box-shadow: 0 25px 60px -20px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;          
+    width: min(100%, 1200px);      
+    padding: 4.5rem 2rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    color: #0f0f0f;
+    background: var(--card);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 28px;
+    box-shadow: 0 25px 60px -20px rgba(0, 0, 0, 0.5);
 }
 
 /* the small green element: a soft glow in the corner */
 #register-container::before {
-  content: "";
-  position: absolute;
-  top: -80px;
-  right: -80px;
-  width: 260px;
-  height: 260px;
-  background: var(--accent);
-  border-radius: 50%;
-  filter: blur(90px);
-  opacity: 0.45;
-  pointer-events: none;
+    content: "";
+    position: absolute;
+    top: -80px;
+    right: -80px;
+    width: 260px;
+    height: 260px;
+    background: var(--accent);
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.45;
+    pointer-events: none;
 }
 
 /* keep the text above the glow */
@@ -1631,58 +1586,57 @@ register-section
 }
 
 #register-container h1 {
-  margin: 0;
-  font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
-  font-size: clamp(2rem, 6vw, 3.5rem);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
+    margin: 0;
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
 }
 
 .subtitle {
-  margin: 0;
-  max-width: 48ch;
-  font-size: 1.05rem;
-  line-height: 1.6;
-  color: #78797a;
+    margin: 0;
+    max-width: 48ch;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: #78797a;
 }
 
 #register-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.9rem 2rem;
-  margin-top: 0.5rem;
-  background: var(--accent);
-  color: #052e16;
-  font-size: 1.1rem;
-  font-weight: 600;
-  text-decoration: none;
-  border-radius: 999px;
-  box-shadow: 0 8px 24px rgba(34, 197, 94, 0.35);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.9rem 2rem;
+    margin-top: 0.5rem;
+    background: var(--dark-green);
+    color: var(--white-green);
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 999px;
+    box-shadow: 0 8px 24px rgba(34, 197, 94, 0.35);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 #register-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 14px 32px rgba(34, 197, 94, 0.5);
+    transform: translateY(-3px);
+    box-shadow: 0 14px 32px rgba(34, 197, 94, 0.5);
 }
 
 #register-btn:focus-visible {
-  outline: 3px solid #fff;
-  outline-offset: 3px;
+    outline: 3px solid #fff;
+    outline-offset: 3px;
 }
 
 .contact {
-  margin: 0;
-  font-size: 0.95rem;
-  color: #94a3b8;
+    margin: 0;
+    font-size: 0.95rem;
+    color: #94a3b8;
 }
 
 .contact a {
-  color: var(--accent);
-  text-decoration: underline;
-  text-underline-offset: 3px;
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
 }
 
 /* ==========================
@@ -1800,7 +1754,6 @@ footer
     min-height: 60vh;
     background-color: #686764;
     position: relative;
-    font-family: Arial, Helvetica, sans-serif;
     color: white;
     padding: 60px 40px 30px;
     box-sizing: border-box;
@@ -1897,14 +1850,14 @@ footer
 
 .bottom-title h1{
     margin: 0;
-    font-family: "Anton", "Arial Narrow", sans-serif;
-    font-size: 15.5vw;
+    font-size: 10vw;
     line-height: 0.8;
     text-transform: uppercase;
     text-align: center;
     white-space: nowrap;
-    color: #f4f1ec;
+    color: #2b2b2b;
     transform: translateY(18%);
+    padding-right: 10px;
 }
 
 /* Tablet */
