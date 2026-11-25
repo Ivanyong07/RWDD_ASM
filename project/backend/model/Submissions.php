@@ -5,8 +5,8 @@ class Submissions
     private ?int $submissionId;
     private int $userId;
     private int $challengesId;
-    private string $photo_path;
     private string $status;
+    private ?string $photo_path;
     private ?string $rejection_reason;
     private ?int $verified_by;
     private ?string $submitted_at;
@@ -15,8 +15,8 @@ class Submissions
     public function __construct(
         int $userId,
         int $challengesId,
-        string $photo_path,
         string $status = "pending",
+        ?string $photo_path = null,
         ?int $submissionId = null,
         ?string $rejection_reason = null,
         ?int $verified_by = null,
@@ -65,16 +65,13 @@ class Submissions
         $this->challengesId = $challengesId;
     }
 
-    public function getPhotoPath(): string
+    public function getPhotoPath(): ?string
     {
         return $this->photo_path;
     }
 
-    public function setPhotoPath(string $photo_path): void
+    public function setPhotoPath(?string $photo_path): void
     {
-        if (trim($photo_path) === "") {
-            throw new InvalidArgumentException("photo path cannot be empty");
-        }
         $this->photo_path = $photo_path;
     }
 

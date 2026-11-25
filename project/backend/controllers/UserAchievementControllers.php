@@ -7,6 +7,8 @@
 // =================================
 
 require_once __DIR__ . '/../model/UserAchievement.php';
+require_once __DIR__ . "/../controllers/UserControllers.php";
+require_once __DIR__ . "/../controllers/AchievementControllers.php";
 
 class UserAchievementControllers
 {
@@ -30,27 +32,38 @@ class UserAchievementControllers
         return mysqli_stmt_execute($stmt);
     }
 
+    public function checkAndUnlockedAchievement(int $user_id) {}
+
     public function getAllUserAchievement()
     {
-        $result = mysqli_query($this->conn, "SELECT user_id, achievement_id, unlocked_at FROM user_achievement");
+        $result = mysqli_query($this->conn, "SELECT
+            ua.user_id,
+            u.username,
+            ua.achievement_id,
+            ua.unlocked_at,
+            a.achievement_name,
+            a.achievement_description,
+            a.achievement_image,
+            a.requirement_value
+        FROM user_achievement ua
+        JOIN achievement a
+            ON a.achievement_id = ua.achievement_id
+        JOIN user u
+            ON u.user_id = ua.user_id");
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
 
-    public function getUserAchievementByUserId(int $user_id)
+    public function getUserAchievement(int $user_id) // display all the achievement unlocked by a user
     {
-        $stmt = mysqli_prepare($this->conn, "SELECT user_id, achievement_id, unlocked_at FROM user_achievement WHERE user_id = ?");
+        $stmt = mysqli_prepare($this->conn, "SELECT ua.user_id, ua.achievement_id, ua.unlocked_at, a.achievement_name, 
+        a.achievement_description, a.achievement_image, a.requirement_value FROM user_achievement ua JOIN achievement a ON 
+        a.achievement_id = ua.achievement_id WHERE ua.user_id = ?");
+
         mysqli_stmt_bind_param($stmt, "i", $user_id);
         mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
-        return mysqli_fetch_all($result, MYSQLI_ASSOC);
-    }
 
-    public function getUserAchievementId(int $user_id, int $achievement_id)
-    {
-        $stmt = mysqli_prepare($this->conn, "SELECT user_id, achievement_id, unlocked_at FROM user_achievement WHERE user_id = ? AND achievement_id = ?");
-        mysqli_stmt_bind_param($stmt, "ii", $user_id, $achievement_id);
-        mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
+
         return mysqli_fetch_assoc($result);
     }
 

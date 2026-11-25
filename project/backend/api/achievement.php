@@ -1,9 +1,9 @@
 <?php
 
-require_once __DIR__ . "/../../config/Database.php";
-require_once __DIR__ . '/../../controllers/AchievementControllers.php';
-require_once __DIR__ . '/../../model/Achievement.php';
-require_once __DIR__ . '/../../helpers/common.php';
+require_once __DIR__ . "/../config/Database.php";
+require_once __DIR__ . '/../controllers/AchievementControllers.php';
+require_once __DIR__ . '/../model/Achievement.php';
+require_once __DIR__ . '/../helpers/common.php';
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -15,7 +15,7 @@ $controllers = new AchievementControllers($conn);
 $id = filter_input(INPUT_POST, "id", FILTER_VALIDATE_INT);
 
 // where the pictures are saved on the computer, and the path that is saved in the database
-$imageFolder = __DIR__ . "/../../../frontend/images/achievements/";
+$imageFolder = __DIR__ . "/../../frontend/images/achievements/";
 
 $imagePath = "images/achievements/";
 
@@ -23,6 +23,7 @@ switch ($method) {
 
     case "GET":
 
+        requireLogin();
 
         header("Content-Type: application/json");
 
@@ -112,7 +113,7 @@ switch ($method) {
         requireAdmin("../../../frontend/admin/achievement.php?auth=not_allowed");
 
         if ($id === false || $id === null || $id <= 0) {
-            goBack("../../../frontend/achievement.php?id_failed=invalid_id");
+            goBack("../../frontend/admin/achievement.php?id_failed=invalid_id");
         }
 
         $result = $controllers->deleteAchievement($id);

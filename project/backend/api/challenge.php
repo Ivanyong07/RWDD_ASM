@@ -1,9 +1,9 @@
 <?php
 
-require_once __DIR__  . "/../../config/Database.php";
-require_once __DIR__ . "/../../controllers/ChallengeControllers.php";
-require_once __DIR__ . "/../../model/Challenges.php";
-require_once __DIR__ . "/../../helpers/common.php";
+require_once __DIR__  . "/../config/Database.php";
+require_once __DIR__ . "/../controllers/ChallengeControllers.php";
+require_once __DIR__ . "/../model/Challenges.php";
+require_once __DIR__ . "/../helpers/common.php";
 
 if (session_start() === PHP_SESSION_NONE) {
     session_start();
@@ -21,6 +21,8 @@ $imagePath = "images/challenges";
 switch ($method) {
 
     case "GET":
+
+        requireLogin();
 
         header("Content-Type: application/json");
 
@@ -118,6 +120,8 @@ switch ($method) {
         }
 
         exit;
+
+    case "POST":
 
     case "DELETE":
 

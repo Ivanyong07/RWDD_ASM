@@ -106,21 +106,21 @@ require_once "../../backend/security/user_check.php";
       </svg>
       Challenge
     </a>
-    <a href="history.html">
+    <a href="history.php">
       <svg viewBox="0 0 24 24">
         <circle cx="12" cy="12" r="9" />
         <path d="M12 7v5l3 2" />
       </svg>
       History
     </a>
-    <a href="badges.html">
+    <a href="badges.php">
       <svg viewBox="0 0 24 24">
         <circle cx="12" cy="9" r="6" />
         <path d="M8.5 14L7 22l5-3 5 3-1.5-8" />
       </svg>
       Badges
     </a>
-    <a href="rewards.html">
+    <a href="rewards.php">
       <svg viewBox="0 0 24 24">
         <rect x="3" y="8" width="18" height="4" rx="1" />
         <path
@@ -128,7 +128,7 @@ require_once "../../backend/security/user_check.php";
       </svg>
       Rewards
     </a>
-    <a href="leaderboard.html">
+    <a href="leaderboard.php">
       <svg viewBox="0 0 24 24">
         <path d="M3 21h18M5 21v-8h4v8M10 21V8h4v13M15 21v-5h4v5" />
       </svg>

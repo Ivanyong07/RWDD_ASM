@@ -3,7 +3,11 @@
 // * Filename : ChallengeControllers.php
 // * Date : 16/10/2026
 // * Author : Ivan Yong
-// * Description : For delete, login, get all list of users, and upate challenge
+// * Description : Create challenge
+// Get all challenges
+// Get challenge by ID
+// Update challenge
+// Delete challenge
 // ================================= 
 
 require_once __DIR__ . "/../model/Challenges.php";
@@ -83,9 +87,24 @@ class ChallengeController
     public function getChallengeId(int $challenge_id)
     {
 
-        $stmt = mysqli_prepare($this->conn, "SELECT challenge_id, title, quantity, description, category, points_reward, xp_reward, deadline, image, location, created_by, created_at  WHERE challenge_id = ?");
+        $stmt = mysqli_prepare($this->conn, "SELECT challenge_id, title, quantity, description, category, points_reward, xp_reward, deadline, image, location, created_by, created_at FROM challenges WHERE challenge_id = ?");
         mysqli_stmt_bind_param($stmt, "i", $challenge_id);
+        mysqli_stmt_execute($stmt);
+
         $result = mysqli_stmt_get_result($stmt);
         return mysqli_fetch_assoc($result);
+    }
+
+    public function joinChallenge(int $user_id, int $challenge_id)
+    {
+
+        $stmt = mysqli_prepare($this->conn, "INSERT INTO submissions(user_id, challenge_id, status) VALUES (?, ?, pending)");
+        mysqli_stmt_bind_param($stmt, "ii", $user_id, $challenge_id);
+
+        if (!mysqli_stmt_execute($stmt)) {
+            return false;
+        }
+
+        return mysqli_insert_id($this->conn);
     }
 }
